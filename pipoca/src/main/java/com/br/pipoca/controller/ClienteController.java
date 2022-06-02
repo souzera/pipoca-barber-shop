@@ -16,7 +16,7 @@ public class ClienteController {
     ClienteRepository repository;
 
     @GetMapping
-    public List<Cliente> list(){
+    public List<Cliente> list() throws IOException{
         return repository.findAll();
     }
 

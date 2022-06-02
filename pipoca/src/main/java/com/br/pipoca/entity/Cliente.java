@@ -19,11 +19,9 @@ public class Cliente {
     private Sexo sexo;
     private Date dtNascimento;
 
-    public Cliente(long id) {
-        this.id = id;
-    }
+    public Cliente() {}
 
-    public Cliente(long id, String nome) {
+    public Cliente(Long id, String nome) {
         this.id = id;
         this.nome = nome;
     }
