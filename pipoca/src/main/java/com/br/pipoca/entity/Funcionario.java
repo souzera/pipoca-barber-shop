@@ -2,11 +2,11 @@ package com.br.pipoca.entity;
 
 
 import com.br.pipoca.model.Sexo;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
@@ -22,7 +22,9 @@ public class Funcionario {
     private Date dtNascimento;
     private String funcao;
 
-    public Funcionario(long id) {
+    public Funcionario(){}
+
+    public Funcionario(Long id) {
         this.id = id;
     }
 
