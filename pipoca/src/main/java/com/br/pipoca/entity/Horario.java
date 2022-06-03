@@ -7,7 +7,7 @@ import java.util.Date;
 public class Horario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY);
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
     @ManyToOne
