@@ -1,7 +1,6 @@
 package com.br.pipoca.controller;
 
 import com.br.pipoca.entity.Horario;
-import com.br.pipoca.entity.Produto;
 import com.br.pipoca.repository.HorarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
