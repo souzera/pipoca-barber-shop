@@ -14,5 +14,4 @@ public enum Sexo {
         return this.valor;
     }
 
-
 }
