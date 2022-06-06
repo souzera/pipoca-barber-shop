@@ -26,19 +26,25 @@ public class ClienteController {
         return repository.findById(id);
     }
 
-    @PostMapping(value = "/cliente")
+    @PostMapping(value = "/cliente/add")
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente salvar(@RequestBody Cliente cliente){
         System.out.println("salvando cliente " + cliente.getNome());
         return repository.save(cliente);
     }
-    @DeleteMapping(value = "/clientes")
+    @DeleteMapping(value = "/clientes/del")
     public void deletar(@RequestBody Cliente cliente){
         repository.delete(cliente);
     }
 
-    @DeleteMapping(value = "/cliente/{id}")
+    @DeleteMapping(value = "/cliente/del/{id}")
     public void deletarPorID(@PathVariable(value = "id") long id){
         repository.deleteById(id);
+    }
+
+    @PutMapping(value = "/cliente/att")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Cliente atualizar(@RequestBody Cliente cliente){
+        return repository.save(cliente);
     }
 }

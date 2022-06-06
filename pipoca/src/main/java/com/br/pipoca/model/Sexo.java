@@ -2,15 +2,16 @@ package com.br.pipoca.model;
 
 public enum Sexo {
 
-    MASCULINO("M"),FEMININO("F");
+    //MASCULINO("M"),FEMININO("F");
+    MASCULINO(0),FEMININO(1);
 
-    private String valor;
+    private int valor;
 
-    Sexo(String valor){
+    Sexo(int valor){
         this.valor = valor;
     }
 
-    public String getValor(){
+    public int getValor(){
         return this.valor;
     }
 
