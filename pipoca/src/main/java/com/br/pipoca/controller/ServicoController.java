@@ -23,7 +23,7 @@ public class ServicoController {
     }
 
     @GetMapping(value = "/servico/{id}")
-    public Servico buscarServicos(@RequestParam(value = "id") long id){
+    public Servico buscarServico(@RequestParam(value = "id") long id){
         return repository.findById(id);
     }
 
