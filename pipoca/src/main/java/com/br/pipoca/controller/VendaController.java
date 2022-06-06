@@ -1,6 +1,5 @@
 package com.br.pipoca.controller;
 
-import com.br.pipoca.entity.Horario;
 import com.br.pipoca.entity.Venda;
 import com.br.pipoca.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +22,14 @@ public class VendaController {
     }
 
     @GetMapping(value = "/venda/{id}")
-    public Venda buscarVenda(@RequestParam(value = "id") long id){
+    public Venda buscarVenda(@PathVariable(value = "id") long id){
         return repository.findById(id);
     }
 
     @PostMapping(value = "/venda/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void salvar(@RequestBody Venda venda){
-        System.out.println("salvando serviço " + venda);
+    public void venda(@RequestBody Venda venda){
+        System.out.println("salvando venda " + venda);
         repository.save(venda);
     }
 

@@ -1,6 +1,5 @@
 package com.br.pipoca.controller;
 
-import com.br.pipoca.entity.Horario;
 import com.br.pipoca.entity.Produto;
 import com.br.pipoca.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class ProdutoController {
     }
 
     @GetMapping(value = "/produto/{id}")
-    public Produto buscarProduto(@RequestParam(value = "id") long id){
+    public Produto buscarProduto(@PathVariable(value = "id") long id){
         return repository.findById(id);
     }
 

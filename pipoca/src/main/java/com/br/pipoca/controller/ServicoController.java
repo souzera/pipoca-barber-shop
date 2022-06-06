@@ -1,6 +1,5 @@
 package com.br.pipoca.controller;
 
-import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.entity.Servico;
 import com.br.pipoca.repository.ServicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class ServicoController {
     }
 
     @GetMapping(value = "/servico/{id}")
-    public Servico buscarServico(@RequestParam(value = "id") long id){
+    public Servico buscarServico(@PathVariable(value = "id") long id){
         return repository.findById(id);
     }
 

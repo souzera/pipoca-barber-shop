@@ -1,7 +1,6 @@
 package com.br.pipoca.controller;
 
 import com.br.pipoca.entity.Agenda;
-import com.br.pipoca.entity.Horario;
 import com.br.pipoca.repository.AgendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,14 +22,14 @@ public class AgendaController {
     }
 
     @GetMapping(value = "/agenda/{id}")
-    public Agenda buscarHorario(@RequestParam(value = "id") long id){
+    public Agenda buscarHorario(@PathVariable(value = "id") long id){
         return repository.findById(id);
     }
 
     @PostMapping(value = "/agenda/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void salvar(@RequestBody Agenda agenda){
-        System.out.println("salvando serviço " + agenda);
+        System.out.println("salvando agenda " + agenda);
         repository.save(agenda);
     }
 

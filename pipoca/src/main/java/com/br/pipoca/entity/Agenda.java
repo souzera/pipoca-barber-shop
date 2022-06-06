@@ -17,7 +17,7 @@ public class Agenda {
     @JoinColumn
     private Horario horario;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     private Servico servico;
 

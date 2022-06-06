@@ -30,6 +30,12 @@ public class Venda {
         this.agenda = agenda;
     }
 
+    public Venda(long id, Produto produto, Agenda agenda) {
+        this.id = id;
+        this.produto = produto;
+        this.agenda = agenda;
+    }
+
     public long getId() {
         return id;
     }

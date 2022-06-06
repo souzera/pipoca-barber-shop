@@ -1,6 +1,5 @@
 package com.br.pipoca.controller;
 
-import com.br.pipoca.entity.Cliente;
 import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class FuncionarioController {
     }
 
     @GetMapping(value = "/funcionario/{id}")
-    public Funcionario buscarFuncionario(@RequestParam(value = "id") long id){
+    public Funcionario buscarFuncionario(@PathVariable(value = "id") long id){
         return repository.findById(id);
     }
 
