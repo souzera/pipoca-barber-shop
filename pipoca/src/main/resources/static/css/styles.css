@@ -11627,7 +11627,7 @@ footer a:hover, footer a:active, footer a:focus {
 /* -- MINHAS CLASSES -- */
 
 .bg-main{
-  background-image: url("/assets/img/bg_main.jpg");
+  background-image: url("/pipoca/src/main/resources/static/assets/img/bg_main.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -11643,11 +11643,22 @@ footer a:hover, footer a:active, footer a:focus {
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
+    transition: 0.5s;
+  }
+
+  .main-container{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    flex-direction: row;
   }
 
   .login-container{
-    width: 30vw;
-    height: 90vh;
+    min-width: 170px;
+    max-width: 30vw;
+    min-height: 80vh;
     padding: 50px;
     background-color: #141619;
   }
@@ -11655,34 +11666,70 @@ footer a:hover, footer a:active, footer a:focus {
   .login-img{
     background-color: rgba(0, 0, 0, 0.7);
     box-sizing: border-box;
-    background-image: url("/assets/img/login-img.jpg");
+    background-image: url("/pipoca/src/main/resources/static/assets/img/login-img.jpg");
     background-blend-mode: multiply;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 90vh;
+    height: 80vh;
     width: 80vh;
   }
 
   @media (max-width: 840px){
 
       .login-container{
-        width: 50vw;
-        height: 65vh;
+        min-width: 170px;
+        max-width: 50vw;
+        min-height: 65vh;
         border-radius: 30px;
+        padding: 50px;
       }
       .login-img{
         display: none;
       }
+
+      .login-body{
+        background-color: coral;
+      }
   }
-  
+
   @media (max-width: 600px){
 
     .login-container{
-      width: 70vw;
-      height: 70vh;
+      min-width: 170px;
+      max-width: 70vw;
+      min-height: 70vh;
+      padding: 50px;
       border-radius: 30px;
     }
+    .login-img{
+      display: none;
+    }
+  }
+
+  @media (max-width: 350px){
+    
+    .login-body{
+      overflow: auto;
+    }
+
+    .login-container{
+      width: 250px;
+      height: 470px;
+      padding: 25px;
+    }
+  }
+
+  @media (max-height: 668px) {
+    .login-body{
+      overflow: auto;
+    }
+
+    .login-container{
+      width: 280px;
+      height: 470px;
+    }
+
     .login-img{
       display: none;
     }
