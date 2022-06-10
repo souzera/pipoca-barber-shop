@@ -11731,8 +11731,10 @@ footer a:hover, footer a:active, footer a:focus {
     }
 
     .login-img{
-      display: none;
+      width: 500px;
+      height: 470px;
     }
+
   }
 
   .login-labels{
