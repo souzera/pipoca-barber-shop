@@ -3036,7 +3036,7 @@ textarea.form-control-lg {
   border-color: #ec283b;
 }
 .btn-primary:hover {
-  color: #ec283b;
+  color: #fff;
   background-color: #fff;
   border-color: #fff;
 }
@@ -3062,13 +3062,17 @@ textarea.form-control-lg {
 
 .btn-secondary {
   color: #fff;
-  background-color: #9f1ae2;
-  border-color: #9f1ae2;
+  padding: 15px 30px;
+  background-color: #ec283b;
+  border-color: #e21a4f;
+  border-radius: 30px;
+  transition: 0.5s ease-in;
 }
 .btn-secondary:hover {
   color: #fff;
-  background-color: #8716c0;
-  border-color: #7f15b5;
+  background-color: #e21a4f;
+  border-color: #ec283b;
+  padding: 18px 33px;
 }
 .btn-check:focus + .btn-secondary, .btn-secondary:focus {
   color: #fff;
@@ -11756,4 +11760,22 @@ footer a:hover, footer a:active, footer a:focus {
   .login-labels a {
     color: #444;
     text-decoration: none;
+  }
+
+  .agendamento-labels{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2vh;
+  }
+
+  .agendamento-labels a{
+    text-decoration: none;
+    color: #4f5050;
+    padding-left: 20px;
+    transition: 0.5s;
+  }
+
+  .agendamento-labels a:hover{
+    color: #101214;
   }
