@@ -3,10 +3,7 @@ package com.br.pipoca.entity;
 import com.br.pipoca.model.Sexo;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Cliente {
@@ -18,6 +15,9 @@ public class Cliente {
     private String telefone;
     private Sexo sexo;
     private Date dtNascimento;
+    @OneToOne
+    @JoinColumn
+    private Usuario usuario;
 
     public Cliente() {}
 
@@ -32,6 +32,20 @@ public class Cliente {
         this.telefone = telefone;
         this.sexo = sexo;
         this.dtNascimento = dtNascimento;
+    }
+
+    public Cliente(long id, Usuario usuario) {
+        this.id = id;
+        this.usuario = usuario;
+    }
+
+    public Cliente(long id, String nome, String telefone, Sexo sexo, Date dtNascimento, Usuario usuario) {
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.sexo = sexo;
+        this.dtNascimento = dtNascimento;
+        this.usuario = usuario;
     }
 
     public long getId() {
