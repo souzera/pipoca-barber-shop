@@ -2,10 +2,7 @@ package com.br.pipoca.entity;
 
 import com.br.pipoca.model.TipoUsuario;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Usuario {
@@ -13,8 +10,8 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-
-    private String usuario;
+    @Column(unique = true)
+    private String login;
     private String senha;
     private TipoUsuario tipoUsuario;
 
@@ -25,15 +22,15 @@ public class Usuario {
         this.id = id;
     }
 
-    public Usuario(long id, String usuario, String senha) {
+    public Usuario(long id, String login, String senha) {
         this.id = id;
-        this.usuario = usuario;
+        this.login = login;
         this.senha = senha;
     }
 
-    public Usuario(long id, String usuario, String senha, TipoUsuario tipoUsuario) {
+    public Usuario(long id, String login, String senha, TipoUsuario tipoUsuario) {
         this.id = id;
-        this.usuario = usuario;
+        this.login = login;
         this.senha = senha;
         this.tipoUsuario = tipoUsuario;
     }
@@ -46,12 +43,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getSenha() {

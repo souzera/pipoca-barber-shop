@@ -7,8 +7,7 @@ public enum TipoUsuario {
     GERENTE(2),
     FUNCIONARIO(3),
     CLIENTE(4),
-
-    DEV(69);
+    DEV(5);
 
     private int valor;
 
