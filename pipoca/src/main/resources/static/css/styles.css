@@ -4912,10 +4912,13 @@ textarea.form-control-lg {
 
 .alert {
   position: relative;
+  /*
+  font-size: small;
   padding: 1rem 1rem;
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.25rem;
+  */
 }
 
 .alert-heading {
@@ -4938,9 +4941,9 @@ textarea.form-control-lg {
 }
 
 .alert-primary {
-  color: #192190;
-  background-color: #d4d7fc;
-  border-color: #bfc3fb;
+  color: #ec283b;
+  /*background-color: #d4d7fc;
+  border-color: #bfc3fb;*/
 }
 .alert-primary .alert-link {
   color: #141a73;
@@ -4984,8 +4987,10 @@ textarea.form-control-lg {
 
 .alert-danger {
   color: #842029;
+  /*
   background-color: #f8d7da;
   border-color: #f5c2c7;
+  */
 }
 .alert-danger .alert-link {
   color: #6a1a21;
@@ -11786,4 +11791,8 @@ footer a:hover, footer a:active, footer a:focus {
 
   .agendamento-labels a:hover{
     color: #101214;
+  }
+
+  .inativo{
+    display: none;
   }
