@@ -29,6 +29,10 @@ public class UsuarioService {
         return usuarioRepository;
     }
 
+    public int getChave(String login){
+        return findByLogin(login).hashCode();
+    }
+
     public Usuario findByLogin(String login) {
         return usuarioRepository.findByLogin(login);
     }
