@@ -29,14 +29,13 @@ public class UsuarioService {
         return usuarioRepository;
     }
 
-    public int getChave(String login){
-        return findByLogin(login).hashCode();
-    }
-
     public Usuario findByLogin(String login) {
         return usuarioRepository.findByLogin(login);
     }
 
+    public int getChave(String login){
+        return findByLogin(login).hashCode();
+    }
     public boolean validarSenha(String login, String senha){
         Usuario tempUsuario = usuarioRepository.findByLogin(login);
         boolean valido = false;
@@ -45,6 +44,10 @@ public class UsuarioService {
             valido = encoder.matches(senha, usuario.getSenha());
         }
         return valido;
+    }
+
+    public boolean isPresent(String login){
+        return (findByLogin(login) != null)? true:false;
     }
 
     public Usuario findById(long id) {

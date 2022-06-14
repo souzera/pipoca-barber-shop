@@ -30,17 +30,17 @@ public class LoginController {
             int tipoConta = usuarioService.findByLogin(login).getTipoUsuario().getValor();
             switch (tipoConta){
                 case 0:
-                    return "redirect:/dashboard/" + usuarioService.getChave(login);
+                    return "redirect:/dashboard/" + login + "/" + usuarioService.getChave(login);
                 case 1:
-                    return "redirect:/dashboard/" + usuarioService.getChave(login);
+                    return "redirect:/dashboard/" + login + "/" + usuarioService.getChave(login);
                 case 2:
-                    return "redirect:/dashboard/" + usuarioService.getChave(login);
+                    return "redirect:/dashboard/" + login + "/" + usuarioService.getChave(login);
                 case 3:
-                    return "redirect:/dashboard/" + usuarioService.getChave(login);
+                    return "redirect:/dashboard/" + login + "/" + usuarioService.getChave(login);
                 case 4:
                     return "redirect:/home";
                 case 5:
-                    return "redirect:/dashboard/" + usuarioService.getChave(login);
+                    return "redirect:/dashboard/" + login + "/" + usuarioService.getChave(login);
             }
         }
         model.addAttribute("erro", "Usuário ou senha Inválidos");
