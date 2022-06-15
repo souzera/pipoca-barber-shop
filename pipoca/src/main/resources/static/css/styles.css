@@ -2493,10 +2493,10 @@ textarea.form-control-lg {
           color-adjust: exact;
 }
 .form-check-input[type=checkbox] {
-  border-radius: 0.25em;
+  border-radius: 0.25px;
 }
 .form-check-input[type=radio] {
-  border-radius: 50%;
+  border-radius: 5px;
 }
 .form-check-input:active {
   filter: brightness(90%);
@@ -11688,7 +11688,7 @@ footer a:hover, footer a:active, footer a:focus {
 
   @media (max-width: 840px){
 
-      .main-container{
+      .login-body{
         background-image: url("/assets/img/login-img.jpg");
         background-position: center;
         background-repeat: no-repeat;
@@ -11715,6 +11715,7 @@ footer a:hover, footer a:active, footer a:focus {
       .login-body{
         background-color: coral;
       }
+
   }
 
   @media (max-width: 600px){
@@ -11775,24 +11776,169 @@ footer a:hover, footer a:active, footer a:focus {
     text-decoration: none;
   }
 
+  
+  /* -- tela cadastro -- */
+  
+  .cadastro-body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+    font-size: large;
+    transition: 0.5s;
+  }
+
+  .cadastro-bg{
+    background-image: url("/assets/img/client-register-img.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #101214;
+  }
+
+  .cadastro-container{
+    overflow-y: auto;
+    min-width: 60vw;
+    max-width: 80vw;
+    min-height: 80vh;
+    height: 100vh;
+    padding: 50px;
+    background-color: #141619;
+  }
+
+  .cadastro-container::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  .cadastro-form{
+    box-sizing: border-box;
+    min-width: 90%;
+    max-width: 95%;
+    height: 95%;
+  }
+
+  .cadastro-form input{
+    box-sizing: border-box;
+    min-width: 70%;
+  }
+  
+  .cadastro-img{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    box-sizing: border-box;
+    min-height: 80vh;
+    width: 80vh;
+  }
+
+  .cadastro-img img{
+    display: block;
+    height: 100%;
+    width: auto;
+  }
+
+  @media (max-width: 840px){
+
+      .cadastro-container{
+        min-width: 170px;
+        max-width: 50vw;
+        min-height: 65vh;
+        border-radius: 30px;
+        padding: 50px;
+      }
+      .cadastro-img{
+        display: none;
+      }
+
+      .cadastro-img img{
+        display: none;
+      }
+
+      .cadastro-body{
+        background-color: coral;
+      }
+      
+  }
+
+  @media (max-width: 600px){
+
+    .cadastro-container{
+      min-width: 170px;
+      max-width: 70vw;
+      min-height: 70vh;
+      padding: 50px;
+      border-radius: 30px;
+    }
+    .cadastro-img{
+      display: none;
+    }
+  }
+
+  @media (max-width: 350px){
+    
+    .cadastro-body{
+      overflow: auto;
+    }
+
+    .cadastro-container{
+      width: 250px;
+      height: 470px;
+      padding: 25px;
+    }
+  }
+
+  @media (max-height: 668px) {
+    .cadastro-body{
+      overflow: auto;
+    }
+
+    .cadastro-container{
+      width: 280px;
+      height: 470px;
+    }
+
+    .cadastro-img{
+      width: 500px;
+      height: 470px;
+    }
+
+  }
+
+  .cadastro-labels{
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  .cadastro-labels span {
+    color:#777;
+  }
+
+  .cadastro-labels a {
+    color: #444;
+    text-decoration: none;
+  }
+
+  /* --- */
+
   .agendamento-labels{
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding: 2vh;
   }
-
+  
   .agendamento-labels a{
     text-decoration: none;
     color: #4f5050;
     padding-left: 20px;
     transition: 0.5s;
   }
-
+  
   .agendamento-labels a:hover{
     color: #101214;
   }
-
+  
   .inativo{
     display: none;
   }

@@ -46,6 +46,16 @@ public class UsuarioService {
         return valido;
     }
 
+    public boolean dasboardAcessValidator(String login, int chave){
+        if (isPresent(login) && chaveValidator(chave, login)){
+            return true;
+        }return false;
+    }
+
+    public boolean chaveValidator(int chave, String login){
+        return (chave == findByLogin(login).hashCode()) ? true:false;
+    }
+
     public boolean isPresent(String login){
         return (findByLogin(login) != null)? true:false;
     }
