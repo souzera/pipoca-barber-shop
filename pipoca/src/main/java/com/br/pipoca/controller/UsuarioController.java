@@ -23,12 +23,6 @@ public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
 
-    private final PasswordEncoder encoder;
-
-    public UsuarioController(PasswordEncoder encoder) {
-        this.encoder = encoder;
-    }
-
     @GetMapping(value = "/usuarios")
     public List<Usuario> list() throws IOException {
         return usuarioService.list();
@@ -47,7 +41,7 @@ public class UsuarioController {
     @PostMapping(value = "/usuario/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void addUsuario(@RequestBody @NotNull Usuario usuario){
-        usuario.setSenha(encoder.encode(usuario.getSenha()));
+        usuarioService.criptarSenha(usuario);
         usuarioService.getUsuarioRepository().save(usuario);
     }
     @DeleteMapping(value = "/usuario/del")
@@ -63,7 +57,13 @@ public class UsuarioController {
     @PutMapping(value = "/usuario/att")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Usuario atualizarUsuario(@RequestBody Usuario usuario){
-        return usuarioService.getUsuarioRepository().save(usuario);
+        return usuarioService.saveUsuario(usuario);
+    }
+
+    @PutMapping(value = "/usuario/redefine-password")
+    public Usuario redefinirSenha(@RequestBody Usuario usuario){
+        usuarioService.criptarSenha(usuario);
+        return usuarioService.saveUsuario(usuario);
     }
 
     @GetMapping(value = "/usuario/validation")

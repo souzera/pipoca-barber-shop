@@ -14,37 +14,37 @@ import java.util.List;
 public class ClienteController {
 
     @Autowired
-    ClienteRepository repository;
+    ClienteRepository clienteRepository;
 
     @GetMapping(value = "/clientes")
     public List<Cliente> list() throws IOException{
-        return repository.findAll();
+        return clienteRepository.findAll();
     }
 
     @GetMapping(value = "/cliente/{id}")
     public Cliente buscarCliente(@PathVariable(value="id") long id){
-        return repository.findById(id);
+        return clienteRepository.findById(id);
     }
 
     @PostMapping(value = "/cliente/add")
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente salvar(@RequestBody Cliente cliente){
         System.out.println("salvando cliente " + cliente.getNome());
-        return repository.save(cliente);
+        return clienteRepository.save(cliente);
     }
     @DeleteMapping(value = "/clientes/del")
     public void deletar(@RequestBody Cliente cliente){
-        repository.delete(cliente);
+        clienteRepository.delete(cliente);
     }
 
     @DeleteMapping(value = "/cliente/del/{id}")
     public void deletarPorID(@PathVariable(value = "id") long id){
-        repository.deleteById(id);
+        clienteRepository.deleteById(id);
     }
 
     @PutMapping(value = "/cliente/att")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Cliente atualizar(@RequestBody Cliente cliente){
-        return repository.save(cliente);
+        return clienteRepository.save(cliente);
     }
 }

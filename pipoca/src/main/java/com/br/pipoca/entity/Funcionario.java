@@ -3,10 +3,7 @@ package com.br.pipoca.entity;
 
 import com.br.pipoca.model.Sexo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -21,6 +18,10 @@ public class Funcionario {
     private Sexo sexo;
     private Date dtNascimento;
     private String funcao;
+
+    @OneToOne
+    @JoinColumn
+    private Usuario usuario;
 
     public Funcionario(){}
 
@@ -42,6 +43,16 @@ public class Funcionario {
         this.id = id;
         this.nome = nome;
         this.funcao = funcao;
+    }
+
+    public Funcionario(long id, String nome, String telefone, Sexo sexo, Date dtNascimento, String funcao, Usuario usuario) {
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.sexo = sexo;
+        this.dtNascimento = dtNascimento;
+        this.funcao = funcao;
+        this.usuario = usuario;
     }
 
     public long getId() {
@@ -86,5 +97,17 @@ public class Funcionario {
 
     public void setFuncao(String funcao) {
         this.funcao = funcao;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

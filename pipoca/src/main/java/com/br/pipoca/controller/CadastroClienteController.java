@@ -1,33 +1,31 @@
 package com.br.pipoca.controller;
 
 import com.br.pipoca.dto.ClienteDTO;
-import com.br.pipoca.entity.Cliente;
-import com.br.pipoca.repository.ClienteRepository;
+import com.br.pipoca.service.ClienteService;
+import com.br.pipoca.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CadastroClienteController {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteService clienteService;
+    @Autowired
+    private UsuarioService usuarioService;
 
-    @GetMapping(value = "/cadastrar-se")
-    public ModelAndView cadastrarse(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("cliente/cadastro-cliente.html");
+    @GetMapping
+    @RequestMapping(value = "/client/cadastrar")
+    public ModelAndView cadastrar(){
+        ModelAndView modelAndView = new ModelAndView("cliente/cadastro.html");
         return modelAndView;
     }
 
-    @PostMapping(value = "/cadastrando")
+    @PostMapping(value = "/client/cadastrando")
     public void create(@RequestBody ClienteDTO clienteDTO){
         System.out.println(clienteDTO);
-        //Cliente cliente = clienteDTO.toCliente();
-        //clienteRepository.save(cliente);
-        //return "redirect:/home";
     }
+
 }

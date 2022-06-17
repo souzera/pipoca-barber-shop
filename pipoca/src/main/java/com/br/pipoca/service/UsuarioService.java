@@ -1,5 +1,6 @@
 package com.br.pipoca.service;
 
+import com.br.pipoca.entity.Cliente;
 import com.br.pipoca.entity.Usuario;
 import com.br.pipoca.model.TipoUsuario;
 import com.br.pipoca.repository.UsuarioRepository;
@@ -17,8 +18,17 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private PasswordEncoder encoder;
+    private final PasswordEncoder encoder;
+
+
+
+    public UsuarioService(PasswordEncoder encoder) {
+        this.encoder = encoder;
+    }
+
+    public Usuario saveUsuario(Usuario usuario){
+        return usuarioRepository.save(usuario);
+    }
 
     public List<Usuario> list() throws IOException {
         Iterable<Usuario> usuarioIterable = this.usuarioRepository.findAll();
@@ -46,6 +56,10 @@ public class UsuarioService {
         return valido;
     }
 
+    public long getIdByLogin(String login){
+        return usuarioRepository.findByLogin(login).getId();
+    }
+
     public boolean dasboardAcessValidator(String login, int chave){
         if (isPresent(login) && chaveValidator(chave, login)){
             return true;
@@ -66,5 +80,9 @@ public class UsuarioService {
 
     public TipoUsuario getUsuarioType(String login){
         return findByLogin(login).getTipoUsuario();
+    }
+
+    public void criptarSenha(Usuario usuario) {
+        usuario.setSenha(encoder.encode(usuario.getSenha()));
     }
 }

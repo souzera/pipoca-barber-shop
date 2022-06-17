@@ -8,6 +8,8 @@ public class UsuarioDTO {
     private String login;
     private String senha;
 
+    public UsuarioDTO() {}
+
     public String getLogin() {
         return login;
     }
@@ -38,12 +40,8 @@ public class UsuarioDTO {
         return usuario;
     }
 
-    public Usuario toUsuarioClienteType(String login, String senha){
-        Usuario usuario = new Usuario();
-        usuario.setLogin(login);
-        usuario.setSenha(senha);
-        usuario.setTipoUsuario(TipoUsuario.CLIENTE);
-        return usuario;
+    public TipoUsuario clienteType(){
+        return TipoUsuario.CLIENTE;
     }
 
     @Override

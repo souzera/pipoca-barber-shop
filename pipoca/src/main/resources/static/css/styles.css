@@ -11942,3 +11942,7 @@ footer a:hover, footer a:active, footer a:focus {
   .inativo{
     display: none;
   }
+
+  .input-username{
+    text-transform: lowercase;
+  }

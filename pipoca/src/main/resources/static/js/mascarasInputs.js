@@ -68,4 +68,9 @@ String.prototype.reverse = function(){
        theEvent.returnValue = false;
        if(theEvent.preventDefault) theEvent.preventDefault();
     }
- }
+  }
+  
+  function forceLower(campo, evt) {
+    var text=campo.value;
+    var lowercase=text.toLowerCase();
+  }

@@ -3,50 +3,29 @@ package com.br.pipoca.dto;
 import com.br.pipoca.entity.Cliente;
 import com.br.pipoca.entity.Usuario;
 import com.br.pipoca.model.Sexo;
+import com.br.pipoca.model.TipoUsuario;
 
 import java.util.Date;
 
 public class ClienteDTO {
-
-    private String nome;
-    private String telefone;
-    private Sexo sexo;
-    private Date dtNascimento;
     private String login;
     private String senha;
+    private String confirmaSenha;
+    private String nome;
+    private Date dtNascimento;
+    private Sexo sexo;
+    private String telefone;
+    public ClienteDTO() {}
 
-    private UsuarioDTO usuarioDTO;
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
+    public ClienteDTO(String nome, String telefone, Sexo sexo, Date dtNascimento,
+                      String login, String senha, String confirmaSenha) {
         this.nome = nome;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public Sexo getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(Sexo sexo) {
         this.sexo = sexo;
-    }
-
-    public Date getDtNascimento() {
-        return dtNascimento;
-    }
-
-    public void setDtNascimento(Date dtNascimento) {
         this.dtNascimento = dtNascimento;
+        this.login = login;
+        this.senha = senha;
+        this.confirmaSenha = confirmaSenha;
     }
 
     public String getLogin() {
@@ -65,13 +44,50 @@ public class ClienteDTO {
         this.senha = senha;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Date getDtNascimento() {
+        return dtNascimento;
+    }
+
+    public void setDtNascimento(Date dtNascimento) {
+        this.dtNascimento = dtNascimento;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
     public Cliente toCliente(){
+        Usuario usuario = new Usuario();
+        usuario.setLogin(this.login);
+        usuario.setSenha(this.senha);
+        usuario.setTipoUsuario(TipoUsuario.CLIENTE);
+
         Cliente cliente = new Cliente();
         cliente.setNome(this.nome);
         cliente.setTelefone(this.telefone);
         cliente.setDtNascimento(this.dtNascimento);
         cliente.setSexo(this.sexo);
-        cliente.setUsuario(this.usuarioDTO.toUsuarioClienteType(this.login, this.senha));
+        cliente.setUsuario(usuario);
         return cliente;
     }
 
@@ -84,7 +100,6 @@ public class ClienteDTO {
                 ", dtNascimento=" + dtNascimento +
                 ", login='" + login + '\'' +
                 ", senha='" + senha + '\'' +
-                ", usuarioDTO=" + usuarioDTO +
                 '}';
     }
 }

@@ -13,6 +13,7 @@ public class Usuario {
     @Column(unique = true)
     private String login;
     private String senha;
+    @Enumerated(EnumType.ORDINAL)
     private TipoUsuario tipoUsuario;
 
     public Usuario() {}
@@ -64,5 +65,15 @@ public class Usuario {
 
     public void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", senha='" + senha.hashCode() + '\'' +
+                ", tipoUsuario=" + tipoUsuario +
+                '}';
     }
 }

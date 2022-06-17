@@ -13,6 +13,7 @@ public class Cliente {
 
     private String nome;
     private String telefone;
+    @Enumerated(EnumType.ORDINAL)
     private Sexo sexo;
     private Date dtNascimento;
     @OneToOne
@@ -96,5 +97,15 @@ public class Cliente {
         this.usuario = usuario;
     }
 
-
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", sexo=" + sexo +
+                ", dtNascimento=" + dtNascimento +
+                ", usuario=" + usuario +
+                '}';
+    }
 }

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipoca Barber Shop</title>
+
+    <link rel="icon" type="image/x-icon" href="/assets/pipoca.ico" />
+    <!-- Bootstrap icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <!-- Google fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,600;1,600&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+<body class="cadastro-body bg-dark cadastro-bg">
+
+
+    <div class="main-container">
+
+            <div class="cadastro-container mb-3" style="color: #fff; font-family:Josefin Sans, sans-serif;">
+                <div class="mb-3 col-mb-10">
+                    <a href="/home">
+                        <img src="/assets/img/response_logo2.svg" alt="logotipo pipoca Barber shop" style="max-height: 30vh;width:auto;">
+                    </a>
+                </div>
+
+                <form class="cadastro-form" action="/client/cadastrando" method="POST">
+                    <!--
+                    -->
+                    <div class="form-group mb-2 row">
+                        <div class="login-content col-md-6">
+                            <label class=" control-label col-md-8" for="login">Usuário <h11>*</h11></label>  
+                            <div class="col-md-12">
+                                <input id="login" name="login" placeholder="@" class="form-control input-md input-username" required="" minlength="03" maxlength="13" type="text" OnKeyUp="forceLower(this,event)">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!--
+                    -->
+                    <div class="form-group mb-5 row justify-content-end mb-3">
+
+                        <div class="senha-content col-md-6 mb-1">
+                            <label class="col-md-8 control-label" for="senha">Senha <h11>*</h11></label>  
+                            <div class="col-md-12">
+                                <input id="senha" name="senha" placeholder="#" class="form-control input-md" required="" type="password">
+                            </div>
+                        </div>
+
+                        <div class="senha-content col-md-6">
+                            <label class="col-md-12 control-label" for="confirmaSenha">Confirmar Senha <h11>*</h11></label>  
+                            <div class="col-md-12">
+                                <input id="confirmaSenha" name="confirmaSenha" placeholder="#" class="form-control input-md" required="" type="password">
+                            </div>
+                        </div>
+                        <!--
+                        -->
+
+                    </div>
+                    
+                    <hr>
+                    
+                    <!--
+                    -->
+                    <div class="form-group mb-3">
+                        <label class="col-md-4 control-label" for="nome">Nome <h11>*</h11></label>  
+                        <div class="col-md-12">
+                            <input id="nome" name="nome" placeholder="" class="form-control input-md" required="" type="text">
+                        </div>
+                    </div>
+
+                    <!--
+                    -->
+                    <div class="form-group mb-4">
+                        
+                        <label class="col-md-4 control-label" for="dtNascimento">Nascimento<h11>*</h11></label>  
+                        <div class="col-md-6">
+                            <input id="dtNascimento" name="dtNascimento" min="1940-01-01" max="2019-06-06" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date" maxlength="10" onBlur="showhide()" onKeyUp="mascaraData(this, event)" >
+                        </div>
+
+                    </div>
+
+                    <!--
+                    -->
+                    <div class="form-group mb-4">
+                        <label class="col-md-4 control-label" for="sexo">Sexo<h11>*</h11></label>
+                        <select  class="form-select col-md-4 mb-3" aria-label="sexo" name="sexo" style="text-transform: lowercase;font-size: large;">
+                            !--
+                                <option value="FEMININO">Feminino</option>
+                                <option selected value="MASCULINO">Masculino</option>
+                            --
+                            <option th:each="sexo:${T(com.br.pipoca.model.Sexo).values()}"
+                                    th:value="${sexo}" th:text="${sexo}" class="form-select"></option>
+                        </select>
+                    </div>
+
+                    <!--
+                    -->
+                    <div class="form-group mb-4">
+                        
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="telefone">Telefone <h11>*</h11></label>
+                            <div class="col-md-6">
+                            <div class="input-group">
+                                <input id="telefone" name="telefone" class="form-control" placeholder="XX XXXXX-XXXX" required="" type="text" maxlength="15" OnKeyPress="onlynumber(event)" onKeyUp="mascaraTelefone(this, event)"> 
+                            </div>
+                            </div>
+                            
+                        </div>
+                    </div> 
+
+                    <div class="form-group mb-2">
+                        <!--
+                            <div th:if="${erro != null}" th:text="${erro}" style="color: red;font-size:medium;padding:3px;"></div>
+                        -->
+                        <button type="submit" class="btn btn-primary">Cadastrar-se</button>
+                    </div>
+                    
+                    <br>
+                </form>
+                
+                <div class="login-labels" style="font-size: medium; align-items: center;">
+                    <span>Já possui conta? <a href="/login">Logar</a></span>
+                    <br>
+                    <span><a href="#">Esqueceu a senha?</a></span>
+                </div>
+
+            </div>
+        
+        
+    </div>
+
+
+    <script src="js/mascarasInputs.js"></script>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- * *                               SB Forms JS                               * *-->
+    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+</html>
