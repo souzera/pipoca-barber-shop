@@ -17,7 +17,7 @@ public class AdminController {
     private UsuarioService usuarioService;
 
     @GetMapping
-    @RequestMapping(value = "/dashboard/{login}{id}/{chave}")
+    @RequestMapping(value = "/dashboard/{login}/{chave}")
     public ModelAndView dashboard(@PathVariable String login, @PathVariable int chave){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin/admin.html");

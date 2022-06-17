@@ -1,13 +1,7 @@
 package com.br.pipoca.controller;
 
-import com.br.pipoca.entity.Cliente;
-import com.br.pipoca.entity.Funcionario;
-import com.br.pipoca.entity.Produto;
-import com.br.pipoca.entity.Servico;
-import com.br.pipoca.service.ClienteService;
-import com.br.pipoca.service.FuncionarioService;
-import com.br.pipoca.service.ProdutoService;
-import com.br.pipoca.service.ServicoService;
+import com.br.pipoca.entity.*;
+import com.br.pipoca.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +18,7 @@ public class ListasController {
     @Autowired private FuncionarioService funcionarioService;
     @Autowired private ProdutoService produtoService;
     @Autowired private ServicoService servicoService;
+    @Autowired private HorarioService horarioService;
 
     @GetMapping
     @RequestMapping(value = "/clientes")
@@ -67,6 +62,19 @@ public class ListasController {
         ModelAndView modelAndView = new ModelAndView("admin/listaServicos.html");
 
         List<Servico> lista = servicoService.servicos();
+        System.out.println(lista);
+        modelAndView.addObject("lista",lista);
+
+        return modelAndView;
+    }
+
+    //remover dps
+    @GetMapping
+    @RequestMapping(value = "/horarios")
+    public ModelAndView listaHorarios() throws IOException {
+        ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
+
+        List<Horario> lista = horarioService.horarioFuncionario(1);
         System.out.println(lista);
         modelAndView.addObject("lista",lista);
 

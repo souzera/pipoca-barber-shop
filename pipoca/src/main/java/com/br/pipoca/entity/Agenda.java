@@ -8,15 +8,12 @@ public class Agenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @OneToOne
     @JoinColumn
     private Cliente cliente;
-
     @OneToOne
     @JoinColumn
     private Horario horario;
-
     @ManyToOne
     @JoinColumn
     private Servico servico;

@@ -28,4 +28,8 @@ public class ClienteService {
         return Streamable.of(clienteIterable).toList();
     }
 
+    public Cliente buscarPorLogin(String login){
+        return clienteRepository.findByUsuario(usuarioService.findByLogin(login));
+    }
+
 }

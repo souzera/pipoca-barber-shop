@@ -16,6 +16,9 @@ public class FuncionarioService {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     public Funcionario saveFuncionario(Funcionario funcionario){
         return funcionarioRepository.save(funcionario);
     }

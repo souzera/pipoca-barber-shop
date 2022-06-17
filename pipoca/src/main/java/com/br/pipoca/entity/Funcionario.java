@@ -18,7 +18,6 @@ public class Funcionario {
     private Sexo sexo;
     private Date dtNascimento;
     private String funcao;
-
     @OneToOne
     @JoinColumn
     private Usuario usuario;

@@ -1,6 +1,7 @@
 package com.br.pipoca.service;
 
 import com.br.pipoca.entity.Cliente;
+import com.br.pipoca.entity.Horario;
 import com.br.pipoca.entity.Usuario;
 import com.br.pipoca.model.TipoUsuario;
 import com.br.pipoca.repository.UsuarioRepository;
@@ -19,8 +20,6 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     private final PasswordEncoder encoder;
-
-
 
     public UsuarioService(PasswordEncoder encoder) {
         this.encoder = encoder;
