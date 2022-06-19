@@ -15,7 +15,8 @@ public class Horario {
     @JoinColumn
     private Funcionario funcionario;
     private Date data;
-    private StatusHorario status;
+    @Enumerated
+    private StatusHorario status = StatusHorario.DISPONIVEL;
 
     public Horario(){};
 
@@ -26,20 +27,17 @@ public class Horario {
     public Horario(long id, Funcionario funcionario) {
         this.id = id;
         this.funcionario = funcionario;
-        this.status = StatusHorario.DISPONIVEL;
     }
 
     public Horario(long id, Date data) {
         this.id = id;
         this.data = data;
-        this.status = StatusHorario.DISPONIVEL;
     }
 
     public Horario(long id, Funcionario funcionario, Date data) {
         this.id = id;
         this.funcionario = funcionario;
         this.data = data;
-        this.status = StatusHorario.DISPONIVEL;
     }
 
     public long getId() {

@@ -240,10 +240,11 @@
                 <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Funcionario</th>
-                        <th scope="col">Hora</th>
-                        <th scope="col">Status</th>
+                          <th scope="col">#</th>
+                          <th scope="col">Cliente</th>
+                          <th scope="col">Funcionario</th>
+                          <th scope="col">Hora</th>
+                          <th scope="col">Status</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -252,9 +253,10 @@
                         -->
                         <tr class="agenda" th:each="objeto: ${lista}">
                             <th scope="row" th:text="${objeto.id}">id</th>
-                            <td th:text="${objeto.funcionario.nome}">funcionario</td>
-                            <td th:text="${objeto.data}">data</td>
-                            <td th:text="${objeto.status}">Profile</td>
+                            <td th:text="${objeto.cliente.nome}">cliente</td>
+                            <td th:text="${objeto.horario.funcionario.nome}">funcionario</td>
+                            <td th:text="${objeto.horario.data.getHours()} +'h'+ ${objeto.horario.data.getMinutes()}">data</td>
+                            <td th:text="${objeto.horario.status}">Profile</td>
                         </tr>
                     </tbody>
                   </table>

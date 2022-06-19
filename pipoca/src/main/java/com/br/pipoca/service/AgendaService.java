@@ -1,12 +1,15 @@
 package com.br.pipoca.service;
 
 import com.br.pipoca.entity.Agenda;
+import com.br.pipoca.entity.Horario;
+import com.br.pipoca.model.StatusHorario;
 import com.br.pipoca.repository.AgendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,8 +30,8 @@ public class AgendaService {
         return Streamable.of(agendaIterable).toList();
     }
 
-    public void verificarHorario(){
-
+    public boolean verificarHorario(Horario horario){
+        return horarioService.buscarPorStatus(StatusHorario.DISPONIVEL).contains(horario);
     }
 
 }

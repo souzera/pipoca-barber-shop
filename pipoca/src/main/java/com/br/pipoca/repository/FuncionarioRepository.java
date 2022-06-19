@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
 
     Funcionario findById(long id);
+    Funcionario findByUsuario(Usuario usuario);
 }

@@ -1,6 +1,7 @@
 package com.br.pipoca.controller;
 
 import com.br.pipoca.entity.Agenda;
+import com.br.pipoca.model.StatusHorario;
 import com.br.pipoca.repository.AgendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,11 +31,13 @@ public class AgendaController {
     @ResponseStatus(HttpStatus.CREATED)
     public void salvar(@RequestBody Agenda agenda){
         System.out.println("salvando agenda " + agenda);
+        agenda.getHorario().setStatus(StatusHorario.OCIOSO);
         repository.save(agenda);
     }
 
     @DeleteMapping(value = "/agenda/del")
     public void deletar(@RequestBody Agenda agenda){
+        agenda.getHorario().setStatus(StatusHorario.CANCELADO);
         repository.delete(agenda);
     }
 

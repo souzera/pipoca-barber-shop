@@ -19,6 +19,7 @@ public class ListasController {
     @Autowired private ProdutoService produtoService;
     @Autowired private ServicoService servicoService;
     @Autowired private HorarioService horarioService;
+    @Autowired private AgendaService agendaService;
 
     @GetMapping
     @RequestMapping(value = "/clientes")
@@ -68,13 +69,12 @@ public class ListasController {
         return modelAndView;
     }
 
-    //remover dps
     @GetMapping
-    @RequestMapping(value = "/horarios")
+    @RequestMapping(value = "/agendamentos")
     public ModelAndView listaHorarios() throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
 
-        List<Horario> lista = horarioService.horarioFuncionario(1);
+        List<Agenda> lista = agendaService.agendamentos();
         System.out.println(lista);
         modelAndView.addObject("lista",lista);
 
