@@ -7,6 +7,7 @@ public class UsuarioDTO {
 
     private String login;
     private String senha;
+    private String confirmaSenha;
 
     public UsuarioDTO() {}
 
@@ -26,6 +27,10 @@ public class UsuarioDTO {
         this.senha = senha;
     }
 
+    public String getConfirmaSenha() {return confirmaSenha;}
+
+    public void setConfirmaSenha(String confirmaSenha) {this.confirmaSenha = confirmaSenha;}
+
     public Usuario toUsuario(){
         Usuario usuario = new Usuario();
         usuario.setLogin(this.login);
@@ -33,16 +38,15 @@ public class UsuarioDTO {
         return usuario;
     }
 
-    public Usuario toUsuario(String login, String senha){
+    public Usuario toUsuarioCliente(){
         Usuario usuario = new Usuario();
         usuario.setLogin(login);
         usuario.setSenha(senha);
+        usuario.setTipoUsuario(clienteType());
         return usuario;
     }
 
-    public TipoUsuario clienteType(){
-        return TipoUsuario.CLIENTE;
-    }
+    public TipoUsuario clienteType(){return TipoUsuario.CLIENTE; }
 
     @Override
     public String toString() {

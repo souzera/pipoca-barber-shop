@@ -4,44 +4,28 @@ import com.br.pipoca.entity.Cliente;
 import com.br.pipoca.entity.Usuario;
 import com.br.pipoca.model.Sexo;
 import com.br.pipoca.model.TipoUsuario;
+import com.br.pipoca.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 public class ClienteDTO {
-    private String login;
-    private String senha;
-    private String confirmaSenha;
     private String nome;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dtNascimento;
     private Sexo sexo;
     private String telefone;
+
+    private UsuarioDTO usuarioDTO;
+
     public ClienteDTO() {}
 
-    public ClienteDTO(String nome, String telefone, Sexo sexo, Date dtNascimento,
-                      String login, String senha, String confirmaSenha) {
+    public ClienteDTO(String nome, String telefone, Sexo sexo, Date dtNascimento) {
         this.nome = nome;
         this.telefone = telefone;
         this.sexo = sexo;
         this.dtNascimento = dtNascimento;
-        this.login = login;
-        this.senha = senha;
-        this.confirmaSenha = confirmaSenha;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public String getNome() {
@@ -77,17 +61,11 @@ public class ClienteDTO {
     }
 
     public Cliente toCliente(){
-        Usuario usuario = new Usuario();
-        usuario.setLogin(this.login);
-        usuario.setSenha(this.senha);
-        usuario.setTipoUsuario(TipoUsuario.CLIENTE);
-
         Cliente cliente = new Cliente();
         cliente.setNome(this.nome);
         cliente.setTelefone(this.telefone);
         cliente.setDtNascimento(this.dtNascimento);
         cliente.setSexo(this.sexo);
-        cliente.setUsuario(usuario);
         return cliente;
     }
 
@@ -98,8 +76,6 @@ public class ClienteDTO {
                 ", telefone='" + telefone + '\'' +
                 ", sexo=" + sexo +
                 ", dtNascimento=" + dtNascimento +
-                ", login='" + login + '\'' +
-                ", senha='" + senha + '\'' +
                 '}';
     }
 }
