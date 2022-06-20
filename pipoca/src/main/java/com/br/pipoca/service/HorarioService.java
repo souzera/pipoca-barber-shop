@@ -1,6 +1,7 @@
 package com.br.pipoca.service;
 
 import com.br.pipoca.entity.Horario;
+import com.br.pipoca.model.GradeHorario;
 import com.br.pipoca.model.StatusHorario;
 import com.br.pipoca.repository.HorarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +44,13 @@ public class HorarioService {
         return Streamable.of(horarioIterable).toList();
     }
 
-    public void validarHorario(Horario horario){
-        if (horario.getData().after(new Date())){
-
+    public void grade(){
+        GradeHorario grade = new GradeHorario();
+        int i = 0;
+        for (int[] e: GradeHorario.getMatrix()
+        ) {
+            System.out.println(GradeHorario.pegarHorario(new Date(), i));
+            i++;
         }
     }
 }

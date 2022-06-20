@@ -78,6 +78,8 @@ public class ListasController {
         System.out.println(lista);
         modelAndView.addObject("lista",lista);
 
+        horarioService.grade();
+
         return modelAndView;
     }
 }
