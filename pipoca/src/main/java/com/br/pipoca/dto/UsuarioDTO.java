@@ -46,7 +46,16 @@ public class UsuarioDTO {
         return usuario;
     }
 
-    public TipoUsuario clienteType(){return TipoUsuario.CLIENTE; }
+    public Usuario toUsuarioFuncionario(){
+        Usuario usuario = new Usuario();
+        usuario.setLogin(login);
+        usuario.setSenha(senha);
+        usuario.setTipoUsuario(funcionarioType());
+        return usuario;
+    }
+
+    public TipoUsuario clienteType(){return TipoUsuario.CLIENTE;}
+    public TipoUsuario funcionarioType(){return TipoUsuario.FUNCIONARIO;}
 
     @Override
     public String toString() {

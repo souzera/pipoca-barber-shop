@@ -8,6 +8,7 @@ import com.br.pipoca.service.ClienteService;
 import com.br.pipoca.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,8 +28,17 @@ public class CadastroClienteController {
     }
 
     @PostMapping(value = "/cadastrando")
-    public String create(UsuarioDTO usuarioDTO, ClienteDTO clienteDTO){
+    public String create(UsuarioDTO usuarioDTO, ClienteDTO clienteDTO, Model model){
+        if (usuarioService.isPresent(usuarioDTO.getLogin())){
+            model.addAttribute("erro", "Este usuário já existe.");
+            return "cliente/cadastro";
+        }
+        if(!(usuarioDTO.getSenha().equals(usuarioDTO.getConfirmaSenha()))){
+            model.addAttribute("erro", "As senhas devem ser correspondentes");
+            return "cliente/cadastro";
+        }
         Usuario usuario = usuarioDTO.toUsuarioCliente();
+        usuarioService.criptarSenha(usuario);
         usuarioService.saveUsuario(usuario);
         Cliente cliente = clienteDTO.toCliente();
         cliente.setUsuario(usuarioService.findByLogin(usuario.getLogin()));
