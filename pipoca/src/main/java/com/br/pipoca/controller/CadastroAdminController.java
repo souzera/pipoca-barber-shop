@@ -1,17 +1,8 @@
 package com.br.pipoca.controller;
 
-import com.br.pipoca.dto.ClienteDTO;
-import com.br.pipoca.dto.FuncionarioDTO;
-import com.br.pipoca.dto.ProdutoDTO;
-import com.br.pipoca.dto.UsuarioDTO;
-import com.br.pipoca.entity.Cliente;
-import com.br.pipoca.entity.Funcionario;
-import com.br.pipoca.entity.Produto;
-import com.br.pipoca.entity.Usuario;
-import com.br.pipoca.service.ClienteService;
-import com.br.pipoca.service.FuncionarioService;
-import com.br.pipoca.service.ProdutoService;
-import com.br.pipoca.service.UsuarioService;
+import com.br.pipoca.dto.*;
+import com.br.pipoca.entity.*;
+import com.br.pipoca.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +22,8 @@ public class CadastroAdminController {
     ClienteService clienteService;
     @Autowired
     ProdutoService produtoService;
+    @Autowired
+    ServicoService servicoService;
 
     @GetMapping
     @RequestMapping(value = "/cadastrar/funcionario")
@@ -56,7 +49,14 @@ public class CadastroAdminController {
     @GetMapping
     @RequestMapping(value = "/registro/servico")
     public ModelAndView cadastrarServico(){
-        ModelAndView modelAndView = new ModelAndView("admin/cadastroProduto.html");
+        ModelAndView modelAndView = new ModelAndView("admin/cadastroServico.html");
+        return modelAndView;
+    }
+
+    @GetMapping
+    @RequestMapping(value = "/agendar")
+    public ModelAndView cadastrarServico(){
+        ModelAndView modelAndView = new ModelAndView("admin/registroAgendamento.html");
         return modelAndView;
     }
 
@@ -103,5 +103,12 @@ public class CadastroAdminController {
         Produto produto = produtoDTO.toProduto();
         produtoService.saveProduto(produto);
         return "redirect:/registro/produto";
+    }
+
+    @PostMapping(value = "/registrando/servico")
+    public String createServico(ServicoDTO servicoDTO){
+        Servico servico = servicoDTO.toServico();
+        servicoService.saveServico(servico);
+        return "redirect:/registro/servico";
     }
 }
