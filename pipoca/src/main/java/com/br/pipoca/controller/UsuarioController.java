@@ -1,17 +1,12 @@
 package com.br.pipoca.controller;
 
 import com.br.pipoca.entity.Usuario;
-import com.br.pipoca.model.TipoUsuario;
-import com.br.pipoca.repository.UsuarioRepository;
 import com.br.pipoca.service.UsuarioService;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.List;

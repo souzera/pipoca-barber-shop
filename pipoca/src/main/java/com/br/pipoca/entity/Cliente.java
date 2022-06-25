@@ -1,7 +1,7 @@
 package com.br.pipoca.entity;
 
-import com.br.pipoca.model.Sexo;
-import java.util.Date;
+import com.br.pipoca.util.Sexo;
+import java.sql.Date;
 
 import javax.persistence.*;
 

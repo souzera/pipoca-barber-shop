@@ -1,9 +1,10 @@
 package com.br.pipoca.entity;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
-public class Agenda {
+public class Atendimento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,18 +18,19 @@ public class Agenda {
     @ManyToOne
     @JoinColumn
     private Servico servico;
+    private Date dia;
 
-    public Agenda() {
+    public Atendimento() {
     }
 
-    public Agenda(long id, Cliente cliente, Horario horario, Servico servico) {
+    public Atendimento(long id, Cliente cliente, Horario horario, Servico servico) {
         this.id = id;
         this.cliente = cliente;
         this.horario = horario;
         this.servico = servico;
     }
 
-    public Agenda(long id, Cliente cliente, Horario horario) {
+    public Atendimento(long id, Cliente cliente, Horario horario) {
         this.id = id;
         this.cliente = cliente;
         this.horario = horario;
@@ -65,4 +67,13 @@ public class Agenda {
     public void setServico(Servico servico) {
         this.servico = servico;
     }
+
+    public Date getDia() {
+        return dia;
+    }
+
+    public void setDia(Date dia) {
+        this.dia = dia;
+    }
+
 }

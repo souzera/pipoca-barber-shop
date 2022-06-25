@@ -1,7 +1,6 @@
 package com.br.pipoca.service;
 
 import com.br.pipoca.entity.Cliente;
-import com.br.pipoca.entity.Usuario;
 import com.br.pipoca.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
@@ -30,6 +29,10 @@ public class ClienteService {
 
     public Cliente buscarPorLogin(String login){
         return clienteRepository.findByUsuario(usuarioService.findByLogin(login));
+    }
+
+    public Cliente buscarPorID(long id){
+        return clienteRepository.findById(id);
     }
 
 }

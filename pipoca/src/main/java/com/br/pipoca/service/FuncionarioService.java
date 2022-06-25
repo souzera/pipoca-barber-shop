@@ -26,4 +26,10 @@ public class FuncionarioService {
         Iterable<Funcionario> funcionarioIterable = this.funcionarioRepository.findAll();
         return Streamable.of(funcionarioIterable).toList();
     }
+
+    public Funcionario findById(long id) {
+        return funcionarioRepository.findById(id);
+    }
+
+    public List<Funcionario> findByCargo(int cargo){return funcionarioRepository.findByCargo(cargo);}
 }

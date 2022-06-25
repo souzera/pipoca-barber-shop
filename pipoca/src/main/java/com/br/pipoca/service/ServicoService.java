@@ -18,6 +18,7 @@ public class ServicoService {
     public Servico saveServico(Servico servico){
         return servicoRepository.save(servico);
     }
+    public Servico buscarPorID(long id){return servicoRepository.findById(id);}
 
     public List<Servico> servicos() throws IOException {
         Iterable<Servico> servicoIterable = this.servicoRepository.findAll();

@@ -16,7 +16,6 @@ public class HorarioController {
     @Autowired
     HorarioRepository repository;
 
-
     @GetMapping(value = "/horarios")
     public List<Horario> list() throws IOException {
         return repository.findAll();
@@ -30,7 +29,6 @@ public class HorarioController {
     @PostMapping(value = "/horario/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void salvar(@RequestBody Horario horario){
-        System.out.println("salvando serviço " + horario.getData());
         repository.save(horario);
     }
 

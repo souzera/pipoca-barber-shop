@@ -1,18 +1,13 @@
 package com.br.pipoca.dto;
 
 import com.br.pipoca.entity.Cliente;
-import com.br.pipoca.entity.Usuario;
-import com.br.pipoca.model.Sexo;
-import com.br.pipoca.model.TipoUsuario;
-import com.br.pipoca.service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.br.pipoca.util.Sexo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class ClienteDTO {
     private String nome;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+
     private Date dtNascimento;
     private Sexo sexo;
     private String telefone;

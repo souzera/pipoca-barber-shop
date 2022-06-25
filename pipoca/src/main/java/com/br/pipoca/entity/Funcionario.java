@@ -1,10 +1,11 @@
 package com.br.pipoca.entity;
 
 
-import com.br.pipoca.model.Sexo;
+import com.br.pipoca.util.Cargo;
+import com.br.pipoca.util.Sexo;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 public class Funcionario {
@@ -17,7 +18,7 @@ public class Funcionario {
     private String telefone;
     private Sexo sexo;
     private Date dtNascimento;
-    private String funcao;
+    private Cargo cargo;
     @OneToOne
     @JoinColumn
     private Usuario usuario;
@@ -29,28 +30,28 @@ public class Funcionario {
     }
 
     public Funcionario(long id, String nome, String telefone, Sexo sexo,
-                       Date dtNascimento, String funcao) {
+                       Date dtNascimento, Cargo cargo) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.sexo = sexo;
         this.dtNascimento = dtNascimento;
-        this.funcao = funcao;
+        this.cargo = cargo;
     }
 
-    public Funcionario(long id, String nome, String funcao) {
+    public Funcionario(long id, String nome, Cargo cargo) {
         this.id = id;
         this.nome = nome;
-        this.funcao = funcao;
+        this.cargo = cargo;
     }
 
-    public Funcionario(long id, String nome, String telefone, Sexo sexo, Date dtNascimento, String funcao, Usuario usuario) {
+    public Funcionario(long id, String nome, String telefone, Sexo sexo, Date dtNascimento, Cargo cargo, Usuario usuario) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.sexo = sexo;
         this.dtNascimento = dtNascimento;
-        this.funcao = funcao;
+        this.cargo = cargo;
         this.usuario = usuario;
     }
 
@@ -90,12 +91,12 @@ public class Funcionario {
         this.dtNascimento = dtNascimento;
     }
 
-    public String getFuncao() {
-        return funcao;
+    public Cargo getCargo() {
+        return cargo;
     }
 
-    public void setFuncao(String funcao) {
-        this.funcao = funcao;
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
     }
 
     public void setId(long id) {

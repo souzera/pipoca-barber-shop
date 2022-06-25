@@ -1,30 +1,30 @@
 package com.br.pipoca.dto;
 
 import com.br.pipoca.entity.Funcionario;
-import com.br.pipoca.model.Sexo;
+import com.br.pipoca.util.Cargo;
+import com.br.pipoca.util.Sexo;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class FuncionarioDTO {
 
     private String nome;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dtNascimento;
     private Sexo sexo;
     private String telefone;
-    private String funcao;
+    private Cargo cargo;
 
     private UsuarioDTO usuarioDTO;
 
     public FuncionarioDTO() {}
 
-    public FuncionarioDTO(String nome, Date dtNascimento, Sexo sexo, String telefone, String funcao) {
+    public FuncionarioDTO(String nome, Date dtNascimento, Sexo sexo, String telefone, Cargo cargo) {
         this.nome = nome;
         this.dtNascimento = dtNascimento;
         this.sexo = sexo;
         this.telefone = telefone;
-        this.funcao = funcao;
+        this.cargo = cargo;
     }
 
     public String getNome() {
@@ -59,12 +59,12 @@ public class FuncionarioDTO {
         this.telefone = telefone;
     }
 
-    public String getFuncao() {
-        return funcao;
+    public Cargo getCargo() {
+        return cargo;
     }
 
-    public void setFuncao(String funcao) {
-        this.funcao = funcao;
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
     }
 
     public UsuarioDTO getUsuarioDTO() {
@@ -78,7 +78,7 @@ public class FuncionarioDTO {
     public Funcionario toFuncionario(){
         Funcionario funcionario = new Funcionario();
         funcionario.setDtNascimento(this.dtNascimento);
-        funcionario.setFuncao(this.funcao);
+        funcionario.setCargo(this.cargo);
         funcionario.setNome(this.nome);
         funcionario.setSexo(this.sexo);
         funcionario.setTelefone(this.telefone);

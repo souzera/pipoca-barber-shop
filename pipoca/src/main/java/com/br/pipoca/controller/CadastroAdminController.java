@@ -2,7 +2,10 @@ package com.br.pipoca.controller;
 
 import com.br.pipoca.dto.*;
 import com.br.pipoca.entity.*;
+import com.br.pipoca.util.Cargo;
+import com.br.pipoca.util.Hora;
 import com.br.pipoca.service.*;
+import com.br.pipoca.util.StatusHorario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,19 +14,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.sql.Date;
+
 @Controller
 public class CadastroAdminController {
 
+    @Autowired UsuarioService usuarioService;
+    @Autowired FuncionarioService funcionarioService;
+    @Autowired ClienteService clienteService;
+    @Autowired ProdutoService produtoService;
+    @Autowired ServicoService servicoService;
+    @Autowired HorarioService horarioService;
     @Autowired
-    UsuarioService usuarioService;
-    @Autowired
-    FuncionarioService funcionarioService;
-    @Autowired
-    ClienteService clienteService;
-    @Autowired
-    ProdutoService produtoService;
-    @Autowired
-    ServicoService servicoService;
+    AtendimentoService atendimentoService;
 
     @GetMapping
     @RequestMapping(value = "/cadastrar/funcionario")
@@ -55,8 +59,12 @@ public class CadastroAdminController {
 
     @GetMapping
     @RequestMapping(value = "/agendar")
-    public ModelAndView cadastrarServico(){
+    public ModelAndView buscarAgenda() throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/registroAgendamento.html");
+        modelAndView.addObject("hora", Hora.values());
+        modelAndView.addObject("clientes", clienteService.clientes());
+        modelAndView.addObject("servicos", servicoService.servicos());
+        modelAndView.addObject("barbeiros", funcionarioService.findByCargo(Cargo.BARBEIRO.getValor()));
         return modelAndView;
     }
 
@@ -70,7 +78,7 @@ public class CadastroAdminController {
             model.addAttribute("erro", "As senhas devem ser correspondentes");
             return "admin/cadastroFuncionario";
         }
-        Usuario usuario = usuarioDTO.toUsuarioCliente();
+        Usuario usuario = usuarioDTO.toUsuarioFuncionario();
         usuarioService.criptarSenha(usuario);
         usuarioService.saveUsuario(usuario);
         Funcionario funcionario = funcionarioDTO.toFuncionario();
@@ -110,5 +118,16 @@ public class CadastroAdminController {
         Servico servico = servicoDTO.toServico();
         servicoService.saveServico(servico);
         return "redirect:/registro/servico";
+    }
+
+    @PostMapping(value = "/agendando")
+    public String createAgenda(HorarioDTO horarioDTO, AtendimentoDTO atendimentoDTO) throws IOException {
+        //criar novo atendimento
+        Horario horario = horarioDTO.toHorario();
+        Atendimento atendimento = atendimentoDTO.toAtendimento();
+        atendimento.setHorario(horarioService.saveHorario(horario));
+        atendimento.getHorario().setStatusHorario(StatusHorario.OCUPADO);
+        atendimentoService.agendar(atendimento);
+        return "redirect:/agendamentos";
     }
 }

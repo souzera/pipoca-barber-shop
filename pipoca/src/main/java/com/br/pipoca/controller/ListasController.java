@@ -19,7 +19,7 @@ public class ListasController {
     @Autowired private ProdutoService produtoService;
     @Autowired private ServicoService servicoService;
     @Autowired private HorarioService horarioService;
-    @Autowired private AgendaService agendaService;
+    @Autowired private AtendimentoService atendimentoService;
 
     @GetMapping
     @RequestMapping(value = "/clientes")
@@ -73,12 +73,9 @@ public class ListasController {
     @RequestMapping(value = "/agendamentos")
     public ModelAndView listaHorarios() throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
-
-        List<Agenda> lista = agendaService.agendamentos();
-        System.out.println(lista);
-        modelAndView.addObject("lista",lista);
-
-        horarioService.grade();
+        List<Atendimento> agendamentos = atendimentoService.agendamentos();
+        System.out.println(agendamentos);
+        modelAndView.addObject("lista",agendamentos);
 
         return modelAndView;
     }

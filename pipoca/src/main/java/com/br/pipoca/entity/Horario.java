@@ -1,9 +1,10 @@
 package com.br.pipoca.entity;
 
-import com.br.pipoca.model.StatusHorario;
+import com.br.pipoca.util.Hora;
+import com.br.pipoca.util.StatusHorario;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 public class Horario {
@@ -14,14 +15,18 @@ public class Horario {
     @ManyToOne
     @JoinColumn
     private Funcionario funcionario;
-    private Date data;
     @Enumerated
-    private StatusHorario status = StatusHorario.DISPONIVEL;
+    private Hora hora;
 
-    public Horario(){};
+    @Enumerated
+    private StatusHorario statusHorario;
 
-    public Horario(long id) {
+    public Horario() {}
+
+    public Horario(long id, Funcionario funcionario, Hora hora, StatusHorario status) {
         this.id = id;
+        this.funcionario = funcionario;
+        this.hora = hora;
     }
 
     public Horario(long id, Funcionario funcionario) {
@@ -29,15 +34,15 @@ public class Horario {
         this.funcionario = funcionario;
     }
 
-    public Horario(long id, Date data) {
+    public Horario(long id, Hora hora) {
         this.id = id;
-        this.data = data;
+        this.hora = hora;
     }
 
-    public Horario(long id, Funcionario funcionario, Date data) {
+    public Horario(long id, Funcionario funcionario, Hora hora) {
         this.id = id;
         this.funcionario = funcionario;
-        this.data = data;
+        this.hora = hora;
     }
 
     public long getId() {
@@ -56,24 +61,19 @@ public class Horario {
         this.funcionario = funcionario;
     }
 
-    public Date getData() {
-        return data;
+    public Hora getHora() {
+        return hora;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setHora(Hora hora) {
+        this.hora = hora;
     }
 
-    @Override
-    public String toString() {
-        return funcionario + "tem um horário marcado no dia " + getData();
+    public StatusHorario getStatusHorario() {
+        return statusHorario;
     }
 
-    public StatusHorario getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusHorario status) {
-        this.status = status;
+    public void setStatusHorario(StatusHorario statusHorario) {
+        this.statusHorario = statusHorario;
     }
 }

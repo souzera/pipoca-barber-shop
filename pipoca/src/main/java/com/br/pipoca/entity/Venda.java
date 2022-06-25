@@ -16,7 +16,7 @@ public class Venda {
 
     @ManyToOne
     @JoinColumn
-    private Agenda agenda;
+    private Atendimento atendimento;
 
     public Venda() {}
 
@@ -25,15 +25,15 @@ public class Venda {
         this.produto = produto;
     }
 
-    public Venda(long id, Agenda agenda) {
+    public Venda(long id, Atendimento atendimento) {
         this.id = id;
-        this.agenda = agenda;
+        this.atendimento = atendimento;
     }
 
-    public Venda(long id, Produto produto, Agenda agenda) {
+    public Venda(long id, Produto produto, Atendimento atendimento) {
         this.id = id;
         this.produto = produto;
-        this.agenda = agenda;
+        this.atendimento = atendimento;
     }
 
     public long getId() {
@@ -52,19 +52,19 @@ public class Venda {
         this.produto = produto;
     }
 
-    public Agenda getAgenda() {
-        return agenda;
+    public Atendimento getAgenda() {
+        return atendimento;
     }
 
-    public void setAgenda(Agenda agenda) {
-        this.agenda = agenda;
+    public void setAgenda(Atendimento atendimento) {
+        this.atendimento = atendimento;
     }
 
     @Override
     public String toString() {
         if (produto != null) {
             return "Venda: " + produto.getDescricao() + "\n\t Valor:" + produto.getValor();
-        } else return "Venda: " + agenda.getServico().getDescricao() +
-                "\n\t Valor:" + agenda.getServico().getValor();
+        } else return "Venda: " + atendimento.getServico().getDescricao() +
+                "\n\t Valor:" + atendimento.getServico().getValor();
     }
 }

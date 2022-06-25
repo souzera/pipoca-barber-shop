@@ -1,6 +1,6 @@
 package com.br.pipoca.entity;
 
-import com.br.pipoca.model.TipoUsuario;
+import com.br.pipoca.util.TipoUsuario;
 
 import javax.persistence.*;
 

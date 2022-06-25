@@ -1,7 +1,7 @@
 package com.br.pipoca.dto;
 
 import com.br.pipoca.entity.Usuario;
-import com.br.pipoca.model.TipoUsuario;
+import com.br.pipoca.util.TipoUsuario;
 
 public class UsuarioDTO {
 
@@ -55,7 +55,7 @@ public class UsuarioDTO {
     }
 
     public TipoUsuario clienteType(){return TipoUsuario.CLIENTE;}
-    public TipoUsuario funcionarioType(){return TipoUsuario.FUNCIONARIO;}
+    public TipoUsuario funcionarioType(){return TipoUsuario.BARBEIRO;}
 
     @Override
     public String toString() {

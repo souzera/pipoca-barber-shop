@@ -1,9 +1,7 @@
 package com.br.pipoca.service;
 
-import com.br.pipoca.entity.Cliente;
-import com.br.pipoca.entity.Horario;
 import com.br.pipoca.entity.Usuario;
-import com.br.pipoca.model.TipoUsuario;
+import com.br.pipoca.util.TipoUsuario;
 import com.br.pipoca.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;

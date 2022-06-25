@@ -1,10 +1,10 @@
-package com.br.pipoca.model;
+package com.br.pipoca.util;
 
 public enum TipoUsuario {
 
     ADM(0),
     SUPER(1),
-    GERENTE(2),
+    BARBEIRO(2),
     FUNCIONARIO(3),
     CLIENTE(4),
     DEV(5);

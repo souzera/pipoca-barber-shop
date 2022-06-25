@@ -1,4 +1,4 @@
-package com.br.pipoca.model;
+package com.br.pipoca.util;
 
 public enum Sexo {
 

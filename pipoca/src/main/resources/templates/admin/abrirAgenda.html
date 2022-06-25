@@ -21,8 +21,6 @@
     <!-- Custom styles for this template-->
     <link href="/admin/css/pipoca-admin-2.css" rel="stylesheet">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
 </head>
 
 <body id="page-top">
@@ -239,68 +237,37 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-            <form class="cadastro-form" action="/agendando" method="POST">
+            <form class="cadastro-form" action="/abrindo/atendimento" method="POST">
                 <!--
                 -->
-                <div class="form-group col-md-8 mb-4 row">
-                    <div class="step" id="step_1">
-                        <label class="col-md-4 control-label" for="dia">Dia<h11>*</h11></label>
-                        <input id="select_dia" type="date" name="dia" required="" onclick="">
+                <div class="form-group mb-2 row">
+                    <label class="col-md-2 control-label" for="horario">Funcionario<h11>*</h11></label>
+                    <select  class="form-select col-md-8 mb-3" aria-label="funcionario" name="funcionario_id" style="text-transform: uppercase;font-size: large;">
+                        <!--
+                        -->
+                        <option th:each="funcionario:${funcionario}"
+                                th:value="${funcionario.id}" th:text="${funcionario.nome}" class="form-select"></option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                        
+                    <label class="col-md-4 control-label" for="dia">Dia<h11>*</h11></label>  
+                    <div class="col-md-6">
+                        <input type="date" id="dia" name="dia">
                     </div>
-                    <div class="step desativado" id="step_2">
-                        <label class="col-md-4 control-label" for="hora">Hora<h11>*</h11></label>
-                        <select id="hora" class="form-select col-md-8 mb-3" required="" aria-label="hora" name="hora" style="text-transform: lowercase;font-size: large;">
-                            <!--
-                            -->
-                            <option th:each="hora:${hora}" th:value="${hora}" th:text="${hora.valor}" class="form-select" style="text-transform: uppercase;"></option>
-                        </select>
-                    </div>
-                </div>
 
-                <div class="form-group step mb-4" id="step_3">
-                    <label class="col-md-4 control-label" for="cliente">Cliente<h11>*</h11></label>
-                    <select  class="form-select col-md-8 mb-3" aria-label="cliente" name="cliente" style="text-transform: lowercase;font-size: large;">
-                        <!--
-                        -->
-                        <option th:each="cliente:${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}" class="form-select" style="text-transform: uppercase;"></option>
-                    </select>
                 </div>
-
-                <div class="form-group step mb-4" id="step_3">
-                    <label class="col-md-4 control-label" for="barbeiro">Barbeiro<h11>*</h11></label>
-                    <select  class="form-select col-md-8 mb-3" aria-label="barbeiro" name="funcionario">
-                        <!--
-                        -->
-                        <option th:each="barbeiro:${barbeiros}" th:value="${barbeiro.id}" th:text="${barbeiro.nome}" class="form-select" style="text-transform: uppercase;"></option>
-                    </select>
-                </div>
-
-                <div class="form-group step mb-4" id="step_4">
-                    <label class="col-md-4 control-label" for="servico">Serviço<h11></h11></label>
-                    <select  class="form-select col-md-8 mb-3" aria-label="servico" name="servico" style="text-transform: lowercase;font-size: large;">
-                        <!--
-                        -->
-                        <option th:each="servico:${servicos}" th:value="${servico.id}" th:text="${servico.descricao}" class="form-select" style="text-transform: uppercase;"></option>
-                    </select>
-                </div>
-
+                
                 <div class="form-group col-md-4 mb-2">
-                    <button type="submit" class="btn btn-primary">Agendar</button>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
                 </div>
 
             </form>
 
         </div>
 
-        <script>
-            var today = new Date();
-            today.setDate(today.getDate()); //Voalá
-            today = today.toISOString().split('T')[0];
 
-            document.getElementsByName("dia")[0].setAttribute('min', today);
-        </script>
-
-        <script src="/js/agendamento.js"></script>
         <script src="/js/mascarasInputs.js"></script>
         <!-- Bootstrap core JavaScript-->
         <script src="/admin/vendor/jquery/jquery.min.js"></script>
@@ -314,18 +281,6 @@
         <!-- Page level custom scripts -->
         <script src="/admin/js/demo/chart-area-demo.js"></script>
         <script src="/admin/js/demo/chart-pie-demo.js"></script>
-
-        <script>
-            $(document).ready(function(){
-                $("#select_dia").blur(function(){
-                    var data = $("select_dia").val();
-                    $("#step_2").toggle(".desativado");
-                    $.get("api/vagas", function(json){
-                        console.log(json);
-                    })
-                })
-            })  
-        </script>
 
 </body>
 
