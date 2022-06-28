@@ -9,7 +9,6 @@ import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -45,5 +44,9 @@ public class HorarioService {
 
     public Horario buscarPorHoraEFuncionario(long funcionario_id, Hora hora){
         return horarioRepository.findByHoraAndFuncionario(funcionario_id,hora);
+    }
+
+    public void deletarHorario(Horario horario){
+        horarioRepository.delete(horario);
     }
 }

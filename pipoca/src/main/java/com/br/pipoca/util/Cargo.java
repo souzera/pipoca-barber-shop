@@ -2,7 +2,7 @@ package com.br.pipoca.util;
 
 public enum Cargo {
 
-    BARBEIRO(1), ATENDENTE(2), ADM(0);
+    ADM(0), BARBEIRO(1), ATENDENTE(2);
 
     private int valor;
     Cargo(int valor) {

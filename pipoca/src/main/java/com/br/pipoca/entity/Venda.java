@@ -1,10 +1,15 @@
 package com.br.pipoca.entity;
 
+import com.br.pipoca.util.Pagamento;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
 public class Venda {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,9 +19,12 @@ public class Venda {
     @JoinColumn
     private Produto produto;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn
     private Atendimento atendimento;
+
+    @Enumerated
+    private Pagamento pagamento;
 
     public Venda() {}
 
@@ -33,30 +41,6 @@ public class Venda {
     public Venda(long id, Produto produto, Atendimento atendimento) {
         this.id = id;
         this.produto = produto;
-        this.atendimento = atendimento;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public Atendimento getAgenda() {
-        return atendimento;
-    }
-
-    public void setAgenda(Atendimento atendimento) {
         this.atendimento = atendimento;
     }
 

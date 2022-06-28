@@ -51,7 +51,12 @@ public class AtendimentoController {
     }
 
     @GetMapping(value = "/vagas")
-    public List<Hora> getVagas(@RequestBody Date date) throws IOException {
+    public List<Hora> getVagas(String dia) throws IOException {
+        int ano = Integer.parseInt(dia.substring(0,4));
+        int mes = Integer.parseInt(dia.substring(5,7));
+        int data = Integer.parseInt(dia.substring(8,10));
+        Date date = new Date(ano, mes, data);
+        System.out.println(atendimentoService.vagas(date));
         return atendimentoService.vagas(date);
     }
 }

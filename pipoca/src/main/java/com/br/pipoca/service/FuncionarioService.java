@@ -3,7 +3,9 @@ package com.br.pipoca.service;
 import com.br.pipoca.entity.Cliente;
 import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.repository.FuncionarioRepository;
+import com.br.pipoca.util.Cargo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +33,5 @@ public class FuncionarioService {
         return funcionarioRepository.findById(id);
     }
 
-    public List<Funcionario> findByCargo(int cargo){return funcionarioRepository.findByCargo(cargo);}
+    public List<Funcionario> findByCargo(Cargo cargo){return funcionarioRepository.findByCargo(cargo.getValor());}
 }

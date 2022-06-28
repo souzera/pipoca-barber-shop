@@ -22,4 +22,6 @@ public interface HorarioRepository extends JpaRepository<Horario, Long> {
     @Query(value = "select * from horario where funcionario_id=:funcionario_id and hora=:hora and status_horario=0;", nativeQuery = true)
     Horario findByHoraAndFuncionario(@Param("funcionario_id")long funcionario_id, @Param("hora") Hora hora);
 
+
+
 }

@@ -26,8 +26,7 @@ public class CadastroAdminController {
     @Autowired ProdutoService produtoService;
     @Autowired ServicoService servicoService;
     @Autowired HorarioService horarioService;
-    @Autowired
-    AtendimentoService atendimentoService;
+    @Autowired AtendimentoService atendimentoService;
 
     @GetMapping
     @RequestMapping(value = "/cadastrar/funcionario")
@@ -63,8 +62,8 @@ public class CadastroAdminController {
         ModelAndView modelAndView = new ModelAndView("admin/registroAgendamento.html");
         modelAndView.addObject("hora", Hora.values());
         modelAndView.addObject("clientes", clienteService.clientes());
+        modelAndView.addObject("barbeiros", funcionarioService.findByCargo(Cargo.BARBEIRO));
         modelAndView.addObject("servicos", servicoService.servicos());
-        modelAndView.addObject("barbeiros", funcionarioService.findByCargo(Cargo.BARBEIRO.getValor()));
         return modelAndView;
     }
 
@@ -84,6 +83,7 @@ public class CadastroAdminController {
         Funcionario funcionario = funcionarioDTO.toFuncionario();
         funcionario.setUsuario(usuarioService.findByLogin(usuario.getLogin()));
         funcionarioService.saveFuncionario(funcionario);
+        //lembrar de mudar esse redirect
         return "redirect:/dashboard/"+ funcionario.getUsuario().getLogin()+ "/" + funcionario.hashCode();
     }
 
@@ -103,6 +103,7 @@ public class CadastroAdminController {
         Cliente cliente = clienteDTO.toCliente();
         cliente.setUsuario(usuarioService.findByLogin(usuario.getLogin()));
         clienteService.saveCliente(cliente);
+        //lembrar de mudar esse redirect
         return "redirect:/home";
     }
 
@@ -121,13 +122,25 @@ public class CadastroAdminController {
     }
 
     @PostMapping(value = "/agendando")
-    public String createAgenda(HorarioDTO horarioDTO, AtendimentoDTO atendimentoDTO) throws IOException {
+    public String createAgenda(HorarioDTO horarioDTO, AtendimentoDTO atendimentoDTO, Model model) throws IOException {
         //criar novo atendimento
         Horario horario = horarioDTO.toHorario();
         Atendimento atendimento = atendimentoDTO.toAtendimento();
         atendimento.setHorario(horarioService.saveHorario(horario));
         atendimento.getHorario().setStatusHorario(StatusHorario.OCUPADO);
+        for (Atendimento e: atendimentoService.buscarPorData(atendimentoDTO.getDia())) {
+            if (atendimentoService.verificarAgenda(atendimento, e)){
+                horarioService.deletarHorario(horarioService.buscarPorHoraEFuncionario(horarioDTO.getFuncionario().getId(), horarioDTO.getHora()));
+                model.addAttribute("hora", Hora.values());
+                model.addAttribute("clientes", clienteService.clientes());
+                model.addAttribute("barbeiros", funcionarioService.findByCargo(Cargo.BARBEIRO));
+                model.addAttribute("servicos", servicoService.servicos());
+                model.addAttribute("erro", "Este horario está ocupado. Caso necessário consulte a lista de agendamentos.");
+                return "admin/registroAgendamento";
+            }
+        }
         atendimentoService.agendar(atendimento);
         return "redirect:/agendamentos";
+
     }
 }

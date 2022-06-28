@@ -2,6 +2,7 @@ package com.br.pipoca.repository;
 
 import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.entity.Usuario;
+import com.br.pipoca.util.Cargo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

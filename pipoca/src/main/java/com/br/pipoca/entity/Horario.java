@@ -2,11 +2,14 @@ package com.br.pipoca.entity;
 
 import com.br.pipoca.util.Hora;
 import com.br.pipoca.util.StatusHorario;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Date;
 
 @Entity
+@Getter
+@Setter
 public class Horario {
 
     @Id
@@ -17,7 +20,6 @@ public class Horario {
     private Funcionario funcionario;
     @Enumerated
     private Hora hora;
-
     @Enumerated
     private StatusHorario statusHorario;
 
@@ -43,37 +45,5 @@ public class Horario {
         this.id = id;
         this.funcionario = funcionario;
         this.hora = hora;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
-
-    public Hora getHora() {
-        return hora;
-    }
-
-    public void setHora(Hora hora) {
-        this.hora = hora;
-    }
-
-    public StatusHorario getStatusHorario() {
-        return statusHorario;
-    }
-
-    public void setStatusHorario(StatusHorario statusHorario) {
-        this.statusHorario = statusHorario;
     }
 }

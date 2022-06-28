@@ -11283,5 +11283,5 @@ body.sidebar-toggled footer.sticky-footer {
 /* minhas classes */
 
 .desativado{
-  display: none;
+  visibility: hidden;
 }

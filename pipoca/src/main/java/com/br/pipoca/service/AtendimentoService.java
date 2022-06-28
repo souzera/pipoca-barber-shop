@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class AtendimentoService {
     @Autowired
     private HorarioService horarioService;
     
-    private Hora[] horas = Hora.values();
+    private static Hora[] horas = Hora.values();
 
     public Atendimento agendar(Atendimento atendimento){
         return atendimentoRepository.save(atendimento);
@@ -43,16 +44,6 @@ public class AtendimentoService {
         return Streamable.of(atendimentoIterable).toList();
     }
 
-    public List<Hora> vagas(Date data) throws IOException {
-        List<Hora> vagas = Arrays.asList(horas);
-        List<Atendimento> atendimentos = buscarPorData(data);
-        for (Atendimento atendimento:
-             atendimentos) {
-            vagas.remove(atendimento.getHorario().getHora());
-        }
-        return vagas;
-    }
-
     public Atendimento buscarPorId(long id) {
         return atendimentoRepository.findById(id);
     }
@@ -61,12 +52,24 @@ public class AtendimentoService {
         atendimentoRepository.deleteById(id);
     }
 
+    public void concluirAtendimento(Atendimento atendimento){
+        atendimento.getHorario().setStatusHorario(StatusHorario.CONCLUIDO);
+    }
+    public void cancelarAtendimento(Atendimento atendimento){
+        atendimento.getHorario().setStatusHorario(StatusHorario.CANCELADO);
+    }
+
     public boolean verificarAgenda(Atendimento atendimento, Atendimento
                                    atendimentoBase) throws IOException {
         if (atendimento.getHorario().getHora() == atendimentoBase.getHorario().getHora()
                 &&
             atendimento.getHorario().getFuncionario() == atendimentoBase.getHorario().getFuncionario()){
-            return false;}
-        return true;
+            return true;}
+        return false;
+    }
+
+    public List<Hora> vagas(Date date) {
+        List<Hora> vagas = Arrays.asList(Hora.values());
+        return vagas;
     }
 }

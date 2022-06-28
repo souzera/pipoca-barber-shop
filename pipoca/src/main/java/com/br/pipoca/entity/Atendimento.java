@@ -1,9 +1,13 @@
 package com.br.pipoca.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
+@Getter @Setter
 public class Atendimento {
 
     @Id
@@ -35,45 +39,4 @@ public class Atendimento {
         this.cliente = cliente;
         this.horario = horario;
     }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Horario getHorario() {
-        return horario;
-    }
-
-    public void setHorario(Horario horario) {
-        this.horario = horario;
-    }
-
-    public Servico getServico() {
-        return servico;
-    }
-
-    public void setServico(Servico servico) {
-        this.servico = servico;
-    }
-
-    public Date getDia() {
-        return dia;
-    }
-
-    public void setDia(Date dia) {
-        this.dia = dia;
-    }
-
 }
