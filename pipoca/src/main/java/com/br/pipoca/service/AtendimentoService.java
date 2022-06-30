@@ -20,11 +20,11 @@ public class AtendimentoService {
 
     @Autowired
     private AtendimentoRepository atendimentoRepository;
-
     @Autowired
     private HorarioService horarioService;
     
     private static Hora[] horas = Hora.values();
+    private Hora[] disponiveis;
 
     public Atendimento agendar(Atendimento atendimento){
         return atendimentoRepository.save(atendimento);
@@ -68,8 +68,21 @@ public class AtendimentoService {
         return false;
     }
 
-    public List<Hora> vagas(Date date) {
-        List<Hora> vagas = Arrays.asList(Hora.values());
+    public List<Hora> vagas(Date date) throws IOException {
+        List<Atendimento> ocupados = buscarPorData(date);
+        List<Hora> vagas = new ArrayList<>();
+        int ocupadoIndex = 0;
+        for (Hora h:
+             horas) {
+            if (h.ordinal() != ocupados.get(ocupadoIndex).getHorario().getHora().ordinal()){
+                vagas.add(h);
+            }
+
+            if(h.ordinal() == ocupados.get(ocupadoIndex).getHorario().getHora().ordinal()){
+                ocupadoIndex++;
+            }
+        }
+
         return vagas;
     }
 }

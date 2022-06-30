@@ -26,7 +26,7 @@ public class CookieService {
                 .orElse(null);
     }
 
-    private static Cookie getCookie(HttpServletRequest request, String chave) {
+    public static Cookie getCookie(HttpServletRequest request, String chave) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {

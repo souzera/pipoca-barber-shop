@@ -5,8 +5,9 @@ public enum StatusHorario {
     DISPONIVEL(0),
     OCUPADO(1),
     CONCLUIDO(2),
+    CANCELADO(3),
 
-    CANCELADO(3);
+    FECHADO(4);
 
     private int valor;
     StatusHorario(int valor){this.valor=valor;}

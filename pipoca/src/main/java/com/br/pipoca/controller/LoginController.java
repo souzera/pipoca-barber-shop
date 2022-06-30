@@ -38,8 +38,8 @@ public class LoginController {
     public String logar(Model model, String login, String senha, String manterLogin, HttpServletResponse response){
         if (usuarioService.validarSenha(login, senha)){
             Usuario usuario = usuarioService.findByLogin(login);
-            int tempo = 30;
-            if (manterLogin != null){tempo = tempo*2;}
+            int tempo = 3600;
+            if (manterLogin != null){tempo = tempo*24;}
             CookieService.setCookie(response, "login", usuario.getLogin(), tempo);
             int tipoConta = usuario.getTipoUsuario().getValor();
             switch (tipoConta){

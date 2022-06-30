@@ -11946,3 +11946,10 @@ footer a:hover, footer a:active, footer a:focus {
   .input-username{
     text-transform: lowercase;
   }
+
+  .border-box-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+  }

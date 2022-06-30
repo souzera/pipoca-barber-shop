@@ -45,8 +45,11 @@ public class HorarioService {
     public Horario buscarPorHoraEFuncionario(long funcionario_id, Hora hora){
         return horarioRepository.findByHoraAndFuncionario(funcionario_id,hora);
     }
-
     public void deletarHorario(Horario horario){
         horarioRepository.delete(horario);
+    }
+
+    public void fecharHorario(Horario horario){
+        horario.setStatusHorario(StatusHorario.FECHADO);
     }
 }

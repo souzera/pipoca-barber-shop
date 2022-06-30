@@ -126,11 +126,20 @@ public class CadastroAdminController {
         //criar novo atendimento
         Horario horario = horarioDTO.toHorario();
         Atendimento atendimento = atendimentoDTO.toAtendimento();
-        atendimento.setHorario(horarioService.saveHorario(horario));
+        long id_horario = horarioService.saveHorario(horario).getId();
+        horarioService.buscarPorId(id_horario).setFuncionario(horario.getFuncionario());
+        horarioService.buscarPorId(id_horario).setHora(horario.getHora());
+        horarioService.buscarPorId(id_horario).setStatusHorario(horario.getStatusHorario());
+
+        atendimento.setHorario(horarioService.buscarPorId(id_horario));
         atendimento.getHorario().setStatusHorario(StatusHorario.OCUPADO);
+
+        System.out.println(atendimentoService.vagas(atendimento.getDia()));
+
+
         for (Atendimento e: atendimentoService.buscarPorData(atendimentoDTO.getDia())) {
             if (atendimentoService.verificarAgenda(atendimento, e)){
-                horarioService.deletarHorario(horarioService.buscarPorHoraEFuncionario(horarioDTO.getFuncionario().getId(), horarioDTO.getHora()));
+                horarioService.deletarHorario(horarioService.buscarPorId(id_horario));
                 model.addAttribute("hora", Hora.values());
                 model.addAttribute("clientes", clienteService.clientes());
                 model.addAttribute("barbeiros", funcionarioService.findByCargo(Cargo.BARBEIRO));

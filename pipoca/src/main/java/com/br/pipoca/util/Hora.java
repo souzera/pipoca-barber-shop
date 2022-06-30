@@ -20,7 +20,6 @@ public enum Hora {
     _17H30("17h30"),//15
     _18H00("18h00"),//16
     _18H30("18h30");//17
-
     private String valor;
     Hora(String valor){
         this.valor = valor;
