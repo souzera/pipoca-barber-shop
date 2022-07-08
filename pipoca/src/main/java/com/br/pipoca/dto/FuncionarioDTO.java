@@ -27,6 +27,16 @@ public class FuncionarioDTO {
         this.cargo = cargo;
     }
 
+    public Funcionario toFuncionario(){
+        Funcionario funcionario = new Funcionario();
+        funcionario.setDtNascimento(this.dtNascimento);
+        funcionario.setCargo(this.cargo);
+        funcionario.setNome(this.nome);
+        funcionario.setSexo(this.sexo);
+        funcionario.setTelefone(this.telefone);
+        return funcionario;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -73,15 +83,5 @@ public class FuncionarioDTO {
 
     public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
         this.usuarioDTO = usuarioDTO;
-    }
-
-    public Funcionario toFuncionario(){
-        Funcionario funcionario = new Funcionario();
-        funcionario.setDtNascimento(this.dtNascimento);
-        funcionario.setCargo(this.cargo);
-        funcionario.setNome(this.nome);
-        funcionario.setSexo(this.sexo);
-        funcionario.setTelefone(this.telefone);
-        return funcionario;
     }
 }

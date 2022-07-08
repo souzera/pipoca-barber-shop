@@ -1,12 +1,15 @@
 package com.br.pipoca.controller;
 
+import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.entity.Horario;
 import com.br.pipoca.repository.HorarioRepository;
+import com.br.pipoca.service.HorarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -16,11 +19,13 @@ public class HorarioController {
     @Autowired
     HorarioRepository repository;
 
+    @Autowired
+    HorarioService horarioService;
+
     @GetMapping(value = "/horarios")
     public List<Horario> list() throws IOException {
         return repository.findAll();
     }
-
     @GetMapping(value = "/horario/{id}")
     public Horario buscarHorario(@PathVariable(value = "id") long id){
         return repository.findById(id);
@@ -46,6 +51,10 @@ public class HorarioController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Horario atualizar(@RequestBody Horario horario){
         return repository.save(horario);
+    }
+
+    public List<Horario> ocupados(Date date, long funcionario_id){
+        return horarioService.buscarPorFuncionarioEData(funcionario_id, date);
     }
 
 }

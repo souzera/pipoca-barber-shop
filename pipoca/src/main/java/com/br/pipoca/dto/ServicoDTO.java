@@ -14,6 +14,13 @@ public class ServicoDTO {
         this.valor = valor;
     }
 
+    public Servico toServico(){
+        Servico servico = new Servico();
+        servico.setDescricao(this.descricao);
+        servico.setValor(this.valor);
+        return servico;
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -28,12 +35,5 @@ public class ServicoDTO {
 
     public void setValor(float valor) {
         this.valor = valor;
-    }
-
-    public Servico toServico(){
-        Servico servico = new Servico();
-        servico.setDescricao(this.descricao);
-        servico.setValor(this.valor);
-        return servico;
     }
 }

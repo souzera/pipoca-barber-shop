@@ -1,13 +1,8 @@
 package com.br.pipoca.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
-import java.sql.Date;
 
 @Entity
-@Getter @Setter
 public class Atendimento {
 
     @Id
@@ -22,9 +17,39 @@ public class Atendimento {
     @ManyToOne
     @JoinColumn
     private Servico servico;
-    private Date dia;
 
-    public Atendimento() {
+    public Atendimento() {}
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Horario getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Horario horario) {
+        this.horario = horario;
+    }
+
+    public Servico getServico() {
+        return servico;
+    }
+
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
 
     public Atendimento(long id, Cliente cliente, Horario horario, Servico servico) {

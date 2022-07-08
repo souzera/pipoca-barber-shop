@@ -1,1 +1,3 @@
-security password.txt
+*.txt
+node_modules
+*.json

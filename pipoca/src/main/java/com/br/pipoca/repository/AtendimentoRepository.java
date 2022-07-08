@@ -19,6 +19,4 @@ public interface AtendimentoRepository extends JpaRepository<Atendimento, Long> 
     List<Atendimento> findByServico(@Param("servico_id") long servico_id);
     @Query(value = "select * from atendimento where horario_id=:horario_id", nativeQuery = true)
     List<Atendimento> findByHorario(@Param("horario_id") long horario_id);
-    @Query(value = "select * from atendimento where dia=:dia", nativeQuery = true)
-    List<Atendimento> findByData(@Param("dia")Date date);
 }

@@ -14,7 +14,6 @@ public class PipocaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PipocaApplication.class, args);
 	}
-
 	@Bean
 	public PasswordEncoder getPasswordEncoder(){
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

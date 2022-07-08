@@ -31,16 +31,21 @@ public class AtendimentoController {
     @PostMapping(value = "/agenda/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void salvar(@RequestBody Atendimento atendimento){
-
+        atendimentoService.agendar(atendimento);
     }
 
     @DeleteMapping(value = "/agenda/del")
     public void deletar(@RequestBody Atendimento atendimento){
-
+        atendimentoService.deleteById(atendimento.getId());
     }
 
-    @DeleteMapping(value = "/agenda/del/{id}")
-    public void deletarPorID(@PathVariable(value = "id") long id){
+    //@DeleteMapping(value = "/agenda/del/{id}")
+    //public void deletarPorID(@PathVariable(value = "id") long id){
+        //atendimentoService.deleteById(id);
+    //}
+
+    @DeleteMapping(value = "/agenda/delete{id}")
+    public void deletarPorID(@RequestParam(value = "id") Long id){
         atendimentoService.deleteById(id);
     }
 
@@ -51,12 +56,8 @@ public class AtendimentoController {
     }
 
     @GetMapping(value = "/vagas")
-    public List<Hora> getVagas(String dia) throws IOException {
-        int ano = Integer.parseInt(dia.substring(0,4));
-        int mes = Integer.parseInt(dia.substring(5,7));
-        int data = Integer.parseInt(dia.substring(8,10));
-        Date date = new Date(ano, mes, data);
-        System.out.println(atendimentoService.vagas(date));
-        return atendimentoService.vagas(date);
+    public List<Hora> getVagas(@RequestBody String dia) throws IOException {
+        System.out.println("ola mundo");
+        return null;
     }
 }

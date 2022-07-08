@@ -1,5 +1,7 @@
 package com.br.pipoca.util;
 
+import java.util.Date;
+
 public enum Hora {
 
     _8H00("08h00"),//0
@@ -21,6 +23,9 @@ public enum Hora {
     _18H00("18h00"),//16
     _18H30("18h30");//17
     private String valor;
+    private Date agora;
+    private static int[][] matrix = {{8,0},{8,30},{9,0},{9,30},{10,0},{10,30},{11,0},{11,30},
+            {14,0},{14,30},{15,0},{15,30},{16,0},{16,30},{17,0},{17,30},{18,0},{18,30}};
     Hora(String valor){
         this.valor = valor;
     }
@@ -29,4 +34,15 @@ public enum Hora {
         return valor;
     }
 
+    public boolean after(int ordinal, int day, int month, int year){
+        Date agora = new Date();
+        Date horaOf = new Date();
+        //
+        horaOf.setYear(year);
+        horaOf.setMonth(month);
+        horaOf.setDate(day);
+        horaOf.setHours(matrix[ordinal][0]);
+        horaOf.setMinutes(matrix[ordinal][1]);
+        return horaOf.after(agora);
+    }
 }

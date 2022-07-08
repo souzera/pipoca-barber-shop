@@ -38,9 +38,9 @@ public class CadastroClienteController {
             return "cliente/cadastro";
         }
         Usuario usuario = usuarioDTO.toUsuarioCliente();
+        Cliente cliente = clienteDTO.toCliente();
         usuarioService.criptarSenha(usuario);
         usuarioService.saveUsuario(usuario);
-        Cliente cliente = clienteDTO.toCliente();
         cliente.setUsuario(usuarioService.findByLogin(usuario.getLogin()));
         clienteService.saveCliente(cliente);
         return "redirect:/home";

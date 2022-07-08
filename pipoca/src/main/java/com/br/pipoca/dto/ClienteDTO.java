@@ -4,7 +4,6 @@ import com.br.pipoca.entity.Cliente;
 import com.br.pipoca.util.Sexo;
 
 import java.sql.Date;
-
 public class ClienteDTO {
     private String nome;
 
@@ -12,7 +11,6 @@ public class ClienteDTO {
     private Sexo sexo;
     private String telefone;
 
-    private UsuarioDTO usuarioDTO;
 
     public ClienteDTO() {}
 
@@ -21,6 +19,25 @@ public class ClienteDTO {
         this.telefone = telefone;
         this.sexo = sexo;
         this.dtNascimento = dtNascimento;
+    }
+
+    public Cliente toCliente(){
+        Cliente cliente = new Cliente();
+        cliente.setNome(this.nome);
+        cliente.setTelefone(this.telefone);
+        cliente.setDtNascimento(this.dtNascimento);
+        cliente.setSexo(this.sexo);
+        return cliente;
+    }
+
+    @Override
+    public String toString() {
+        return "ClienteDTO{" +
+                "nome='" + nome + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", sexo=" + sexo +
+                ", dtNascimento=" + dtNascimento +
+                '}';
     }
 
     public String getNome() {
@@ -53,24 +70,5 @@ public class ClienteDTO {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public Cliente toCliente(){
-        Cliente cliente = new Cliente();
-        cliente.setNome(this.nome);
-        cliente.setTelefone(this.telefone);
-        cliente.setDtNascimento(this.dtNascimento);
-        cliente.setSexo(this.sexo);
-        return cliente;
-    }
-
-    @Override
-    public String toString() {
-        return "ClienteDTO{" +
-                "nome='" + nome + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", sexo=" + sexo +
-                ", dtNascimento=" + dtNascimento +
-                '}';
     }
 }

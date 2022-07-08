@@ -11,6 +11,15 @@ public class ProdutoDTO {
 
     public ProdutoDTO() {}
 
+    public Produto toProduto(){
+        Produto produto = new Produto();
+        produto.setDescricao(this.descricao);
+        produto.setCategoria(this.categoria);
+        produto.setMarca(this.marca);
+        produto.setValor(this.valor);
+        return produto;
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -41,14 +50,5 @@ public class ProdutoDTO {
 
     public void setValor(float valor) {
         this.valor = valor;
-    }
-
-    public Produto toProduto(){
-        Produto produto = new Produto();
-        produto.setDescricao(this.descricao);
-        produto.setCategoria(this.categoria);
-        produto.setMarca(this.marca);
-        produto.setValor(this.valor);
-        return produto;
     }
 }

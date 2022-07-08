@@ -27,6 +27,10 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
+function getGanhos(){
+  return [100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320];
+}
+
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
@@ -34,7 +38,7 @@ var myLineChart = new Chart(ctx, {
   data: {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [{
-      label: "Earnings",
+      label: "Receita",
       lineTension: 0.3,
       backgroundColor: "rgba(223, 78, 78, 0.05)",
       borderColor: "rgba(204, 67, 23, 1)",
@@ -46,7 +50,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(223, 78, 78, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: getGanhos(),
     }],
   },
   options: {

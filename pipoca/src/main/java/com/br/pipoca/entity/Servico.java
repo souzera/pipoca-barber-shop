@@ -1,7 +1,5 @@
 package com.br.pipoca.entity;
 
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@Getter
-@Setter
 public class Servico {
 
     @Id
@@ -39,6 +35,30 @@ public class Servico {
     public Servico(long id, String descricao, float valor) {
         this.id = id;
         this.descricao = descricao;
+        this.valor = valor;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public float getValor() {
+        return valor;
+    }
+
+    public void setValor(float valor) {
         this.valor = valor;
     }
 

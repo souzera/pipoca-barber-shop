@@ -9,8 +9,9 @@ import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
-
 @Service
 public class HorarioService {
 
@@ -19,14 +20,12 @@ public class HorarioService {
     @Autowired
     private FuncionarioService funcionarioService;
 
-    //private static int[][] matrix = {{8,0},{8,30},{9,0},{9,30},{10,0},{10,30},{11,0},{11,30},
-    // {14,0},{14,30},{15,0},{15,30},{16,0},{16,30},{17,0},{17,30},{18,0},{18,30}};
-
     public Horario saveHorario(Horario horario){
         horario.setStatusHorario(StatusHorario.DISPONIVEL);
         return horarioRepository.save(horario);}
+
+    //Buscas
     public Horario buscarPorId(long id){return horarioRepository.findById(id);}
-    public void setHora(Horario horario, int hora){}
     public List<Horario> horarios() throws IOException {
         Iterable<Horario> horarioIterable = this.horarioRepository.findAll();
         return Streamable.of(horarioIterable).toList();
@@ -45,11 +44,63 @@ public class HorarioService {
     public Horario buscarPorHoraEFuncionario(long funcionario_id, Hora hora){
         return horarioRepository.findByHoraAndFuncionario(funcionario_id,hora);
     }
-    public void deletarHorario(Horario horario){
-        horarioRepository.delete(horario);
+
+    public List<Horario> buscarPorData(Date date){
+        return horarioRepository.findByData(date);
+    }
+
+    public List<Horario> buscarPorFuncionarioEData(long funcionario_id, Date date){
+        return horarioRepository.findByFuncionarioAndDia(date, funcionario_id);
+    }
+
+    public List<Horario> buscarPorDataEHora(Hora hora, Date date){
+        return horarioRepository.findByDataAndHora(date, hora);
+    }
+
+
+    // ------------ //
+    public void deletarHorario(Horario horario){horarioRepository.delete(horario);
     }
 
     public void fecharHorario(Horario horario){
         horario.setStatusHorario(StatusHorario.FECHADO);
+    }
+
+    //validações
+    public boolean isDisponivel(Horario horario){
+        if (!(blank(horarioRepository.findByFuncionarioAndDia(horario.getDate(), horario.getFuncionario().getId())))){
+            if (horarioRepository.findByHoraAndFuncionarioAndDia(horario.getFuncionario().getId(),
+                    horario.getHora().ordinal(), horario.getDate()) != null){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean blank(List<Horario> lista){
+        if (lista.isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
+    public List<Hora> vagas(long funcionario_id, Date date){
+        List<Hora> vagas = new ArrayList<Hora>();
+        //System.out.println(horarioRepository.findByFuncionarioAndDia(date, funcionario_id));
+        Horario novoHorario = new Horario();
+        novoHorario.setDate(date);
+        novoHorario.setFuncionario(funcionarioService.findById(funcionario_id));
+        int dia = novoHorario.getDate().getDate();
+        int mes = novoHorario.getDate().getMonth();
+        int ano = novoHorario.getDate().getYear();
+        for (Hora h: Hora.values()) {
+            novoHorario.setHora(h);
+            if (isDisponivel(novoHorario)){
+                if (h.after(h.ordinal(), dia, mes, ano)){
+                    vagas.add(h);
+                }
+            }
+        }
+        return vagas;
     }
 }

@@ -2,48 +2,39 @@ package com.br.pipoca.dto;
 
 import com.br.pipoca.entity.Atendimento;
 import com.br.pipoca.entity.Cliente;
-import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.entity.Servico;
-import com.br.pipoca.util.Hora;
-
-import java.sql.Date;
+import com.br.pipoca.service.ClienteService;
+import com.br.pipoca.service.ServicoService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class AtendimentoDTO {
-    private Cliente cliente;
-    private Date dia;
-    private Servico servico;
-
+    private long cliente_id;
+    private long servico_id;
     public AtendimentoDTO() {}
 
-    public Cliente getCliente() {
-        return cliente;
+    public long getCliente_id() {
+        return cliente_id;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCliente_id(long cliente_id) {
+        this.cliente_id = cliente_id;
     }
 
-    public Date getDia() {
-        return dia;
+    public long getServico_id() {
+        return servico_id;
     }
 
-    public void setDia(Date dia) {
-        this.dia = dia;
-    }
-
-    public Servico getServico() {
-        return servico;
-    }
-
-    public void setServico(Servico servico) {
-        this.servico = servico;
+    public void setServico_id(long servico_id) {
+        this.servico_id = servico_id;
     }
 
     public Atendimento toAtendimento(){
         Atendimento atendimento = new Atendimento();
-        atendimento.setDia(this.dia);
-        atendimento.setCliente(this.cliente);
-        atendimento.setServico(this.servico);
+        //mudar na hora do cadastro
+        //atendimento.setCliente(clienteService.buscarPorID(this.cliente_id));
+        //atendimento.setServico(servicoService.buscarPorID(this.servico_id));
         return atendimento;
     }
+
+
 }

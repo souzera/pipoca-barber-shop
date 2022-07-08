@@ -1,14 +1,11 @@
 package com.br.pipoca.entity;
 
 import com.br.pipoca.util.Pagamento;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
-@Getter
-@Setter
 public class Venda {
 
     @Id
@@ -25,6 +22,8 @@ public class Venda {
 
     @Enumerated
     private Pagamento pagamento;
+
+    private Date date;
 
     public Venda() {}
 
@@ -44,11 +43,43 @@ public class Venda {
         this.atendimento = atendimento;
     }
 
-    @Override
-    public String toString() {
-        if (produto != null) {
-            return "Venda: " + produto.getDescricao() + "\n\t Valor:" + produto.getValor();
-        } else return "Venda: " + atendimento.getServico().getDescricao() +
-                "\n\t Valor:" + atendimento.getServico().getValor();
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public Atendimento getAtendimento() {
+        return atendimento;
+    }
+
+    public void setAtendimento(Atendimento atendimento) {
+        this.atendimento = atendimento;
+    }
+
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
