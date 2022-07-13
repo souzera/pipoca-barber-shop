@@ -35,4 +35,8 @@ public class FuncionarioService {
     }
 
     public List<Funcionario> findByCargo(Cargo cargo){return funcionarioRepository.findByCargo(cargo.getValor());}
+
+    public void deleteById(long id) {
+        funcionarioRepository.deleteById(id);
+    }
 }

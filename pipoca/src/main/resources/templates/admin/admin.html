@@ -70,8 +70,8 @@
                         <a class="collapse-item" href="/agendamentos">Agendamentos</a>
                         <a class="collapse-item" href="/busca/agendamento">Buscar Agendamento</a>
                         <a class="collapse-item" href="/agendar/step1">Agendar Horário</a>
-                        <a class="collapse-item" href="/api/agendamento/del">Cancelar Agendamento</a>
-                        <a class="collapse-item" href="/api/agendamento/att">Alterar Agendamento</a>
+                        <a class="collapse-item" href="/agendamentos">Cancelar Agendamento</a>
+                        <a class="collapse-item" href="/agendamentos" hidden>Alterar Agendamento</a>
                     </div>
                 </div>
             </li>
@@ -102,10 +102,10 @@
                 <div id="collapseFuncionarios" class="collapse" aria-labelledby="headingFuncionarios" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/funcionarios">Listar Funcionarios</a>
-                        <a class="collapse-item" href="/api/funcionario/">Buscar Funcionario</a>
+                        <a class="collapse-item" href="/api/funcionario/" hidden>Buscar Funcionario</a>
                         <a class="collapse-item" href="/cadastrar/funcionario">Cadastrar Funcionario</a>
-                        <a class="collapse-item" href="/api/funcionario/del">Excluir Funcionario</a>
-                        <a class="collapse-item" href="/api/funcionario/att">Alterar Funcionario</a>
+                        <a class="collapse-item" href="/funcionarios">Excluir Funcionario</a>
+                        <a class="collapse-item" href="/funcionarios">Alterar Funcionario</a>
                     </div>
                 </div>
             </li>
@@ -121,8 +121,8 @@
                         <a class="collapse-item" href="/produtos">Listar Produtos</a>
                         <a class="collapse-item" href="/api/produto/">Buscar Produto</a>
                         <a class="collapse-item" href="/registro/produto">Cadastrar Produto</a>
-                        <a class="collapse-item" href="/api/produto/del">Excluir Produto</a>
-                        <a class="collapse-item" href="/api/produto/att">Alterar Produto</a>
+                        <a class="collapse-item" href="/produtos">Excluir Produto</a>
+                        <a class="collapse-item" href="/produtos">Alterar Produto</a>
                     </div>
                 </div>
             </li>
@@ -138,8 +138,8 @@
                         <a class="collapse-item" href="/servicos">Listar Serviço</a>
                         <a class="collapse-item" href="/api/servico/">Buscar Serviço</a>
                         <a class="collapse-item" href="/registro/servico">Cadastrar Serviço</a>
-                        <a class="collapse-item" href="/api/servico/del">Excluir Serviço</a>
-                        <a class="collapse-item" href="/api/servico/att">Alterar Serviço</a>
+                        <a class="collapse-item" href="/servicos">Excluir Serviço</a>
+                        <a class="collapse-item" href="/servicos">Alterar Serviço</a>
                     </div>
                 </div>
             </li>
@@ -147,7 +147,7 @@
             <!-- 
                 Nav Item - Utilities Collapse Menu 
             -->
-            <li class="nav-item">
+            <li class="nav-item" hidden>
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
@@ -169,11 +169,20 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Profile
+                Utilidades
             </div>
 
+                    <!--
+                        ============
+                        ============
+                        ============
+                        ESCONDA ESSA
+                        ============
+                        ============
+                        ============
+                    -->
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item" hidden>
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
@@ -197,11 +206,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                    <span>Gráficos</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            <li class="nav-item" hidden>
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
@@ -233,8 +242,17 @@
             <!-- Main Content -->
             <div id="content">
 
+                    <!--
+                        ============
+                        ============
+                        ============
+                        ESCONDA form pesquisa
+                        ============
+                        ============
+                        ============
+                    -->
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" >
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 ">
@@ -243,7 +261,7 @@
 
                     <!-- Topbar Search -->
                     <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="" method="get">
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="" method="get" hidden>
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
                                 aria-label="buscar" aria-describedby="basic-addon2">
@@ -337,7 +355,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Ganhos (Mensais)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$ <span> {ganhosM}" </span></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">R$ <span th:value="${vendaMensal}" th:text="${vendaMensal}"></span></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -355,7 +373,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Ganhos (Anuais)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${ganhosA}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">R$ <span th:value="${vendaAnual}" th:text="${vendaAnual}"></span></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -431,11 +449,10 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                             aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <div class="dropdown-header">Menu:</div>
+                                            <a class="dropdown-item" href="#">Expandir</a>
+                                            <div class="dropdown-divider" hidden></div>
+                                            <a class="dropdown-item" href="#" hidden>Something else here</a>
                                         </div>
                                     </div>
                                 </div>
@@ -491,8 +508,18 @@
                         </div>
                     </div>
 
+
+                    <!--
+                        ============
+                        ============
+                        ============
+                        ESCONDA ESSA
+                        ============
+                        ============
+                        ============
+                    -->
                     <!-- Content Row -->
-                    <div class="row">
+                    <div class="row" hidden>
 
                         <!-- Content Column -->
                         <div class="col-lg-6 mb-4">
@@ -537,7 +564,7 @@
                             </div>
 
                             <!-- Color System -->
-                            <div class="row" style="display: none;">
+                            <div class="row" style="display: none;" hidden>
                                 <div class="col-lg-6 mb-4">
                                     <div class="card bg-primary text-white shadow">
                                         <div class="card-body">
@@ -606,7 +633,7 @@
 
                         </div>
 
-                        <div class="col-lg-6 mb-4">
+                        <div class="col-lg-6 mb-4" hidden>
 
                             <!-- Illustrations -->
                             <div class="card shadow mb-4">
@@ -628,7 +655,7 @@
                             </div>
 
                             <!-- Approach -->
-                            <div class="card shadow mb-4">
+                            <div class="card shadow mb-4" hidden>
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
                                 </div>

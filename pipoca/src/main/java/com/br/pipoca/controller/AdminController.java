@@ -1,6 +1,7 @@
 package com.br.pipoca.controller;
 
 import com.br.pipoca.service.CookieService;
+import com.br.pipoca.service.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,9 @@ public class AdminController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private VendaService vendaService;
+
     @GetMapping
     @RequestMapping(value = "/dashboard/{chave}")
     public ModelAndView dashboard(@PathVariable int chave,
@@ -35,6 +39,14 @@ public class AdminController {
                 return modelAndView;
             }
             modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+            System.out.println(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")).getClass().getName().toLowerCase());
+            //===================================GRÁFICOS=========================================
+
+            int ano = new java.util.Date().getYear();
+            int mes = new java.util.Date().getMonth();
+            modelAndView.addObject("vendaMensal", vendaService.receitaMensal(mes,ano));
+            modelAndView.addObject("vendaAnual", vendaService.receitaAnual(ano));
+            //====================================================================================
             return modelAndView;
         }
         response.sendRedirect("/login");

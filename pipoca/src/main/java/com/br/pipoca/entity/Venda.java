@@ -15,15 +15,13 @@ public class Venda {
     @ManyToOne
     @JoinColumn
     private Produto produto;
-
     @OneToOne
     @JoinColumn
     private Atendimento atendimento;
-
     @Enumerated
     private Pagamento pagamento;
-
     private Date date;
+    private float valor;
 
     public Venda() {}
 
@@ -82,4 +80,13 @@ public class Venda {
     public void setDate(Date date) {
         this.date = date;
     }
+    public float getValor() {
+        return valor;
+    }
+
+    public void setValor(float valor) {
+        this.valor = valor;
+    }
+
+
 }

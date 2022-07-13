@@ -68,10 +68,10 @@
                 <div id="collapseAgenda" class="collapse" aria-labelledby="headingAgenda" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/agendamentos">Agendamentos</a>
-                        <a class="collapse-item" href="/api/agendamento/">Buscar Agendamento</a>
+                        <a class="collapse-item" href="/busca/agendamento">Buscar Agendamento</a>
                         <a class="collapse-item" href="/agendar">Agendar Horário</a>
-                        <a class="collapse-item" href="/api/agendamento/del">Cancelar Agendamento</a>
-                        <a class="collapse-item" href="/api/agendamento/att">Alterar Agendamento</a>
+                        <a class="collapse-item" href="/agendamentos">Cancelar Agendamento</a>
+                        <a class="collapse-item" href="/agendamentos">Alterar Agendamento</a>
                     </div>
                 </div>
             </li>
@@ -442,62 +442,97 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Agendamentos</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Cliente</h1>
                         <button class="btn btn-primary" id="relatorio-btn">
                             <i class="fas fa-download fa-sm text-white-50"></i> Gerar Relatório
                         </button>
                     </div>
 
                     <!-- Content Row -->
-                    <div class="row mb-4">
+                    <div class="row">
 
-                        <table id="agendamentos-table" class="table table-striped">
-                            <thead>
-                              <tr>
-                                  <th scope="col">#</th>
-                                  <th scope="col">Cliente</th>
-                                  <th scope="col">Funcionario</th>
-                                  <th scope="col">Dia</th>
-                                  <th scope="col">Hora</th>
-                                  <th scope="col">Preço</th>
-                                  <th scope="col">Ações</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                <!--
-                                    Thymleaf Agenda
-                                -->
-                                <tr class="atendimento" th:each="objeto:${lista}">
-                                    <th scope="row" th:text="${objeto.id}">id</th>
-                                    <td th:text="${objeto.cliente.nome}"></td>
-                                    <td th:text="${objeto.horario.funcionario.nome}"></td>
-                                    <td th:text="${objeto.horario.date}"></td>
-                                    <td th:text="${objeto.horario.hora.valor}"></td>
-                                    <td th:text="${objeto.servico.valor}"></td>
-                                    <td>
-                                        <a class="nav-link" th:href="@{/agenda/details(id=${objeto.id})}"><i class="fas fa-fw fa-wrench"></i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                          </table>
+                        <div class="container">
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <h3>
+                                        <b><span id="pessoa" th:text="${pessoa.nome}"></span></b>
+                                    </h3>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="dtNascimento">Data Nascimento: </label>
+                                    <span id="dtNascimento" th:text="${pessoa.dtNascimento}"></span>
+                                </div>
+                                <div class="col">
+                                    <label for="telefone">Fone: </label>
+                                    <span id="telefone" th:text="${pessoa.telefone}"></span>
+                                </div>
+                                <div class="col">
+                                    <label for="sexo">Sexo: </label>
+                                    <span id="sexo" th:text="${pessoa.sexo}"></span>
+                                </div>
+                            </div>
 
-                    </div>
-                    <!-- /.container-fluid -->
-
-                    <!-- CONSULTAR CONCLUIDOS -->
-                    <div class="row mb-4">
-                        <div class="col"></div>
-                        <div class="col"></div>
-                        <div class="col"></div>
-                        <div class="col"></div>
-                        <div class="col">
-                            <a href="/agendamentos/finalizados">
-                                <button class="btn btn-link">
-                                    Finalizados
-                                </button>
-                            </a>
+                            <div class="row mb-5">
+                                <div class="col"></div>
+                                <div class="col"></div>
+                                <div class="col">
+                                <div class="btn-group row" role="group" id="botoes" >
+                                    <div class="mb-2">
+                                        <form action="/cliente/deletar" method="post">
+                                            <input type="text" name="login" th:value="${pessoa.id}" hidden>
+                                            <button type="submit" class="btn btn-danger">Excluir</button>
+                                        </form>
+                                    </div>
+                                        
+                                    <div class="ml-2 mr-2 mb-2">
+                                        <button type="submit" class="btn btn-primary">Alterar</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+                        <hr class="mb-3">
+
+                        <div class="row mb-3">
+                            <table id="agendamentos-table" class="table table-striped">
+                                <thead>
+                                  <tr>
+                                      <th scope="col">#</th>
+                                      <th scope="col">Funcionario</th>
+                                      <th scope="col">Dia e Hora</th>
+                                      <th scope="col">Status</th>
+                                      <th scope="col">Preço</th>
+                                      <th scope="col">Ações</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <!--
+                                        Thymleaf Agenda
+                                    -->
+                                    <tr class="atendimento" th:each="objeto:${agendamentos}">
+                                        <th scope="row" th:text="${objeto.id}">id</th>
+                                        <td th:text="${objeto.horario.funcionario.nome}"></td>
+                                        <td>
+                                            <span th:text="${objeto.horario.date}"></span>
+                                            <span> | </span>
+                                            <span th:text="${objeto.horario.hora.valor}"></span>
+                                        </td>
+                                        <td th:text="${objeto.horario.statusHorario}"></td>
+                                        <td th:text="${objeto.servico.valor}"></td>
+                                        <td>
+                                            <a class="nav-link" th:href="@{/agenda/details(id=${objeto.id})}"><i class="fas fa-fw fa-wrench"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                              </table>
+                        </div>                          
+                        </div>
+                        
                     </div>
+                <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
@@ -559,20 +594,6 @@
     <script src="/admin/js/demo/chart-pie-demo.js"></script>
 
     <!-- Gerar PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
-        const botao = document.querySelector('#relatorio-btn');
-        const table = document.querySelector('#agendamentos-table');
-
-        botao.addEventListener('click', (dados)=>{
-        const pdf = jsPDF();
-
-        pdf.autoPrint();
-        pdf.output("dataurlnewwindow");
-        });
-    </script>
-    <script>
-        console.log("olá");
-    </script>
 
 </body>
 

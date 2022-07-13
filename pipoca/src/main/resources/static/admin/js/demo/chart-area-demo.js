@@ -1,4 +1,5 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
+
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
@@ -28,15 +29,25 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 function getGanhos(){
-  return [100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320];
+  const ano = new Date().getFullYear();
+  console.log(ano);
+  const json = $.get("/api/vendas/mensais/" + ano, function(dados){
+    return dados;
+  })
+  return json;
 }
+
+var ganhos = getGanhos();
+
+
+console.log(ganhos);
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
     datasets: [{
       label: "Receita",
       lineTension: 0.3,
@@ -50,7 +61,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(223, 78, 78, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: getGanhos(),
+      data: ganhos.get,
     }],
   },
   options: {

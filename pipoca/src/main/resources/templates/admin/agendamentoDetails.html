@@ -68,10 +68,10 @@
                 <div id="collapseAgenda" class="collapse" aria-labelledby="headingAgenda" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/agendamentos">Agendamentos</a>
-                        <a class="collapse-item" href="/api/agendamento/">Buscar Agendamento</a>
+                        <a class="collapse-item" href="/busca/agendamento">Buscar Agendamento</a>
                         <a class="collapse-item" href="/agendar">Agendar Horário</a>
-                        <a class="collapse-item" href="/api/agendamento/del">Cancelar Agendamento</a>
-                        <a class="collapse-item" href="/api/agendamento/att">Alterar Agendamento</a>
+                        <a class="collapse-item" href="/agendamentos">Cancelar Agendamento</a>
+                        <a class="collapse-item" href="/agendamentos">Alterar Agendamento</a>
                     </div>
                 </div>
             </li>
@@ -489,13 +489,17 @@
                                 <div class="col">
                                     <div class="btn-group row" role="group" id="botoes" >
                                         <div class="mb-2">
-                                            <a th:href="@{/api/agenda/delete(id=${agendamento.id})}">
+                                            <form action="/agenda/deletar" method="post">
+                                                <input type="text" name="agenda_id" th:value="${agendamento.id}" hidden>
                                                 <button type="submit" class="btn btn-danger">Excluir</button>
-                                            </a>
+                                            </form>
                                         </div>
                                         
                                         <div class="mr-2 ml-2 mb-2">
-                                            <button type="submit" class="btn btn-success">Concluir</button>
+                                            <form action="/agenda/check" method="post">
+                                                <input type="text" name="agenda_id" th:value="${agendamento.id}" hidden>
+                                                <button type="submit" class="btn btn-success">Concluir</button>
+                                            </form>
                                         </div>
                                         
                                         <div class="mb-2">

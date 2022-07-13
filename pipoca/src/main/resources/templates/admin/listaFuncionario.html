@@ -240,10 +240,11 @@
                 <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col"></th>
-                        <th scope="col">Ações</th>
+                          <th scope="col">#</th>
+                          <th scope="col">Nome</th>
+                          <th scope="col">Cargo</th>
+                          <th scope="col">Telefone</th>
+                          <th scope="col">Ações</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -253,8 +254,11 @@
                         <tr class="cliente funcionario" th:each="objeto: ${lista}">
                             <th scope="row" th:text="${objeto.id}">id</th>
                             <td th:text="${objeto.nome}">nome</td>
-                            <td th:text="${objeto.usuario.login}">login</td>
-                            <td href="#" th:text="${objeto.usuario.login}">Profile</td>
+                            <td th:text="${objeto.cargo}">cargo</td>
+                            <td th:text="${objeto.telefone}"></td>
+                            <td>
+                                <a class="nav-link" th:href="@{/funcionario/details(id=${objeto.id})}"><i class="fas fa-fw fa-wrench"></i></a>
+                            </td>
                         </tr>
                     </tbody>
                   </table>

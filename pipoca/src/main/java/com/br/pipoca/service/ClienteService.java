@@ -7,6 +7,7 @@ import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -22,6 +23,14 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
+    //deletar
+
+    public void deleteById(long id) {
+        clienteRepository.deleteById(id);
+    }
+
+    //========================================================================================
+
     public List<Cliente> clientes() throws IOException {
         Iterable<Cliente> clienteIterable = this.clienteRepository.findAll();
         return Streamable.of(clienteIterable).toList();
@@ -34,5 +43,12 @@ public class ClienteService {
     public Cliente buscarPorID(long id){
         return clienteRepository.findById(id);
     }
+
+    public Date getAniversario(Cliente cliente){
+        Date aniversario = cliente.getDtNascimento();
+        aniversario.setYear(new java.util.Date().getYear());
+        return aniversario;
+    }
+
 
 }

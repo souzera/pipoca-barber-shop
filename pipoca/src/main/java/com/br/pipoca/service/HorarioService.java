@@ -21,7 +21,6 @@ public class HorarioService {
     private FuncionarioService funcionarioService;
 
     public Horario saveHorario(Horario horario){
-        horario.setStatusHorario(StatusHorario.DISPONIVEL);
         return horarioRepository.save(horario);}
 
     //Buscas
@@ -59,12 +58,55 @@ public class HorarioService {
 
 
     // ------------ //
-    public void deletarHorario(Horario horario){horarioRepository.delete(horario);
+    public void deletarHorario(Horario horario){horarioRepository.delete(horario);}
+
+    public void deleteById(long id){horarioRepository.deleteById(id);}
+
+    //==================================================================================
+
+    // Alterar Status
+    public Horario fecharHorario(Horario horario){
+        horario.setStatusHorario(StatusHorario.FECHADO);
+        return saveHorario(horario);
     }
 
-    public void fecharHorario(Horario horario){
-        horario.setStatusHorario(StatusHorario.FECHADO);
+    public Horario concluirHorario(Horario horario){
+        horario.setStatusHorario(StatusHorario.CONCLUIDO);
+        return saveHorario(horario);
     }
+
+    public Horario abrirHorario(Horario horario){
+        horario.setStatusHorario(StatusHorario.DISPONIVEL);
+        return saveHorario(horario);
+    }
+
+    public Horario ocuparHorario(Horario horario){
+        horario.setStatusHorario(StatusHorario.OCIOSO);
+        return saveHorario(horario);
+    }
+
+    public Horario alterarStatus(Horario horario, int status){
+        switch (status){
+            case 0:
+                horario.setStatusHorario(StatusHorario.CONCLUIDO);
+                return saveHorario(horario);
+            case 1:
+                horario.setStatusHorario(StatusHorario.OCIOSO);
+                return saveHorario(horario);
+            case 2:
+                horario.setStatusHorario(StatusHorario.FECHADO);
+                return saveHorario(horario);
+            case 3:
+                horario.setStatusHorario(StatusHorario.CANCELADO);
+                return saveHorario(horario);
+            case 4:
+                horario.setStatusHorario(StatusHorario.DISPONIVEL);
+                return saveHorario(horario);
+        }
+        return horario;
+    }
+
+    //==================================================================================
 
     //validações
     public boolean isDisponivel(Horario horario){

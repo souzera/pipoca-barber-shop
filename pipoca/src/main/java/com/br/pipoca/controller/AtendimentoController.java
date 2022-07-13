@@ -44,8 +44,8 @@ public class AtendimentoController {
         //atendimentoService.deleteById(id);
     //}
 
-    @DeleteMapping(value = "/agenda/delete{id}")
-    public void deletarPorID(@RequestParam(value = "id") Long id){
+    @DeleteMapping(value = "/agenda/delete/{id}")
+    public void deletarPorID(@PathVariable(value = "id") long id){
         atendimentoService.deleteById(id);
     }
 

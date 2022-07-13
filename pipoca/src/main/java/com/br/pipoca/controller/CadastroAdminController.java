@@ -160,7 +160,7 @@ public class CadastroAdminController {
             horarioService.buscarPorId(id_horario).setHora(horario.getHora());
             horarioService.buscarPorId(id_horario).setStatusHorario(horario.getStatusHorario());
             atendimento.setHorario(horarioService.buscarPorId(id_horario));
-            atendimento.getHorario().setStatusHorario(StatusHorario.OCUPADO);
+            atendimento.getHorario().setStatusHorario(StatusHorario.OCIOSO);
         }else {
             model.addAttribute("hora", Hora.values());
             model.addAttribute("clientes", clienteService.clientes());

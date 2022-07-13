@@ -26,27 +26,30 @@ public class ListasController {
 
     @Autowired private VendaService vendaService;
 
+    //====================================================================================
+
+    //CLIENTES
     @GetMapping
     @RequestMapping(value = "/clientes")
     public ModelAndView listarClientes() throws IOException {
-        ModelAndView modelAndView = new ModelAndView("admin/listaPessoa.html");
+        ModelAndView modelAndView = new ModelAndView("admin/listaCliente.html");
 
         List<Cliente> lista = clienteService.clientes();
-        System.out.println(lista);
+        System.out.println(clienteService.getAniversario(lista.get(0)));
         modelAndView.addObject("lista",lista);
         return modelAndView;
     }
 
+    //========================================================================================
+    //FUNCIONARIOS
+
     @GetMapping
     @RequestMapping(value = "/funcionarios")
     public ModelAndView listarFuncionarios() throws IOException {
-        ModelAndView modelAndView = new ModelAndView("admin/listaPessoa.html");
-
+        ModelAndView modelAndView = new ModelAndView("admin/listaFuncionario.html");
         List<Funcionario> lista = funcionarioService.funcionarios();
         System.out.println(lista.get(0).getNome());
-
         modelAndView.addObject("lista",lista);
-
         return modelAndView;
     }
 
@@ -74,11 +77,16 @@ public class ListasController {
         return modelAndView;
     }
 
+
+    //===========================================================================================
+
+    //AGENDAMENTOS
+
     @GetMapping
     @RequestMapping(value = "/agendamentos")
     public ModelAndView listaHorarios() throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
-        List<Atendimento> agendamentos = atendimentoService.agendamentos();
+        List<Atendimento> agendamentos = atendimentoService.ociosos();
         System.out.println(agendamentos);
         modelAndView.addObject("lista",agendamentos);
 
@@ -117,4 +125,16 @@ public class ListasController {
 
         return modelAndView;
     }
+
+    @GetMapping
+    @RequestMapping(value = "/agendamentos/finalizados")
+    public ModelAndView agendamentosFinalizados() throws IOException {
+        ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
+        List<Atendimento> agendamentos = atendimentoService.finalizados();
+        System.out.println(agendamentos);
+        modelAndView.addObject("lista",agendamentos);
+
+        return modelAndView;
+    }
+
 }

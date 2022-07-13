@@ -2,12 +2,11 @@ package com.br.pipoca.util;
 
 public enum StatusHorario {
 
-    DISPONIVEL(0),
-    OCUPADO(1),
-    CONCLUIDO(2),
+    CONCLUIDO(0),
+    OCIOSO(1),
+    FECHADO(2),
     CANCELADO(3),
-
-    FECHADO(4);
+    DISPONIVEL(4);
 
     private int valor;
     StatusHorario(int valor){this.valor=valor;}
