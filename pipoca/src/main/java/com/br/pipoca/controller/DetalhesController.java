@@ -1,5 +1,9 @@
 package com.br.pipoca.controller;
 
+import com.br.pipoca.dto.ClienteDTO;
+import com.br.pipoca.entity.Atendimento;
+import com.br.pipoca.entity.Cliente;
+import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.entity.Horario;
 import com.br.pipoca.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +65,7 @@ public class DetalhesController {
     @RequestMapping("/cliente/details{id}")
     public ModelAndView clienteDetails(@RequestParam(value = "id") long id, HttpServletRequest request) throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/clienteDetails.html");
-        modelAndView.addObject("pessoa", clienteService.buscarPorID(id));
+        modelAndView.addObject("cliente", clienteService.buscarPorID(id));
         modelAndView.addObject("agendamentos", atendimentoService.agendamentosCliente(id));
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieName(request, "login")));
         return modelAndView;
@@ -69,10 +73,14 @@ public class DetalhesController {
 
     @PostMapping
     @RequestMapping(value = "/cliente/deletar")
-    public String deletarCliente(long cliente_id){
-        System.out.println(clienteService.buscarPorID(cliente_id));
-        clienteService.deleteById(cliente_id);
-        return "redirect:/agendamentos";
+    public String deletarCliente(long id){
+        Cliente c = clienteService.buscarPorID(id);
+        for (Atendimento a: atendimentoService.agendamentosCliente(id)) {
+            horarioService.deletarHorario(a.getHorario());
+            atendimentoService.deleteById(a.getId());
+        }
+        clienteService.deleteById(id);
+        return "redirect:/clientes";
     }
 
     //funcionario
@@ -88,16 +96,20 @@ public class DetalhesController {
 
     @PostMapping
     @RequestMapping(value = "/funcionario/deletar")
-    public String deletarFuncionario(long funcionario_id){
-        System.out.println(funcionarioService.findById(funcionario_id));
-        funcionarioService.deleteById(funcionario_id);
+    public String deletarFuncionario(long id) throws IOException {
+        Funcionario f = funcionarioService.findById(id);
+        for (Atendimento a: atendimentoService.agendamentosFuncionario(f)) {
+            horarioService.deletarHorario(a.getHorario());
+            atendimentoService.deleteById(a.getId());
+        }
+        funcionarioService.deleteById(id);
         return "redirect:/agendamentos";
     }
 
     //=======================================================================================================
     //=======================================================================================================
 
-    //alguma coisa
+    //VENDA
 
     //=======================================================================================================
     //=======================================================================================================

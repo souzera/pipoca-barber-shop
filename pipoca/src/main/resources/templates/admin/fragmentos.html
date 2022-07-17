@@ -1,207 +1,344 @@
-<!-- Barra Lateral -->
-<ul th:fragment="sidebar" class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
-    <!-- Barra Lateral - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
+    <!-- Barra Lateral -->
+    <ul th:fragment="sidebar" class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Barra Lateral - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
+            <!--
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3"> <sup>2</sup></div>
+            -->
+            <img src="/assets/img/response_logo2.svg" alt="Logotipo Pipoca Barber Shop" style="transform: scale(80%);">
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="/login">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <div class="sidebar-heading">
+            Gestão
+        </div>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAgenda"
+               aria-expanded="true" aria-controls="collapseAgenda">
+                <i class="fas fa-fw fa-calendar"></i>
+                <span>Agenda</span>
+            </a>
+            <div id="collapseAgenda" class="collapse" aria-labelledby="headingAgenda" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/agendamentos">Agendamentos</a>
+                    <a class="collapse-item" href="/busca/agendamento">Buscar Agendamento</a>
+                    <a class="collapse-item" href="/agendar/step1">Agendar Horário</a>
+                    <a class="collapse-item" href="/agendamentos">Cancelar Agendamento</a>
+                    <a class="collapse-item" href="/agendamentos" hidden>Alterar Agendamento</a>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCliente"
+               aria-expanded="true" aria-controls="collapseCliente">
+                <i class="fas fa-fw fa-user"></i>
+                <span>Clientes</span>
+            </a>
+            <div id="collapseCliente" class="collapse" aria-labelledby="headingCliente" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/clientes">Listar Clientes</a>
+                    <a class="collapse-item" href="/api/cliente/">Buscar Cliente</a>
+                    <a class="collapse-item" href="/cadastrar/cliente">Cadastrar Cliente</a>
+                    <a class="collapse-item" href="cards.html">Excluir Cliente</a>
+                    <a class="collapse-item" href="cards.html">Alterar Cliente</a>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFuncionarios"
+               aria-expanded="true" aria-controls="collapseFuncionarios">
+                <i class="fas fa-fw fa-clipboard-list"></i>
+                <span>Funcionários</span>
+            </a>
+            <div id="collapseFuncionarios" class="collapse" aria-labelledby="headingFuncionarios" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/funcionarios">Listar Funcionarios</a>
+                    <a class="collapse-item" href="/api/funcionario/" hidden>Buscar Funcionario</a>
+                    <a class="collapse-item" href="/cadastrar/funcionario">Cadastrar Funcionario</a>
+                    <a class="collapse-item" href="/funcionarios">Excluir Funcionario</a>
+                    <a class="collapse-item" href="/funcionarios">Alterar Funcionario</a>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduto"
+               aria-expanded="true" aria-controls="collapseProduto">
+                <i class="fas fa-fw fa-bell"></i>
+                <span>Produtos</span>
+            </a>
+            <div id="collapseProduto" class="collapse" aria-labelledby="headingProduto" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/produtos">Listar Produtos</a>
+                    <a class="collapse-item" href="/api/produto/">Buscar Produto</a>
+                    <a class="collapse-item" href="/registro/produto">Cadastrar Produto</a>
+                    <a class="collapse-item" href="/produtos">Excluir Produto</a>
+                    <a class="collapse-item" href="/produtos">Alterar Produto</a>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServico"
+               aria-expanded="true" aria-controls="collapseServico">
+                <i class="fas fa-fw fa-donate"></i>
+                <span>Serviços</span>
+            </a>
+            <div id="collapseServico" class="collapse" aria-labelledby="headingServico" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/servicos">Listar Serviço</a>
+                    <a class="collapse-item" href="/api/servico/">Buscar Serviço</a>
+                    <a class="collapse-item" href="/registro/servico">Cadastrar Serviço</a>
+                    <a class="collapse-item" href="/servicos">Excluir Serviço</a>
+                    <a class="collapse-item" href="/servicos">Alterar Serviço</a>
+                </div>
+            </div>
+        </li>
+
         <!--
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
-            <div class="sidebar-brand-text mx-3"> <sup>2</sup></div>
+            Nav Item - Utilities Collapse Menu
         -->
-        <img src="/assets/img/response_logo2.svg" alt="Logotipo Pipoca Barber Shop" style="transform: scale(80%);">
-    </a>
+        <li class="nav-item" hidden>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+               aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Ferramentas</span>
+            </a>
+            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                 data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/abrir/atendimento">Abrir Agenda</a>
+                    <a class="collapse-item" href="utilities-border.html">Borders</a>
+                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                    <a class="collapse-item" href="utilities-other.html">Other</a>
+                </div>
+            </div>
+        </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+        <!-- Divider -->
+        <hr class="sidebar-divider">
 
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="/login">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-    </li>
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Utilidades
+        </div>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+        <!--
+            ============
+            ============
+            ============
+            ESCONDA ESSA
+            ============
+            ============
+            ============
+        -->
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item" hidden>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Pages</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Login Screens:</h6>
+                    <a class="collapse-item" href="login.html">Login</a>
+                    <a class="collapse-item" href="register.html">Register</a>
+                    <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                    <div class="collapse-divider"></div>
+                    <h6 class="collapse-header">Other Pages:</h6>
+                    <a class="collapse-item" href="404.html">404 Page</a>
+                    <a class="collapse-item" href="blank.html">Blank Page</a>
+                </div>
+            </div>
+        </li>
 
-    <div class="sidebar-heading">
-        Gestão
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+            <a class="nav-link" href="charts.html">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Gráficos</span></a>
+        </li>
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item" hidden>
+            <a class="nav-link" href="tables.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Tables</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+        <!--
+            Sidebar Message
+            <div class="sidebar-card d-none d-lg-flex">
+                <img class="sidebar-card-illustration mb-2" src="/admin/img/undraw_rocket.svg" alt="...">
+                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+            </div>
+        -->
+
+    </ul>
+    <!-- Fim da Barra Lateral -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Barra Topo -->
+    <nav th:fragment="topbar" class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" >
+
+        <!-- Sidebar Toggle (Topbar) -->
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 ">
+            <i class="fa fa-bars"></i>
+        </button>
+
+        <!-- Topbar Search -->
+        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="" method="get" hidden>
+            <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
+                       aria-label="buscar" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Topbar Navbar -->
+        <ul class="navbar-nav ml-auto">
+
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-search fa-fw"></i>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                     aria-labelledby="searchDropdown">
+                    <form class="form-inline mr-auto w-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small"
+                                   placeholder="Search for..." aria-label="Search"
+                                   aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${usuario.login}"></span>
+                    <img class="img-profile rounded-circle"
+                         src="/admin/img/undraw_profile.svg">
+                </a>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                     aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Perfil
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Configurações
+                    </a>
+                    <div class="dropdown-divider"></div>
+
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Sair
+                    </a>
+                </div>
+            </li>
+
+        </ul>
+
+    </nav>
+    <!-- Fim da Barra Topo -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Logout Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Deseja Sair?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Selecione "Sair" caso deseje encerrar a sessão.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="/logout">Sair</a>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAgenda"
-           aria-expanded="true" aria-controls="collapseAgenda">
-            <i class="fas fa-fw fa-calendar"></i>
-            <span>Agenda</span>
-        </a>
-        <div id="collapseAgenda" class="collapse" aria-labelledby="headingAgenda" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/agendamentos">Agendamentos</a>
-                <a class="collapse-item" href="/busca/agendamento">Buscar Agendamento</a>
-                <a class="collapse-item" href="/agendar/step1">Agendar Horário</a>
-                <a class="collapse-item" href="/agendamentos">Cancelar Agendamento</a>
-                <a class="collapse-item" href="/agendamentos" hidden>Alterar Agendamento</a>
-            </div>
-        </div>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCliente"
-           aria-expanded="true" aria-controls="collapseCliente">
-            <i class="fas fa-fw fa-user"></i>
-            <span>Clientes</span>
-        </a>
-        <div id="collapseCliente" class="collapse" aria-labelledby="headingCliente" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/clientes">Listar Clientes</a>
-                <a class="collapse-item" href="/api/cliente/">Buscar Cliente</a>
-                <a class="collapse-item" href="/cadastrar/cliente">Cadastrar Cliente</a>
-                <a class="collapse-item" href="cards.html">Excluir Cliente</a>
-                <a class="collapse-item" href="cards.html">Alterar Cliente</a>
-            </div>
-        </div>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFuncionarios"
-           aria-expanded="true" aria-controls="collapseFuncionarios">
-            <i class="fas fa-fw fa-clipboard-list"></i>
-            <span>Funcionários</span>
-        </a>
-        <div id="collapseFuncionarios" class="collapse" aria-labelledby="headingFuncionarios" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/funcionarios">Listar Funcionarios</a>
-                <a class="collapse-item" href="/api/funcionario/" hidden>Buscar Funcionario</a>
-                <a class="collapse-item" href="/cadastrar/funcionario">Cadastrar Funcionario</a>
-                <a class="collapse-item" href="/funcionarios">Excluir Funcionario</a>
-                <a class="collapse-item" href="/funcionarios">Alterar Funcionario</a>
-            </div>
-        </div>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduto"
-           aria-expanded="true" aria-controls="collapseProduto">
-            <i class="fas fa-fw fa-bell"></i>
-            <span>Produtos</span>
-        </a>
-        <div id="collapseProduto" class="collapse" aria-labelledby="headingProduto" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/produtos">Listar Produtos</a>
-                <a class="collapse-item" href="/api/produto/">Buscar Produto</a>
-                <a class="collapse-item" href="/registro/produto">Cadastrar Produto</a>
-                <a class="collapse-item" href="/produtos">Excluir Produto</a>
-                <a class="collapse-item" href="/produtos">Alterar Produto</a>
-            </div>
-        </div>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServico"
-           aria-expanded="true" aria-controls="collapseServico">
-            <i class="fas fa-fw fa-donate"></i>
-            <span>Serviços</span>
-        </a>
-        <div id="collapseServico" class="collapse" aria-labelledby="headingServico" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/servicos">Listar Serviço</a>
-                <a class="collapse-item" href="/api/servico/">Buscar Serviço</a>
-                <a class="collapse-item" href="/registro/servico">Cadastrar Serviço</a>
-                <a class="collapse-item" href="/servicos">Excluir Serviço</a>
-                <a class="collapse-item" href="/servicos">Alterar Serviço</a>
-            </div>
-        </div>
-    </li>
-
-    <!--
-        Nav Item - Utilities Collapse Menu
-    -->
-    <li class="nav-item" hidden>
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-           aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>Ferramentas</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-             data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/abrir/atendimento">Abrir Agenda</a>
-                <a class="collapse-item" href="utilities-border.html">Borders</a>
-                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                <a class="collapse-item" href="utilities-other.html">Other</a>
-            </div>
-        </div>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Utilidades
-    </div>
-
-    <!--
-        ============
-        ============
-        ============
-        ESCONDA ESSA
-        ============
-        ============
-        ============
-    -->
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item" hidden>
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-           aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Login Screens:</h6>
-                <a class="collapse-item" href="login.html">Login</a>
-                <a class="collapse-item" href="register.html">Register</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="404.html">404 Page</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
-            </div>
-        </div>
-    </li>
-
-    <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Gráficos</span></a>
-    </li>
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item" hidden>
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
-
-    <!--
-        Sidebar Message
-        <div class="sidebar-card d-none d-lg-flex">
-            <img class="sidebar-card-illustration mb-2" src="/admin/img/undraw_rocket.svg" alt="...">
-            <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-            <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-        </div>
-    -->
-
-</ul>
-<!-- End of Sidebar -->
+    <!-- Fim do Logout Modal -->
+</html>

@@ -455,7 +455,8 @@
                             <div class="row mb-3">
                                 <div class="col">
                                     <h3>
-                                        <b><span id="pessoa" th:text="${pessoa.nome}"></span></b>
+                                        <b><span id="pessoa" th:text="${cliente.nome}"></span></b>
+                                        <input type="text" name="cliente_id" th:value="${cliente.id}" hidden>
                                     </h3>
                                 </div>
                             </div>
@@ -463,15 +464,15 @@
                             <div class="row mb-3">
                                 <div class="col">
                                     <label for="dtNascimento">Data Nascimento: </label>
-                                    <span id="dtNascimento" th:text="${pessoa.dtNascimento}"></span>
+                                    <span id="dtNascimento" th:text="${cliente.dtNascimento}"></span>
                                 </div>
                                 <div class="col">
                                     <label for="telefone">Fone: </label>
-                                    <span id="telefone" th:text="${pessoa.telefone}"></span>
+                                    <span id="telefone" th:text="${cliente.telefone}"></span>
                                 </div>
                                 <div class="col">
                                     <label for="sexo">Sexo: </label>
-                                    <span id="sexo" th:text="${pessoa.sexo}"></span>
+                                    <span id="sexo" th:text="${cliente.sexo}"></span>
                                 </div>
                             </div>
 
@@ -482,13 +483,14 @@
                                 <div class="btn-group row" role="group" id="botoes" >
                                     <div class="mb-2">
                                         <form action="/cliente/deletar" method="post">
-                                            <input type="text" name="login" th:value="${pessoa.id}" hidden>
                                             <button type="submit" class="btn btn-danger">Excluir</button>
                                         </form>
                                     </div>
                                         
                                     <div class="ml-2 mr-2 mb-2">
-                                        <button type="submit" class="btn btn-primary">Alterar</button>
+                                        <a th:href="@{/cliente/alterar(id=${cliente.id})}">
+                                            <button type="button" class="btn btn-primary">Alterar</button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
