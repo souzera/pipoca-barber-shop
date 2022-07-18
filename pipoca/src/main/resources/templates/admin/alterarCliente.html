@@ -25,113 +25,124 @@
 
 <body id="page-top">
 
-<div id="content-wrapper" class="d-flex flex-column">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-    <!-- Main Content -->
-    <div id="content">
+        <!-- Barra Lateral -->
+        <ul th:replace="~{admin/fragmentos :: sidebar}"></ul>
+        <!-- End of Sidebar -->
 
-        <!-- Topbar -->
-        <nav th:replace="~{admin/fragmentos :: topbar}"></nav>
-        <!-- End of Topbar -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
 
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
+                <!-- Topbar -->
+                <nav th:replace="~{admin/fragmentos :: topbar}"></nav>
+                <!-- End of Topbar -->
 
-            <form action="/cliente/alterando" method="post">
-                <div class="container col-mb-10">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
 
-                    <div class="row">
-                        <div class="col">
-                            <div>
-                                <h3>Cliente: <span th:text="${cliente.id}"></span></h3>
-                                <input type="text" th:value="${cliente.id}" hidden>
+                    <form action="/cliente/alterando" method="post">
+                        <div class="container col-mb-10">
+
+                            <div class="row">
+                                <div class="col">
+                                    <div>
+                                        <h3>Cliente: <span th:text="${cliente.id}"></span></h3>
+                                        <input type="text" th:value="${cliente.id}" hidden>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <div>
-                                Nome de usuário: <span th:text="${cliente.usuario.login}"></span></h5>
-                                <button class="btn btn-link ml-3 mr-3">
-                                    Opções de Usuário
-                                </button>
+                            <div class="row">
+                                <div class="col">
+                                    <div>
+                                        Nome de usuário: <span th:text="${cliente.usuario.login}"></span></h5>
+                                        <button class="btn btn-link ml-3 mr-3">
+                                            Opções de Usuário
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <hr class="divider">
+                            <hr class="divider">
 
-                    <h5>Preencha os campos que deseja alterar.</h5>
+                            <h5>Preencha os campos que deseja alterar.</h5>
 
-                    <div class="row">
-                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <div>
+                                        <label class="col-md-4 control-label" for="nome">Nome</label>
+                                        <div class="col-md-12">
+                                            <input id="nome" name="nome" th:value="${cliente.nome}" class="form-control input-md" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <div>
+                                        <label class="col-md-4 control-label" for="dtNascimento">Nascimento</label>
+                                        <div class="col-md-6">
+                                            <input id="dtNascimento" th:value="${cliente.dtNascimento}" name="dtNascimento" min="1940-01-01" max="2019-06-06" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date" maxlength="10" onBlur="showhide()" onKeyUp="mascaraData(this, event)" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <div class="form-select">
+                                        <label class="col-md-4 control-label" for="sexo">Sexo</label>
+                                        <select id="sexo" class="col-md-4 mb-3" aria-label="sexo" name="sexo" style="text-transform: lowercase;font-size: large;">
+                                            <option th:value="${cliente.sexo}" selected hidden></option>
+                                            <option value="FEMININO">Feminino</option>
+                                            <option value="MASCULINO">Masculino</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label class="col-md-4 control-label" for="telefone">Telefone</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input id="telefone" th:value="${cliente.telefone}" name="telefone" class="form-control" placeholder="XX XXXXX-XXXX"  type="text" maxlength="15" OnKeyPress="onlynumber(event)" onKeyUp="mascaraTelefone(this, event)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ====== CAMPOS ESTATICOS ====== -->
                             <div>
-                                <label class="col-md-4 control-label" for="nome">Nome</label>
-                                <div class="col-md-12">
-                                    <input id="nome" name="nome" th:value="${cliente.nome}" class="form-control input-md" type="text">
+                                <input id="id" name="id" th:value="${cliente.id}" hidden>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col"></div>
+                                <div class="col"></div>
+                                <div class="col"></div>
+                                <div class="col"></div>
+                                <div class="col">
+                                    <button class="btn btn-primary" type="submit">Alterar</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row mb-3">
-                        <div class="col">
-                            <div>
-                                <label class="col-md-4 control-label" for="dtNascimento">Nascimento</label>
-                                <div class="col-md-6">
-                                    <input id="dtNascimento" th:value="${cliente.dtNascimento}" name="dtNascimento" min="1940-01-01" max="2019-06-06" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date" maxlength="10" onBlur="showhide()" onKeyUp="mascaraData(this, event)" >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="row mb-3">
-                        <div class="col">
-                            <div class="form-select">
-                                <label class="col-md-4 control-label" for="sexo">Sexo</label>
-                                <select id="sexo" class="col-md-4 mb-3" aria-label="sexo" name="sexo" style="text-transform: lowercase;font-size: large;">
-                                    <option th:value="${cliente.sexo}" selected hidden></option>
-                                    <option value="FEMININO">Feminino</option>
-                                    <option value="MASCULINO">Masculino</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label class="col-md-4 control-label" for="telefone">Telefone</label>
-                            <div class="col-md-6">
-                                <div class="input-group">
-                                    <input id="telefone" th:value="${cliente.telefone}" name="telefone" class="form-control" placeholder="XX XXXXX-XXXX"  type="text" maxlength="15" OnKeyPress="onlynumber(event)" onKeyUp="mascaraTelefone(this, event)">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- ====== CAMPOS ESTATICOS ====== -->
-                    <div>
-                        <input id="id" name="id" th:value="${cliente.id}" hidden>
-                    </div>
+                    </form>
 
-                    <div class="row mt-3">
-                        <div class="col"></div>
-                        <div class="col"></div>
-                        <div class="col"></div>
-                        <div class="col"></div>
-                        <div class="col">
-                            <button class="btn btn-primary" type="submit">Alterar</button>
-                        </div>
-                    </div>
                 </div>
-
-
-
-
-            </form>
-
+            
+            </div>
+        
         </div>
+    </div>
 
         <!-- Bootstrap core JavaScript-->
         <script src="/admin/vendor/jquery/jquery.min.js"></script>

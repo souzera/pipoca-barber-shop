@@ -51,9 +51,9 @@
                             Thymleaf Cliente e Funcionario
                         -->
                         <tr class="cliente funcionario" th:each="objeto: ${lista}">
-                            <th scope="row" th:text="${objeto.id}">id</th>
-                            <td th:text="${objeto.nome}">nome</td>
-                            <td th:text="${objeto.telefone}">login</td>
+                            <th scope="row" th:text="${objeto.id}"></th>
+                            <td th:text="${objeto.nome}"></td>
+                            <td th:text="${objeto.telefone}"></td>
                             <td>
                                 <a class="nav-link" th:href="@{/cliente/details(id=${objeto.id})}"><i class="fas fa-fw fa-wrench"></i></a>
                             </td>
