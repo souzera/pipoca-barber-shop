@@ -15,8 +15,8 @@
     <!-- Custom fonts for this template-->
     <link href="/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="/admin/css/pipoca-admin-2.css" rel="stylesheet">
@@ -25,133 +25,161 @@
 
 <body id="page-top">
 
-<div id="content-wrapper" class="d-flex flex-column">
+    <div id="wrapper">
 
-    <!-- Main Content -->
-    <div id="content">
+        <!-- Barra Lateral -->
+        <ul th:replace="~{admin/fragmentos :: sidebar}"></ul>
+        <!-- End of Sidebar -->
 
-        <!-- Topbar -->
-        <nav th:replace="~{admin/fragmentos :: topbar}"></nav>
-        <!-- End of Topbar -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
+            <!-- Main Content -->
+            <div id="content">
 
-            <form class="cadastro-form mb-5" action="/cadastrando/cliente" method="POST">
-                <!--
-                -->
-                <div class="mb-2 row">
-                    <div class="login-content col-md-6">
-                        <label class=" control-label col-md-8" for="login">Usuário <h11>*</h11></label>
-                        <div class="col-md-12">
-                            <input id="login" name="login" placeholder="@" class="form-control input-md input-username" required="" minlength="03" maxlength="13" type="text" OnKeyUp="forceLower(this,event)">
-                        </div>
-                    </div>
-                </div>
+                <!-- Topbar -->
+                <nav th:replace="~{admin/fragmentos :: topbar}"></nav>
+                <!-- End of Topbar -->
 
-                <!--
-                -->
-                <div class="mb-5 row justify-content-end mb-3">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
 
-                    <div class="senha-content col-md-6 mb-1">
-                        <label class="col-md-8 control-label" for="senha">Senha <h11>*</h11></label>
-                        <div class="col-md-12">
-                            <input id="senha" name="senha" placeholder="#" class="form-control input-md" required="" type="password">
-                        </div>
-                    </div>
-
-                    <div class="senha-content col-md-6">
-                        <label class="col-md-12 control-label" for="confirmaSenha">Confirmar Senha <h11>*</h11></label>
-                        <div class="col-md-12">
-                            <input id="confirmaSenha" name="confirmaSenha" placeholder="#" class="form-control input-md" required="" type="password">
-                        </div>
-                    </div>
-                    <!--
-                    -->
-
-                </div>
-
-                <hr>
-
-                <!--
-                -->
-                <div class="mb-3">
-                    <label class="col-md-4 control-label" for="nome">Nome <h11>*</h11></label>
-                    <div class="col-md-12">
-                        <input id="nome" name="nome" placeholder="" class="form-control input-md" required="" type="text">
-                    </div>
-                </div>
-
-                <!--
-                -->
-                <div class="mb-4">
-
-                    <label class="col-md-4 control-label" for="dtNascimento">Nascimento<h11>*</h11></label>
-                    <div class="col-md-6">
-                        <input id="dtNascimento" name="dtNascimento" min="1940-01-01" max="2019-06-06" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date" maxlength="10" onBlur="showhide()" onKeyUp="mascaraData(this, event)" >
-                    </div>
-
-                </div>
-
-                <!--
-                -->
-                <div class="mb-4">
-                    <label class="col-md-4 control-label" for="sexo">Sexo<h11>*</h11></label>
-                    <select  class="form-select col-md-4 mb-3" aria-label="sexo" name="sexo" style="text-transform: lowercase;font-size: large;">
-
-                        <option value="FEMININO">Feminino</option>
-                        <option selected value="MASCULINO">Masculino</option>
-
+                    <form class="cadastro-form mb-5" action="/cadastrando/cliente" method="POST">
                         <!--
-                            <option th:each="sexo:${T(com.br.pipoca.model.Sexo).values()}"
-                                    th:value="${sexo}" th:text="${sexo}" class="form-select"></option>
-                        -->
-                    </select>
-                </div>
-
-                <!--
                 -->
-                <div class="mb-4">
-
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="telefone">Telefone <h11>*</h11></label>
-                        <div class="col-md-6">
-                            <div class="input-group">
-                                <input id="telefone" name="telefone" class="form-control" placeholder="XX XXXXX-XXXX" required="" type="text" maxlength="15" OnKeyPress="onlynumber(event)" onKeyUp="mascaraTelefone(this, event)">
+                        <div class="mb-2 row">
+                            <div class="login-content col-md-6">
+                                <label class=" control-label col-md-8" for="login">Usuário <h11>*</h11></label>
+                                <div class="col-md-12">
+                                    <input id="login" name="login" placeholder="@"
+                                        class="form-control input-md input-username" required="" minlength="03"
+                                        maxlength="13" type="text" OnKeyUp="forceLower(this,event)">
+                                </div>
                             </div>
                         </div>
 
-                    </div>
+                        <!--
+                -->
+                        <div class="mb-5 row justify-content-end mb-3">
+
+                            <div class="senha-content col-md-6 mb-1">
+                                <label class="col-md-8 control-label" for="senha">Senha <h11>*</h11></label>
+                                <div class="col-md-12">
+                                    <input id="senha" name="senha" placeholder="#" class="form-control input-md"
+                                        required="" type="password">
+                                </div>
+                            </div>
+
+                            <div class="senha-content col-md-6">
+                                <label class="col-md-12 control-label" for="confirmaSenha">Confirmar Senha <h11>*</h11>
+                                </label>
+                                <div class="col-md-12">
+                                    <input id="confirmaSenha" name="confirmaSenha" placeholder="#"
+                                        class="form-control input-md" required="" type="password">
+                                </div>
+                            </div>
+                            <!--
+                    -->
+
+                        </div>
+
+                        <hr>
+
+                        <!--
+                -->
+                        <div class="mb-3">
+                            <label class="col-md-4 control-label" for="nome">Nome <h11>*</h11></label>
+                            <div class="col-md-12">
+                                <input id="nome" name="nome" placeholder="" class="form-control input-md" required=""
+                                    type="text">
+                            </div>
+                        </div>
+
+                        <!--
+                -->
+                        <div class="mb-4">
+
+                            <label class="col-md-4 control-label" for="dtNascimento">Nascimento<h11>*</h11></label>
+                            <div class="col-md-6">
+                                <input id="dtNascimento" name="dtNascimento" min="1940-01-01" max="2019-06-06"
+                                    placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date"
+                                    maxlength="10" onBlur="showhide()" onKeyUp="mascaraData(this, event)">
+                            </div>
+
+                        </div>
+
+                        <!--
+                -->
+                        <div class="mb-4">
+                            <label class="col-md-4 control-label" for="sexo">Sexo<h11>*</h11></label>
+                            <select class="form-select col-md-4 mb-3" aria-label="sexo" name="sexo"
+                                style="text-transform: lowercase;font-size: large;">
+
+                                <option value="FEMININO">Feminino</option>
+                                <option selected value="MASCULINO">Masculino</option>
+
+                                <!--
+                            <option th:each="sexo:${T(com.br.pipoca.model.Sexo).values()}"
+                                    th:value="${sexo}" th:text="${sexo}" class="form-select"></option>
+                        -->
+                            </select>
+                        </div>
+
+                        <!--
+                -->
+                        <div class="mb-4">
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="telefone">Telefone <h11>*</h11></label>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input id="telefone" name="telefone" class="form-control"
+                                            placeholder="XX XXXXX-XXXX" required="" type="text" maxlength="15"
+                                            OnKeyPress="onlynumber(event)" onKeyUp="mascaraTelefone(this, event)">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <div th:if="${erro != null}" th:text="${erro}"
+                                style="color: red;font-size:x-small;padding:3px;"></div>
+                            <button type="submit" class="btn btn-primary">Cadastrar-se</button>
+                        </div>
+
+                        <br>
+
+                    </form>
+
                 </div>
 
-                <div class="mb-2">
-                    <div th:if="${erro != null}" th:text="${erro}" style="color: red;font-size:x-small;padding:3px;"></div>
-                    <button type="submit" class="btn btn-primary">Cadastrar-se</button>
-                </div>
+            </div>
 
-                <br>
-
-            </form>
+            <!-- Footer -->
+            <footer th:replace="~{admin/fragmentos :: footer}"></footer>
+            <!-- End of Footer -->
 
         </div>
 
+    </div>
 
-        <!-- Logout Modal-->
-        <div th:replace="~{admin/fragmentos :: logout}"></div>
-        </div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="/admin/vendor/jquery/jquery.min.js"></script>
-        <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- Core plugin JavaScript-->
-        <script src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-        <!-- Custom scripts for all pages-->
-        <script src="/admin/js/pipoca-admin-2.min.js"></script>
-        <!-- Page level plugins -->
-        <script src="/admin/vendor/chart.js/Chart.min.js"></script>
-        <!-- Page level custom scripts -->
-        <script src="/admin/js/demo/chart-area-demo.js"></script>
-        <script src="/admin/js/demo/chart-pie-demo.js"></script>
+    <!-- Logout Modal-->
+    <div th:replace="~{admin/fragmentos :: logout}"></div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/admin/js/pipoca-admin-2.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="/admin/vendor/chart.js/Chart.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="/admin/js/demo/chart-area-demo.js"></script>
+    <script src="/admin/js/demo/chart-pie-demo.js"></script>
 
 </body>
 

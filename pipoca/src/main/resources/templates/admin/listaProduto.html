@@ -25,48 +25,57 @@
 
 <body id="page-top">
 
-    <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-        <!-- Main Content -->
-        <div id="content">
+        <ul th:replace="~{admin/fragmentos :: sidebar}"></ul>
 
-            <!-- Topbar -->
-            <nav th:replace="~{admin/fragmentos :: topbar}"></nav>
-            <!-- End of Topbar -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
+            <!-- Main Content -->
+            <div id="content">
 
-                <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Descrição</th>
-                        <th scope="col">Categoria</th>
-                        <th scope="col">Detalhes</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                
-                        <!--
+                <!-- Topbar -->
+                <nav th:replace="~{admin/fragmentos :: topbar}"></nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col">Detalhes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <!--
                             Thymeleaf Produto
                 
                         -->
-                        <tr class="produto" th:each="objeto: ${lista}">
-                            <th scope="row" th:text="${objeto.id}">id</th>
-                            <td th:text="${objeto.descricao}">nome</td>
-                            <td th:text="${objeto.categoria}">categoria</td>
-                            <td href="#" th:text="${objeto.descricao}">Detalhes</td>
-                        </tr>
-                    </tbody>
-                  </table>
+                            <tr class="produto" th:each="objeto: ${lista}">
+                                <th scope="row" th:text="${objeto.id}">id</th>
+                                <td th:text="${objeto.descricao}">nome</td>
+                                <td th:text="${objeto.categoria}">categoria</td>
+                                <td href="#" th:text="${objeto.descricao}">Detalhes</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
+                </div>
             </div>
         </div>
+
     </div>
+    <!-- End of Page Wrapper -->
 
     <!-- Logout Modal-->
-    <div th:replace="~{admin/fragmentos :: logout}"></div></div>
+    <div th:replace="~{admin/fragmentos :: logout}"></div>
+    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="/admin/vendor/jquery/jquery.min.js"></script>

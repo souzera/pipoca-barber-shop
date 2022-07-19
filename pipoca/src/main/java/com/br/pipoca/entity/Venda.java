@@ -11,7 +11,6 @@ public class Venda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @ManyToOne
     @JoinColumn
     private Produto produto;
@@ -89,4 +88,16 @@ public class Venda {
     }
 
 
+    @Override
+    public String toString() {
+        if (!(this.produto != null)){
+            return ""+ this.atendimento.getCliente().getNome()
+                    + " | R$" + this.valor;
+        } else if (!(this.atendimento != null)) {
+            return ""+ this.produto.getDescricao()
+                    + " | R$" + this.valor;
+        }
+        return ""+ this.atendimento.getCliente().getNome()
+                + " | R$" + this.valor;
+    }
 }

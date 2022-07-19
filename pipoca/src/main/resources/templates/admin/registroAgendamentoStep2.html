@@ -28,75 +28,92 @@
 
 <body id="page-top">
 
-    <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-        <!-- Main Content -->
-        <div id="content">
+        <!-- Barra Lateral -->
+        <ul th:replace="~{admin/fragmentos :: sidebar}"></ul>
+        <!-- End of Sidebar -->
 
-            <!-- Topbar -->
-            <nav th:replace="~{admin/fragmentos :: topbar}"></nav>
-            <!-- End of Topbar -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav th:replace="~{admin/fragmentos :: topbar}"></nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
 
 
-                <form action="/agendando" method="post">
+                    <form action="/agendando" method="post">
 
-                    <div id="step-1" class="form-group col-md-10 row mb-4">
-                        <br>
-                        <div class="col-md-5">
-                            <label class="form-label" th:text="${date}" for="date"></label>
-                            <input type="date" name="date" th:value="${date}" id="date" hidden>
-                        </div>
-
-                        <div class="col-md-6 form-select">
-                            <label class="form-label" th:text="${funcionario.nome}" for="funcionario"></label>
-                            <input type="text" name="funcionarioId" th:value="${funcionario.id}" hidden>
-                        </div>
-                    </div>
-
-                    <hr class="mb-3">
-
-                    <div id="step-2" class="form-group col-mb-8" style="margin: 2%;">
-
-                        <div class="col-mb-8 mb-3 row">
-                            <label class="form-label" for="cliente">Cliente</label>
-                            <select class="form-select" name="cliente_id" id="cliente">
-                                <option th:each="cliente:${clientes}" th:value="${cliente.id}"
-                                    th:text="${cliente.nome}"></option>
-                            </select>
-                        </div>
-
-                        <div class="row mb-3 col-mb-4">
-                            <div class="col-mb-4 mr-3">
-                                <label class="form-label" for="hora">Hora</label>
-                                <select class="form-select" name="hora" id="hora">
-                                    <option th:each="hora:${vagas}" th:value="${hora}" th:text="${hora.valor}"></option>
-                                </select>
+                        <div id="step-1" class="form-group col-md-10 row mb-4">
+                            <br>
+                            <div class="col-md-5">
+                                <label class="form-label" th:text="${date}" for="date"></label>
+                                <input type="date" name="date" th:value="${date}" id="date" hidden>
                             </div>
 
-                            <div class="col-mb-8">
-                                <label class="form-label" for="servico">Serviço</label>
-                                <select class="form-select" name="servico_id" id="servico">
-                                    <option th:each="servico:${servicos}" th:text="${servico.descricao}"
-                                        th:value="${servico.id}"></option>
-                                </select>
+                            <div class="col-md-6 form-select">
+                                <label class="form-label" th:text="${funcionario.nome}" for="funcionario"></label>
+                                <input type="text" name="funcionarioId" th:value="${funcionario.id}" hidden>
                             </div>
                         </div>
 
-                    </div>
+                        <hr class="mb-3">
 
-                    <div class="form-group col-md-4 mb-2">
-                        <div class="mb-2" th:if="${erro != null}" th:text="${erro}" style="color: red;"></div>
-                        <button type="submit" class="btn btn-primary">Agendar</button>
-                    </div>
-                </form>
+                        <div id="step-2" class="form-group col-mb-8" style="margin: 2%;">
+
+                            <div class="col-mb-8 mb-3 row">
+                                <label class="form-label" for="cliente">Cliente</label>
+                                <select class="form-select" name="cliente_id" id="cliente">
+                                    <option th:each="cliente:${clientes}" th:value="${cliente.id}"
+                                        th:text="${cliente.nome}"></option>
+                                </select>
+                            </div>
+
+                            <div class="row mb-3 col-mb-4">
+                                <div class="col-mb-4 mr-3">
+                                    <label class="form-label" for="hora">Hora</label>
+                                    <select class="form-select" name="hora" id="hora">
+                                        <option th:each="hora:${vagas}" th:value="${hora}" th:text="${hora.valor}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-mb-8">
+                                    <label class="form-label" for="servico">Serviço</label>
+                                    <select class="form-select" name="servico_id" id="servico">
+                                        <option th:each="servico:${servicos}" th:text="${servico.descricao}"
+                                            th:value="${servico.id}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group col-md-4 mb-2">
+                            <div class="mb-2" th:if="${erro != null}" th:text="${erro}" style="color: red;"></div>
+                            <button type="submit" class="btn btn-primary">Agendar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
+
+            <!-- Footer -->
+            <footer th:replace="~{admin/fragmentos :: footer}"></footer>
+            <!-- End of Footer -->
         </div>
+
     </div>
 
-    
+    <!-- Logout Modal-->
+    <div th:replace="~{admin/fragmentos :: logout}"></div>
+    </div>
+
     <script>
         var today = new Date();
         today.setDate(today.getDate()); //Voalá

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.Date;
 
@@ -31,8 +32,9 @@ public class CadastroAdminController {
 
     @GetMapping
     @RequestMapping(value = "/cadastrar/funcionario")
-    public ModelAndView cadastrarFuncionario(){
+    public ModelAndView cadastrarFuncionario(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView("admin/cadastroFuncionario.html");
+        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
         return modelAndView;
     }
     @PostMapping(value = "/cadastrando/funcionario")
@@ -61,8 +63,9 @@ public class CadastroAdminController {
 
     @GetMapping
     @RequestMapping(value = "/cadastrar/cliente")
-    public ModelAndView cadastrarCliente(){
+    public ModelAndView cadastrarCliente(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView("admin/cadastroCliente.html");
+        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
         return modelAndView;
     }
     @PostMapping(value = "/cadastrando/cliente")
@@ -90,8 +93,9 @@ public class CadastroAdminController {
 
     @GetMapping
     @RequestMapping(value = "/registro/produto")
-    public ModelAndView cadastrarProduto(){
+    public ModelAndView cadastrarProduto(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView("admin/cadastroProduto.html");
+        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
         return modelAndView;
     }
     @PostMapping(value = "/registrando/produto")
@@ -105,8 +109,9 @@ public class CadastroAdminController {
     //Serviços
     @GetMapping
     @RequestMapping(value = "/registro/servico")
-    public ModelAndView cadastrarServico(){
+    public ModelAndView cadastrarServico(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView("admin/cadastroServico.html");
+        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
         return modelAndView;
     }
     @PostMapping(value = "/registrando/servico")
@@ -121,9 +126,10 @@ public class CadastroAdminController {
 
     @GetMapping
     @RequestMapping(value = "/agendar/step1")
-    public ModelAndView buscarAgenda() throws IOException {
+    public ModelAndView buscarAgenda(HttpServletRequest request) throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/registroAgendamentoStep1.html");
         modelAndView.addObject("funcionarios", funcionarioService.findByCargo(Cargo.BARBEIRO));
+        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
         return modelAndView;
     }
 
@@ -133,7 +139,7 @@ public class CadastroAdminController {
     }
 
     @GetMapping(value = "/agendar/{funcionario}&{date}")
-    public ModelAndView agendar(@PathVariable(value = "funcionario") long funcionario_id, @PathVariable(value = "date") Date date) throws IOException {
+    public ModelAndView agendar(@PathVariable(value = "funcionario") long funcionario_id, @PathVariable(value = "date") Date date, HttpServletRequest request) throws IOException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin/registroAgendamentoStep2.html");
         modelAndView.addObject("date", date);
@@ -141,11 +147,12 @@ public class CadastroAdminController {
         modelAndView.addObject("clientes", clienteService.clientes());
         modelAndView.addObject("servicos", servicoService.servicos());
         modelAndView.addObject("vagas", horarioService.vagas(funcionario_id, date));
+        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
         return modelAndView;
     }
 
     @PostMapping(value = "/agendando")
-    public String createAgenda(HorarioDTO horarioDTO, AtendimentoDTO atendimentoDTO, Model model) throws IOException {
+    public String createAgenda(HorarioDTO horarioDTO, AtendimentoDTO atendimentoDTO, Model model, HttpServletRequest request) throws IOException {
         //criar novo horario
         Horario horario = horarioDTO.toHorario();
         horario.setFuncionario(funcionarioService.findById(horarioDTO.getFuncionarioId()));

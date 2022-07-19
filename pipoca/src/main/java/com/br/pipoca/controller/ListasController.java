@@ -142,4 +142,57 @@ public class ListasController {
         return modelAndView;
     }
 
+    //===========================================================================================
+
+    //VENDA
+
+    @GetMapping
+    @RequestMapping(value = "/vendas")
+    public ModelAndView vendas(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView("admin/listaVenda.html");
+        List<Venda> vendas = vendaService.vendas();
+        modelAndView.addObject("lista", vendas);
+        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        return modelAndView;
+    }
+
+    @GetMapping
+    @RequestMapping(value = "/vendas/{mes}{ano}")
+    public ModelAndView vendasMensais(@RequestParam("mes") int mes, @RequestParam("ano") int ano, HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView("admin/listaVenda.html");
+        List<Venda> vendas = vendaService.vendasMensais(mes,ano-1900);
+        modelAndView.addObject("lista", vendas);
+        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        return modelAndView;
+    }
+
+    @GetMapping
+    @RequestMapping(value = "/vendas/{ano}")
+    public ModelAndView vendasAnuais(@PathVariable("ano") int ano, HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView("admin/listaVenda.html");
+        List<Venda> vendas = vendaService.vendasAnuais(ano-1900);
+        modelAndView.addObject("lista", vendas);
+        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        return modelAndView;
+    }
+
+    @GetMapping
+    @RequestMapping(value = "/vendas/servicos")
+    public ModelAndView vendasServicos(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView("admin/listaVenda.html");
+        List<Venda> vendas = vendaService.vendaServicos();
+        modelAndView.addObject("lista", vendas);
+        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        return modelAndView;
+    }
+
+    @GetMapping
+    @RequestMapping(value = "/vendas/produtos")
+    public ModelAndView vendasProdutos(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView("admin/listaVenda.html");
+        List<Venda> vendas = vendaService.vendaProduto();
+        modelAndView.addObject("lista", vendas);
+        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        return modelAndView;
+    }
 }
