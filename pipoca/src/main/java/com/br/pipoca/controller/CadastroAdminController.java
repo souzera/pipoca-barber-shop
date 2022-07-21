@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 
@@ -180,5 +181,37 @@ public class CadastroAdminController {
         atendimentoService.agendar(atendimento);
         return "redirect:/agendamentos";
 
+    }
+
+    //=================================================================================================
+    //VENDA
+
+    @GetMapping
+    @RequestMapping(value = "/registro/venda")
+    public ModelAndView registraVenda(HttpServletRequest request) throws IOException {
+        ModelAndView modelAndView = new ModelAndView("admin/registroVenda");
+        modelAndView.addObject("clientes", clienteService.clientes());
+        modelAndView.addObject("produtos", produtoService.produtos());
+        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        return modelAndView;
+    }
+
+    @PostMapping
+    @RequestMapping(value = "/registrar/venda-step1")
+    public Model createVendaStep1(long cliente_id, VendaDTO vendaDTO, HttpServletResponse response) throws IOException {
+        if (cliente_id!=0){
+            vendaDTO.getModel().addAttribute("cliente", clienteService.buscarPorID(cliente_id));
+            vendaDTO.getModel().addAttribute("agendamentos", atendimentoService.listarPorClienteEStatus(cliente_id, StatusHorario.OCIOSO));
+        }
+        vendaDTO.getModel().addAttribute("step2", true);
+        response.sendRedirect("/registrar/venda-step2");
+        return vendaDTO.getModel();
+    }
+
+    @PostMapping
+    @RequestMapping(value = "/registrar/venda-step2")
+    public VendaDTO createVendaStep2(long cliente_id, VendaDTO vendaDTO){
+        vendaDTO.getModel().addAttribute("step3", true);
+        return vendaDTO;
     }
 }

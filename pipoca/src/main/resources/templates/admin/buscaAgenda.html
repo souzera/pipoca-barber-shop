@@ -3,188 +3,216 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="tuezera">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="tuezera">
+  <meta name="author" content="">
 
-    <title>Pipoca Barber Shop - Dashboard</title>
+  <title>Pipoca Barber Shop - Dashboard</title>
 
-    <link rel="icon" type="image/x-icon" href="/assets/pipoca.ico" />
-    <!-- Custom fonts for this template-->
-    <link href="/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="/assets/pipoca.ico" />
+  <!-- Custom fonts for this template-->
+  <link href="/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="/admin/css/pipoca-admin-2.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="/admin/css/pipoca-admin-2.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
 
-        <!-- Barra Lateral -->
-        <ul th:replace="~{admin/fragmentos :: sidebar}"></ul>
-        <!-- End of Sidebar -->
+    <!-- Barra Lateral -->
+    <ul th:replace="~{admin/fragmentos :: sidebar}"></ul>
+    <!-- End of Sidebar -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+      <!-- Main Content -->
+      <div id="content">
 
-                <!-- Topbar -->
-                <nav th:replace="~{admin/fragmentos :: topbar}"></nav>
-                <!-- End of Topbar -->
+        <!-- Topbar -->
+        <nav th:replace="~{admin/fragmentos :: topbar}"></nav>
+        <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
 
-                    <div id="accordion" class="col-md-12">
-                        <div class="card col-md-10 mb-3">
-                          <div class="card-header" id="headingOne">
-                            <h5 class="mb-0">
-                              <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Buscar por Funcionario
-                              </button>
-                            </h5>
-                          </div>
-                      
-                          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                            <div class="card-body">
-                                <form class="form row" action="/busca-redirect/agendamento" method="post">
-                        
-                                    <div class="col-md-6 form-select">
-                                        <label class="form-label" for="funcionario">Barbeiro</label>
-                                        <select class="form-select" required name="funcionario_id" id="funcionario">
-                                            <option selected th:each="funcionario:${funcionarios}" th:value="${funcionario.id}" th:text="${funcionario.nome}"></option>
-                                        </select>
-                                     </div>
-            
-                                    <div class="form-group col-md-4 mb-2">
-                                            <div class="mb-2" th:if="${erro != null}" th:text="${erro}" style="color: red;"></div>
-                                            <button type="submit" class="btn btn-primary">Buscar</button>
-                                        </div>
-                                    </div>
-                                
-                                </form>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div class="card col-md-10 mb-3">
-                          <div class="card-header" id="headingTwo">
-                            <h5 class="mb-0">
-                              <button class="btn btn-primary collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Buscar por Data
-                              </button>
-                            </h5>
-                          </div>
-                          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                            <div class="card-body ">
-                                <form class="form row" action="/busca-redirect/agendamento" method="post">
-                        
-                                    <div class="col-md-5">
-                                        <label class="form-label" for="date">Data</label>
-                                        <input type="date" name="date"id="date" required>
-                                    </div>
-            
-                                    <div class="form-group col-md-4 mb-2">
-                                            <div class="mb-2" th:if="${erro != null}" th:text="${erro}" style="color: red;"></div>
-                                            <button type="submit" class="btn btn-primary">Buscar</button>
-                                        </div>
-                                    </div>
-                                
-                                </form>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div class="card col-md-10 mb-3" hidden>
-                          <div class="card-header" id="headingThree">
-                            <h5 class="mb-0">
-                              <button class="btn btn-primary collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Buscar por Funcionario e Data
-                              </button>
-                            </h5>
-                          </div>
-                          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                            <div class="card-body">
-                                <div class="col-mb-8 mb-3 row">
+          <div class="col-mb-8">
+            <div id="accordion">
 
-                                    <form class="form row" action="/busca-redirect/agendamento" method="post">
-                        
-                                        <div class="col-md-5">
-                                            <label class="form-label" for="date">Data</label>
-                                            <input type="date" name="date"id="date" required>
-                                        </div>
 
-                                        <div class="col-md-6 form-select">
-                                            <label class="form-label" for="funcionario">Barbeiro</label>
-                                            <select class="form-select" required name="funcionario_id" id="funcionario">
-                                                <option selected th:each="funcionario:${funcionarios}" th:value="${funcionario.id}" th:text="${funcionario.nome}"></option>
-                                            </select>
-                                         </div>
-                
-                                        <div class="form-group col-md-4 mb-2">
-                                                <div class="mb-2" th:if="${erro != null}" th:text="${erro}" style="color: red;"></div>
-                                                <button type="submit" class="btn btn-primary">Buscar</button>
-                                            </div>
-                                        </div>
-                                    
-                                    </form>
-                                </div>
-                          </div>
-                        </div>
+
+
+
+
+
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                      aria-controls="collapseOne">
+                      Consultar Por Funcionário
+                    </button>
+                  </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body">
+                    <form class="form row" action="/buscando/agendamento" method="post">
+
+                      <div class="col-md-6 form-select">
+                        <label class="form-label" for="funcionario">Barbeiro</label>
+                        <select class="form-select" required name="funcionario_id" id="funcionario">
+                          <option selected th:each="funcionario:${funcionarios}" th:value="${funcionario.id}"
+                            th:text="${funcionario.nome}"></option>
+                        </select>
                       </div>
 
+                      <div class="form-group col-md-4 mb-2">
+                        <div class="mb-2" th:if="${erro != null}" th:text="${erro}" style="color: red;"></div>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
-                <!-- /.container-fluid -->
+              </div>
 
+
+
+
+
+
+
+
+
+
+
+              <div class="card">
+                <div class="card-header" id="headingTwo">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                      aria-expanded="false" aria-controls="collapseTwo">
+                      Consultar por Data
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                  <div class="card-body">
+                    <form class="form row" action="/buscando/agendamento" method="post">
+
+                      <div class="col-md-5">
+                        <label class="form-label" for="date">Data</label>
+                        <input type="date" name="date" id="date" required>
+                      </div>
+
+                      <div class="form-group col-md-4 mb-2">
+                        <div class="mb-2" th:if="${erro != null}" th:text="${erro}" style="color: red;"></div>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+              <div class="card">
+                <div class="card-header" id="headingThree">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                      aria-expanded="false" aria-controls="collapseThree">
+                      Consultar por Funcionário e Data
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                  <div class="card-body">
+                    <form class="form row" th:action="/buscando/agendamento" method="post">
+
+                      <div class="col-md-5">
+                        <label class="form-label" for="date">Data</label>
+                        <input type="date" name="date" id="date" required>
+                      </div>
+
+                      <div class="col-md-6 form-select">
+                        <label class="form-label" for="funcionario">Barbeiro</label>
+                        <select class="form-select" required name="funcionario_id" id="funcionario">
+                          <option selected th:each="funcionario:${funcionarios}" th:value="${funcionario.id}"
+                            th:text="${funcionario.nome}"></option>
+                        </select>
+                      </div>
+
+                      <div class="form-group col-md-4 mb-2">
+                        <div class="mb-2" th:if="${erro != null}" th:text="${erro}" style="color: red;"></div>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer th:replace="~{admin/fragmentos :: footer}"></footer>
-            <!-- End of Footer -->
+          </div>
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer th:replace="~{admin/fragmentos :: footer}"></footer>
+      <!-- End of Footer -->
 
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+  </div>
+  <!-- End of Page Wrapper -->
 
-    <!-- Logout Modal-->
-    <div th:replace="~{admin/fragmentos :: logout}"></div>
-    </div>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div th:replace="~{admin/fragmentos :: logout}"></div>
+  </div>
 
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/admin/vendor/jquery/jquery.min.js"></script>
-    <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap core JavaScript-->
+  <script src="/admin/vendor/jquery/jquery.min.js"></script>
+  <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/admin/js/pipoca-admin-2.min.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="/admin/js/pipoca-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="/admin/vendor/chart.js/Chart.min.js"></script>
+  <!-- Page level plugins -->
+  <script src="/admin/vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="/admin/js/demo/chart-area-demo.js"></script>
-    <script src="/admin/js/demo/chart-pie-demo.js"></script>
+  <!-- Page level custom scripts -->
+  <script src="/admin/js/demo/chart-area-demo.js"></script>
+  <script src="/admin/js/demo/chart-pie-demo.js"></script>
 
 </body>
 

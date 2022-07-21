@@ -47,32 +47,43 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
+                    <div class="container text-center">
+                        <div class="row">
+                            <div id="step1" class="col">
+                                <form action="/registrar/venda-step1" method="post">
+                                    <div class="row">
+                                        <div class="col">
+                                            <select class="form-select form-select-lg mb-3" name="cliente_id"
+                                                id="cliente" aria-label="Cliente">
+                                                <option select value="0">Selecionar Cliente</option>
+                                                <option th:each="cliente:${clientes}" th:value="${cliente.id}"
+                                                    th:text="${cliente.nome}"></option>
+                                            </select>
 
-                    <form action="/agendar/to-step-2" method="post">
+                                        </div>
 
-                        <div id="step-1" class="form-group col-md-10 row mb-4">
-                            <br>
-                            <div class="col-md-5">
-                                <label class="form-label" for="date">Data</label>
-                                <input type="date" name="date" id="date" required>
-                            </div>
+                                        <div class="col">
+                                            <select required class="form-select form-select-lg mb-3" name="produto_id"
+                                                id="produto" aria-label="Produto">
+                                                <option select value="0">Selecionar Produtos</option>
+                                                <option th:each="produto:${produtos}" th:value="${produto.id}"
+                                                    th:text="${produto.descricao}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
 
-                            <div class="col-md-6 form-select">
-                                <label class="form-label" for="funcionario">Barbeiro</label>
-                                <select class="form-select" required name="funcionario_id" id="funcionario">
-                                    <option selected th:each="funcionario:${funcionarios}" th:value="${funcionario.id}"
-                                        th:text="${funcionario.nome}"></option>
-                                </select>
+                                    <div class="row">
+                                        <div class="col"></div>
+                                        <div class="col"></div>
+                                        <div class="col"></div>
+                                        <div class="col">
+                                            <button type="submit" class="btn btn-primary">Avançar</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-
-                        <hr class="mb-3">
-
-                        <div class="form-group col-md-4 mb-2">
-                            <div class="mb-2" th:if="${erro != null}" th:text="${erro}" style="color: red;"></div>
-                            <button type="submit" class="btn btn-primary">Consultar</button>
-                        </div>
-                    </form>
+                    </div>
 
                 </div>
             </div>
@@ -110,26 +121,6 @@
     <!-- Page level custom scripts -->
     <script src="/admin/js/demo/chart-area-demo.js"></script>
     <script src="/admin/js/demo/chart-pie-demo.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $("#dia").blur(function () {
-                $.ajax({
-                    url: "/api/ocupados",
-                    type: "GET",
-                    success: function (result) {
-                        console.log(result)
-                    },
-                    error: function (error) {
-                        console.log(`Error ${error}`)
-                    }
-                })
-                $("#dia").submit(function () {
-                    console.log("opa");
-                })
-            })
-        })  
-    </script>
 
 </body>
 

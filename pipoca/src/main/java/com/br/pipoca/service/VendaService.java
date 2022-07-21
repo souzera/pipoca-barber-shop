@@ -39,7 +39,6 @@ public class VendaService {
                 lista.add(v);
             }
         }
-
         return lista;
     }
 
