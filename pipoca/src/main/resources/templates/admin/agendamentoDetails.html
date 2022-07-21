@@ -67,12 +67,12 @@
                                     <span id="funcionario" th:text="${agendamento.horario.funcionario.nome}"></span>
                                 </div>
                             </div>
-                            
+
                             <div class="row mb-5">
                                 <div class="col">
                                     <label for="data">Data: </label>
                                     <span id="data" th:text="${agendamento.horario.date}"></span>
-                                    
+
                                     <label for="hora">Hora: </label>
                                     <span id="hora" th:text="${agendamento.horario.hora.valor}"></span>
                                 </div>
@@ -80,71 +80,59 @@
                                     <label for="servico">Serviço: </label>
                                     <span id="servico" th:text="${agendamento.servico.descricao}"></span>
                                 </div>
-                                
+
                                 <div class="col">
                                     <label for="valorServe">Valor: </label>
                                     <span id="valorServe" th:text="${agendamento.servico.valor}"></span>
                                 </div>
                             </div>
-                            
+
 
                             <div class="row mb-5">
                                 <div class="col"></div>
                                 <div class="col"></div>
                                 <div class="col">
-                                    <div class="btn-group row" role="group" id="botoes" >
+                                    <div class="btn-group row" role="group" id="botoes">
                                         <div class="mb-2">
                                             <form action="/agenda/deletar" method="post">
                                                 <input type="text" name="agenda_id" th:value="${agendamento.id}" hidden>
                                                 <button type="submit" class="btn btn-danger">Excluir</button>
                                             </form>
                                         </div>
-                                        
+
                                         <div class="mr-2 ml-2 mb-2">
-                                            <form action="/agenda/check" method="post">
-                                                <input type="text" name="agenda_id" th:value="${agendamento.id}" hidden>
-                                                <button type="submit" class="btn btn-success">Concluir</button>
-                                            </form>
+                                            <button type="submit" class="btn btn-success" data-toggle="modal"
+                                                data-target="#pagamentoModalCenter">Concluir</button>
                                         </div>
-                                        
+
                                         <div class="mb-2">
                                             <button type="submit" class="btn btn-primary">Alterar</button>
                                         </div>
                                     </div>
                                 </div>
-                                
-                            
+
+
                             </div>
                         </div>
 
 
-                        
-                    </div>
-                <!-- /.container-fluid -->
 
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Pipoca Barber Shop 2022</span>
                     </div>
+                    <!-- /.container-fluid -->
+
                 </div>
-            </footer>
-            <!-- End of Footer -->
+                <!-- End of Main Content -->
 
-        
+                <!-- Footer -->
+                <footer th:replace="~{admin/fragmentos :: footer}"></footer>
+                <!-- End of Footer -->
+
             </div>
-        <!-- End of Content Wrapper -->
+            <!-- End of Content Wrapper -->
 
         </div>
         <!-- End of Page Wrapper -->
 
-        <!-- Footer -->
-        <footer th:replace="~{admin/fragmentos :: footer}"></footer>
-        <!-- End of Footer -->
     </div>
 
     <!-- Scroll to Top Button-->
@@ -152,11 +140,61 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
+
+    <!-- Pagamento Modal -->
+    <div class="modal fade" id="pagamentoModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="pagamentoModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pagamentoModalLongTitle">Selecione a forma de Pagamento</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col">
+                            <form action="/agenda/check" method="post">
+                                <input type="text" name="agenda_id" th:value="${agendamento.id}" hidden>
+                                <h6>Dinheiro</h6>
+                                <button class="btn btn-lg btn-primary" type="submit">
+                                    <input type="text" name="pagamento" value="DINHEIRO" hidden>
+                                    <i class="fa fa-money" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col">
+                            <form action="/agenda/check" method="post">
+                                <input type="text" name="agenda_id" th:value="${agendamento.id}" hidden>
+                                <h6>Cartão</h6>
+                                <button class="btn btn-lg btn-primary" type="submit">
+                                    <input type="text" name="pagamento" value="CARTAO" hidden>
+                                    <i class="fa fa-credit-card" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col">
+                            <form action="/agenda/check" method="post">
+                                <input type="text" name="agenda_id" th:value="${agendamento.id}" hidden>
+                                <h6>Pix</h6>
+                                <button class="btn btn-lg btn-primary" type="submit">
+                                    <input type="text" name="pagamento" value="PIX" hidden>
+                                    <i class="fa-brands fa-pix"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Logout Modal-->
     <div th:replace="~{admin/fragmentos :: logout}"></div>
     </div>
 
-    
 
     <!-- Bootstrap core JavaScript-->
     <script src="/admin/vendor/jquery/jquery.min.js"></script>
@@ -170,6 +208,9 @@
     <!-- Page level custom scripts -->
     <script src="/admin/js/demo/chart-area-demo.js"></script>
     <script src="/admin/js/demo/chart-pie-demo.js"></script>
+
+    <!--FA ICONS-->
+    <script src="/js/be2a1fbfc9.js" crossorigin="anonymous"></script>
 
     <!-- Gerar PDF -->
 

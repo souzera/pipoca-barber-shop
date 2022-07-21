@@ -1,11 +1,10 @@
 package com.br.pipoca.controller;
 
 import com.br.pipoca.dto.ClienteDTO;
-import com.br.pipoca.entity.Atendimento;
-import com.br.pipoca.entity.Cliente;
-import com.br.pipoca.entity.Funcionario;
-import com.br.pipoca.entity.Horario;
+import com.br.pipoca.entity.*;
 import com.br.pipoca.service.*;
+import com.br.pipoca.util.DateConverter;
+import com.br.pipoca.util.Pagamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.sql.Date;
 
 @Controller
 public class DetalhesController {
@@ -27,6 +27,8 @@ public class DetalhesController {
     UsuarioService usuarioService;
     @Autowired
     FuncionarioService funcionarioService;
+    @Autowired
+    VendaService vendaService;
     //=======================================================================================================
 
     //AGENDAMENTOS
@@ -49,9 +51,15 @@ public class DetalhesController {
     }
     @PostMapping
     @RequestMapping(value = "/agenda/check")
-    public String concluirAgenda(long agenda_id){
+    public String concluirAgenda(long agenda_id, Pagamento pagamento){
         Horario h = atendimentoService.buscarPorId(agenda_id).getHorario();
         horarioService.alterarStatus(h, 0);
+        Venda venda = new Venda();
+        venda.setAtendimento(atendimentoService.buscarPorId(agenda_id));
+        venda.setValor(venda.getAtendimento().getServico().getValor());
+        venda.setPagamento(pagamento);
+        venda.setDate(DateConverter.dateConverter(new java.util.Date()));
+        vendaService.save(venda);
         return "redirect:/agendamentos";
     }
 
