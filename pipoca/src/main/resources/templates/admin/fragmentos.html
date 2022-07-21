@@ -126,7 +126,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="/vendas">Consultar Vendas</a>
                     <a class="collapse-item" href="#">Buscar Venda</a>
-                    <a class="collapse-item" href="#">Realizar Venda</a>
+                    <a class="collapse-item" href="/registro/venda">Realizar Venda</a>
                     <a class="collapse-item" href="#">Cancelar Venda</a>
                 </div>
             </div>
@@ -156,19 +156,10 @@
         <hr class="sidebar-divider">
 
         <!-- Heading -->
-        <div class="sidebar-heading">
+        <div th:if="${admPass}" class="sidebar-heading">
             Utilidades
         </div>
 
-        <!--
-            ============
-            ============
-            ============
-            ESCONDA ESSA
-            ============
-            ============
-            ============
-        -->
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item" hidden>
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -191,7 +182,7 @@
         </li>
 
         <!-- Nav Item - Charts -->
-        <li class="nav-item">
+        <li th:if="${admPass}" class="nav-item">
             <a class="nav-link" href="charts.html">
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Gráficos</span></a>

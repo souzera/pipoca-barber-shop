@@ -40,6 +40,7 @@ public class ListasController {
         System.out.println(clienteService.getAniversario(lista.get(0)));
         modelAndView.addObject("lista",lista);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
         return modelAndView;
     }
 
@@ -54,6 +55,7 @@ public class ListasController {
         System.out.println(lista.get(0).getNome());
         modelAndView.addObject("lista",lista);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
         return modelAndView;
     }
 
@@ -66,6 +68,7 @@ public class ListasController {
         System.out.println(lista);
         modelAndView.addObject("lista",lista);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
         return modelAndView;
     }
 
@@ -78,6 +81,7 @@ public class ListasController {
         System.out.println(lista);
         modelAndView.addObject("lista",lista);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
         return modelAndView;
     }
 
@@ -94,15 +98,18 @@ public class ListasController {
         System.out.println(agendamentos);
         modelAndView.addObject("lista",agendamentos);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
         return modelAndView;
     }
 
     @GetMapping
-    @RequestMapping(value = "/agendamento/func_{funcionario_id}")
+    @RequestMapping(value = "/agendamento/funcionario_id={funcionario_id}")
     public ModelAndView buscaFuncionario(@PathVariable("funcionario_id") long funcionario_id, HttpServletRequest request) throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
-        List<Atendimento> agendamentos = atendimentoService.agendamentosFuncionario(funcionarioService.findById(funcionario_id));
+        Funcionario f = funcionarioService.findById(funcionario_id);
+        List<Atendimento> agendamentos = atendimentoService.agendamentosFuncionario(f);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
         System.out.println(agendamentos);
         modelAndView.addObject("lista",agendamentos);
 
@@ -110,24 +117,27 @@ public class ListasController {
     }
 
     @GetMapping
-    @RequestMapping(value = "/agendamento/date_{data}")
+    @RequestMapping(value = "/agendamento/date={data}")
     public ModelAndView buscaData(@PathVariable("data")Date date, HttpServletRequest request) throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
-        List<Atendimento> agendamentos = atendimentoService.agendamentosDate(date);
+        Date d = date;
+        List<Atendimento> agendamentos = atendimentoService.agendamentosDate(d);
         System.out.println(agendamentos);
         modelAndView.addObject("lista",agendamentos);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
         return modelAndView;
     }
 
     @GetMapping
-    @RequestMapping(value = "/agendamento/date_{data}&func_{funcionario_id}")
+    @RequestMapping(value = "/agendamento/{data}/{funcionario_id}")
     public ModelAndView buscaDataEFunc(@PathVariable("data")Date date, @PathVariable("funcionario_id") long funcionario_id, HttpServletRequest request) throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
         List<Atendimento> agendamentos = atendimentoService.agendamentosDateEFuncionario(funcionarioService.findById(funcionario_id), date);
         System.out.println(agendamentos);
         modelAndView.addObject("lista",agendamentos);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
         return modelAndView;
     }
 
@@ -139,6 +149,7 @@ public class ListasController {
         System.out.println(agendamentos);
         modelAndView.addObject("lista",agendamentos);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
         return modelAndView;
     }
 
@@ -153,6 +164,7 @@ public class ListasController {
         List<Venda> vendas = vendaService.vendas();
         modelAndView.addObject("lista", vendas);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
         return modelAndView;
     }
 
@@ -163,6 +175,7 @@ public class ListasController {
         List<Venda> vendas = vendaService.vendasMensais(mes,ano-1900);
         modelAndView.addObject("lista", vendas);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
         return modelAndView;
     }
 
@@ -173,6 +186,7 @@ public class ListasController {
         List<Venda> vendas = vendaService.vendasAnuais(ano-1900);
         modelAndView.addObject("lista", vendas);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
         return modelAndView;
     }
 
@@ -183,6 +197,7 @@ public class ListasController {
         List<Venda> vendas = vendaService.vendaServicos();
         modelAndView.addObject("lista", vendas);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
         return modelAndView;
     }
 
@@ -193,6 +208,7 @@ public class ListasController {
         List<Venda> vendas = vendaService.vendaProduto();
         modelAndView.addObject("lista", vendas);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
         return modelAndView;
     }
 }

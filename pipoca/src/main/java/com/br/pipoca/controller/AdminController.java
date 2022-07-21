@@ -1,7 +1,11 @@
 package com.br.pipoca.controller;
 
+import com.br.pipoca.entity.Usuario;
+import com.br.pipoca.service.AtendimentoService;
 import com.br.pipoca.service.CookieService;
 import com.br.pipoca.service.VendaService;
+import com.br.pipoca.util.DateConverter;
+import com.br.pipoca.util.TipoUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +28,8 @@ public class AdminController {
 
     @Autowired
     private VendaService vendaService;
+    @Autowired
+    AtendimentoService atendimentoService;
 
     @GetMapping
     @RequestMapping(value = "/dashboard/{chave}")
@@ -38,14 +44,18 @@ public class AdminController {
                 modelAndView.setViewName("admin/user-unauthorized.html");
                 return modelAndView;
             }
-            modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+            Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+            modelAndView.addObject("usuario", u);
+            usuarioService.addPass(u, modelAndView);
             System.out.println(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")).getClass().getName().toLowerCase());
             //===================================GRÁFICOS=========================================
 
-            int ano = new java.util.Date().getYear();
-            int mes = new java.util.Date().getMonth();
-            modelAndView.addObject("vendaMensal", vendaService.receitaMensal(mes,ano));
-            modelAndView.addObject("vendaAnual", vendaService.receitaAnual(ano));
+            java.util.Date hoje = new java.util.Date();
+            modelAndView.addObject("vendaMensal", vendaService.receitaMensal(hoje.getMonth(),hoje.getYear()));
+            modelAndView.addObject("vendaAnual", vendaService.receitaAnual(hoje.getYear()));
+            modelAndView.addObject("progresso", atendimentoService.progressoDiario(DateConverter.dateConverter(hoje)));
+            //trocar quando implementar a fila
+            modelAndView.addObject("fila", atendimentoService.ociosos().size());
             //====================================================================================
             return modelAndView;
         }
@@ -63,5 +73,4 @@ public class AdminController {
         }
         return "redirect:/login";
     }
-
 }

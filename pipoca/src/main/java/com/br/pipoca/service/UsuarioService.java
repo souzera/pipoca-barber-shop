@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.List;
@@ -81,5 +83,25 @@ public class UsuarioService {
 
     public void criptarSenha(Usuario usuario) {
         usuario.setSenha(encoder.encode(usuario.getSenha()));
+    }
+
+    public void addPass(Usuario usuario, ModelAndView modelAndView){
+        switch (usuario.getTipoUsuario()){
+            case ADM:
+                modelAndView.addObject("admPass", true);
+                break;
+            case DEV:
+                modelAndView.addObject("admPass", true);
+                break;
+            case BARBEIRO:
+                modelAndView.addObject("funPass", true);
+                break;
+            case FUNCIONARIO:
+                modelAndView.addObject("funPass", true);
+                break;
+            case SUPER:
+                modelAndView.addObject("admPass", true);
+                break;
+        }
     }
 }

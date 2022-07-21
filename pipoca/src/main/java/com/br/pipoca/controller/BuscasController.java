@@ -29,21 +29,21 @@ public class BuscasController {
     @GetMapping
     @RequestMapping(value = "/busca/agendamento")
     public ModelAndView buscaGeral(HttpServletRequest request) throws IOException {
-        ModelAndView modelAndView = new ModelAndView("admin/buscaAgenda.html");
+        ModelAndView modelAndView = new ModelAndView("admin/buscaAgenda");
         modelAndView.addObject("funcionarios", funcionarioService.findByCargo(Cargo.BARBEIRO));
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
         return modelAndView;
     }
 
     @PostMapping
-    @RequestMapping(value = "/busca-redirect/agendamento")
+    @RequestMapping(value = "/buscando/agendamento")
     public String agendamentosRedirect(Date date, Long funcionario_id, Model model){
         if (date != null && funcionario_id != null){
-            return "redirect:/agendamento/date_"+ date.toString() + "&func_"+ funcionario_id;
+            return "redirect:/agendamento/"+ date.toString() + "/"+ funcionario_id;
         } else if (!(date!=null)) {
-            return "redirect:/agendamento/func_"+ funcionario_id;
+            return "redirect:/agendamento/funcionario_id="+funcionario_id;
         } else if (!(funcionario_id !=null)){
-            return "redirect:/agendamento/date_"+ date;
+            return "redirect:/agendamento/date="+ date;
         } else if (!(date!=null) && !(funcionario_id !=null)){
             model.addAttribute("erro", "Preencha ao menos 1 campo.");
             return "admin/buscaAgenda";
