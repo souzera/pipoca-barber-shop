@@ -97,7 +97,7 @@ public class DetalhesController {
     public ModelAndView funcionarioDetails(@RequestParam(value = "id") long id, HttpServletRequest request) throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/funcionarioDetails.html");
         modelAndView.addObject("funcionario", funcionarioService.findById(id));
-        modelAndView.addObject("agendamentos", atendimentoService.agendamentosFuncionario(funcionarioService.findById(id)));
+        modelAndView.addObject("agendamentos", atendimentoService.agendamentosFuncionario(id));
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieName(request, "login")));
         return modelAndView;
     }
@@ -106,7 +106,7 @@ public class DetalhesController {
     @RequestMapping(value = "/funcionario/deletar")
     public String deletarFuncionario(long id) throws IOException {
         Funcionario f = funcionarioService.findById(id);
-        for (Atendimento a: atendimentoService.agendamentosFuncionario(f)) {
+        for (Atendimento a: atendimentoService.agendamentosFuncionario(id)) {
             horarioService.deletarHorario(a.getHorario());
             atendimentoService.deleteById(a.getId());
         }

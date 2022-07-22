@@ -53,15 +53,16 @@
                     <!-- Content Row -->
                     <div class="row">
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
+                        <!-- Ganhos Mensais -->
+                        <div th:if="${admPass}" class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Ganhos (Mensais)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">R$ <span th:value="${vendaMensal}" th:text="${vendaMensal}"></span></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">R$ <span
+                                                    th:value="${vendaMensal}" th:text="${vendaMensal}"></span></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -71,15 +72,16 @@
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
+                        <!-- Ganhos Anuais -->
+                        <div th:if="${admPass}" class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Ganhos (Anuais)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">R$ <span th:value="${vendaAnual}" th:text="${vendaAnual}"></span></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">R$ <span
+                                                    th:value="${vendaAnual}" th:text="${vendaAnual}"></span></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -89,17 +91,57 @@
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        <!-- Horario Restantes (Dia Atual) -->
+                        <div th:if="${funPass}" class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Em espera: <span th:text="${hojeStr}"></span></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span
+                                                    th:value="${ociosos}" th:text="${ociosos}"></span></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-user fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Horario Concluidos (Dia Atual) -->
+                        <div th:if="${funPass}" class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Concluídos: <span th:text="${hojeStr}"></span></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span
+                                                    th:value="${concluidos}" th:text="${concluidos}"></span></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-check fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Progresso Diario -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tarefas
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tarefas <span th:text="${hojeStr}"></span>
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><span th:text="${progresso}"></span>%</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><span
+                                                            th:text="${progresso}"></span>%</div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
@@ -118,7 +160,7 @@
                             </div>
                         </div>
 
-                        <!-- Pending Requests Card Example -->
+                        <!-- Fila de Espera -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <a href="#">
                                 <div class="card border-left-warning shadow h-100 py-2">
@@ -143,7 +185,7 @@
 
                     <!-- Content Row -->
 
-                    <div class="row">
+                    <div th:if="${admPass}" class="row">
 
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
@@ -216,18 +258,9 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
-
-                    <!--
-                        ============
-                        ============
-                        ============
-                        ESCONDA ESSA
-                        ============
-                        ============
-                        ============
-                    -->
                     <!-- Content Row -->
                     <div class="row" hidden>
 
@@ -378,6 +411,12 @@
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-ml-10">
+                            <table th:replace="~{admin/listaAgendamento :: agenda}"></table>
                         </div>
                     </div>
 

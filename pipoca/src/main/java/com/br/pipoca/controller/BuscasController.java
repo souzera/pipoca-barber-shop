@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 
@@ -29,15 +30,16 @@ public class BuscasController {
     @GetMapping
     @RequestMapping(value = "/busca/agendamento")
     public ModelAndView buscaGeral(HttpServletRequest request) throws IOException {
-        ModelAndView modelAndView = new ModelAndView("admin/buscaAgenda");
+        ModelAndView modelAndView = new ModelAndView("admin/buscaAgenda.html");
         modelAndView.addObject("funcionarios", funcionarioService.findByCargo(Cargo.BARBEIRO));
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request, "login")), modelAndView);
         return modelAndView;
     }
 
-    @PostMapping
+    /*@PostMapping
     @RequestMapping(value = "/buscando/agendamento")
-    public String agendamentosRedirect(Date date, Long funcionario_id, Model model){
+    public String agendamentosRedirect(Date date, Long funcionario_id, Model model, HttpServletResponse response) throws IOException {
         if (date != null && funcionario_id != null){
             return "redirect:/agendamento/"+ date.toString() + "/"+ funcionario_id;
         } else if (!(date!=null)) {
@@ -46,8 +48,8 @@ public class BuscasController {
             return "redirect:/agendamento/date="+ date;
         } else if (!(date!=null) && !(funcionario_id !=null)){
             model.addAttribute("erro", "Preencha ao menos 1 campo.");
-            return "admin/buscaAgenda";
+            response.sendRedirect("/busca/agendamento");
         }
         return "redirect:/agendamentos";
-    }
+    }*/
 }

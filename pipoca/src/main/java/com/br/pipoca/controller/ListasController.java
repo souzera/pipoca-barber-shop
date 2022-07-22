@@ -107,7 +107,7 @@ public class ListasController {
     public ModelAndView buscaFuncionario(@PathVariable("funcionario_id") long funcionario_id, HttpServletRequest request) throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
         Funcionario f = funcionarioService.findById(funcionario_id);
-        List<Atendimento> agendamentos = atendimentoService.agendamentosFuncionario(f);
+        List<Atendimento> agendamentos = atendimentoService.agendamentosFuncionario(funcionario_id);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
         usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
         System.out.println(agendamentos);

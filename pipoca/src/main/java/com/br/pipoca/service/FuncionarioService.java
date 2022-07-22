@@ -34,6 +34,16 @@ public class FuncionarioService {
         return funcionarioRepository.findById(id);
     }
 
+    public Funcionario findByLogin(String login){
+        Iterable<Funcionario> funcionarioIterable = this.funcionarioRepository.findAll();
+        for (Funcionario f: funcionarioIterable) {
+            if (f.getUsuario().getLogin() == login){
+                return f;
+            }
+        }
+        return null;
+    }
+
     public List<Funcionario> findByCargo(Cargo cargo){return funcionarioRepository.findByCargo(cargo.getValor());}
 
     public void deleteById(long id) {

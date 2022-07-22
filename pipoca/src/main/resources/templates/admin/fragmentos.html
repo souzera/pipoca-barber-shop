@@ -65,7 +65,7 @@
             </div>
         </li>
 
-        <li class="nav-item">
+        <li th:if="${admPass}" class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFuncionarios"
                aria-expanded="true" aria-controls="collapseFuncionarios">
                 <i class="fas fa-fw fa-clipboard-list"></i>
@@ -196,7 +196,7 @@
         </li>
 
         <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+        <hr th:if="${admPass}" class="sidebar-divider d-none d-md-block">
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">

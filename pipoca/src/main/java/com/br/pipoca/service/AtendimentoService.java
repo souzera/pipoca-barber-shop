@@ -19,6 +19,8 @@ public class AtendimentoService {
 
     @Autowired
     private AtendimentoRepository atendimentoRepository;
+    @Autowired
+    private FuncionarioService funcionarioService;
 
     public Atendimento agendar(Atendimento atendimento){
         return atendimentoRepository.save(atendimento);
@@ -36,12 +38,13 @@ public class AtendimentoService {
         atendimentoRepository.deleteById(id);
     }
 
-    public List<Atendimento> agendamentosFuncionario(Funcionario funcionario) throws IOException {
+    public List<Atendimento> agendamentosFuncionario(long funcionario_id) throws IOException {
+        Funcionario f = funcionarioService.findById(funcionario_id);
         Iterable<Atendimento> atendimentoIterable = this.atendimentoRepository.findAll();
         List<Atendimento> lista = new ArrayList<>();
         for (Atendimento a:
              atendimentoIterable) {
-            if (a.getHorario().getFuncionario() == funcionario){
+            if (a.getHorario().getFuncionario() == f){
                 lista.add(a);
             }
         }
@@ -103,6 +106,30 @@ public class AtendimentoService {
         return lista;
     }
 
+    public List<Atendimento> ociososFuncionario(long funcionario_id){
+        Iterable<Atendimento> atendimentoIterable = this.atendimentoRepository.findAll();
+        List<Atendimento> lista = new ArrayList<>();
+        for (Atendimento a: atendimentoIterable) {
+            if (a.getHorario().getFuncionario().getId() == funcionario_id &&
+                    a.getHorario().getStatusHorario() == StatusHorario.OCIOSO){
+                lista.add(a);
+            }
+        }
+        return lista;
+    }
+
+    public List<Atendimento> concluidosFuncionario(long funcionario_id){
+        Iterable<Atendimento> atendimentoIterable = this.atendimentoRepository.findAll();
+        List<Atendimento> lista = new ArrayList<>();
+        for (Atendimento a: atendimentoIterable) {
+            if (a.getHorario().getFuncionario().getId() == funcionario_id &&
+                    a.getHorario().getStatusHorario() == StatusHorario.CONCLUIDO){
+                lista.add(a);
+            }
+        }
+        return lista;
+    }
+
     public List<Atendimento> listarPorClienteEStatus(long cliente_id, StatusHorario status){
         Iterable<Atendimento> atendimentoIterable = this.atendimentoRepository.findByCliente(cliente_id);
         List<Atendimento> lista = new ArrayList<>();
@@ -131,6 +158,13 @@ public class AtendimentoService {
             }
         }
         float progresso = (ociososDate.size()*100)/atendimentos.size();
+        return 100-progresso;
+    }
+
+    public float progressoFuncionario(long funcionario_id) throws IOException {
+        List<Atendimento> atendimentos = agendamentosFuncionario(funcionario_id);
+        List<Atendimento> ociososFuncionario = ociososFuncionario(funcionario_id);
+        float progresso = (ociososFuncionario.size()*100)/atendimentos.size();
         return 100-progresso;
     }
 
