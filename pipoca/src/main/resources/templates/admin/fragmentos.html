@@ -40,7 +40,7 @@
             <div id="collapseAgenda" class="collapse" aria-labelledby="headingAgenda" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="/agendamentos">Agendamentos</a>
-                    <a class="collapse-item" href="/busca/agendamento">Buscar Agendamento</a>
+                    <a th:if="${admPass}" class="collapse-item" href="/busca/agendamento" hidden>Buscar Agendamento</a>
                     <a class="collapse-item" href="/agendar/step1">Agendar Horário</a>
                     <a class="collapse-item" href="/agendamentos">Cancelar Agendamento</a>
                     <a class="collapse-item" href="/agendamentos" hidden>Alterar Agendamento</a>
@@ -57,10 +57,10 @@
             <div id="collapseCliente" class="collapse" aria-labelledby="headingCliente" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="/clientes">Listar Clientes</a>
-                    <a class="collapse-item" href="/api/cliente/">Buscar Cliente</a>
+                    <a class="collapse-item" href="/api/cliente/" hidden>Buscar Cliente</a>
                     <a class="collapse-item" href="/cadastrar/cliente">Cadastrar Cliente</a>
-                    <a class="collapse-item" href="cards.html">Excluir Cliente</a>
-                    <a class="collapse-item" href="cards.html">Alterar Cliente</a>
+                    <a class="collapse-item" href="/clientes">Excluir Cliente</a>
+                    <a class="collapse-item" href="/clientes">Alterar Cliente</a>
                 </div>
             </div>
         </li>
@@ -108,7 +108,7 @@
             <div id="collapseServico" class="collapse" aria-labelledby="headingServico" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="/servicos">Listar Serviço</a>
-                    <a class="collapse-item" href="/api/servico/">Buscar Serviço</a>
+                    <a class="collapse-item" href="/api/servico/" hidden>Buscar Serviço</a>
                     <a class="collapse-item" href="/registro/servico">Cadastrar Serviço</a>
                     <a class="collapse-item" href="/servicos">Excluir Serviço</a>
                     <a class="collapse-item" href="/servicos">Alterar Serviço</a>

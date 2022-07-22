@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -37,7 +39,6 @@ public class ListasController {
         ModelAndView modelAndView = new ModelAndView("admin/listaCliente.html");
 
         List<Cliente> lista = clienteService.clientes();
-        System.out.println(clienteService.getAniversario(lista.get(0)));
         modelAndView.addObject("lista",lista);
         modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
         usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
@@ -94,11 +95,20 @@ public class ListasController {
     @RequestMapping(value = "/agendamentos")
     public ModelAndView listaHorarios(HttpServletRequest request) throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
-        List<Atendimento> agendamentos = atendimentoService.ociosos();
-        System.out.println(agendamentos);
-        modelAndView.addObject("lista",agendamentos);
-        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
         usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
+        switch (u.getTipoUsuario()){
+            case ADM:
+            case DEV:
+            case SUPER:
+            case FUNCIONARIO:
+                modelAndView.addObject("lista",atendimentoService.ociosos());
+                break;
+            case BARBEIRO:
+                modelAndView.addObject("lista",atendimentoService.ociososFuncionario(funcionarioService.findByLogin(u.getLogin()).getId()));
+                break;
+        }
         return modelAndView;
     }
 
@@ -121,11 +131,20 @@ public class ListasController {
     public ModelAndView buscaData(@PathVariable("data")Date date, HttpServletRequest request) throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
         Date d = date;
-        List<Atendimento> agendamentos = atendimentoService.agendamentosDate(d);
-        System.out.println(agendamentos);
-        modelAndView.addObject("lista",agendamentos);
-        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
         usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
+        switch (u.getTipoUsuario()){
+            case ADM:
+            case DEV:
+            case SUPER:
+            case FUNCIONARIO:
+                modelAndView.addObject("lista",atendimentoService.ociosos());
+                break;
+            case BARBEIRO:
+                modelAndView.addObject("lista",atendimentoService.ociososFuncionario(funcionarioService.findByLogin(u.getLogin()).getId()));
+                break;
+        }
         return modelAndView;
     }
 
@@ -133,11 +152,20 @@ public class ListasController {
     @RequestMapping(value = "/agendamento/{data}/{funcionario_id}")
     public ModelAndView buscaDataEFunc(@PathVariable("data")Date date, @PathVariable("funcionario_id") long funcionario_id, HttpServletRequest request) throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
-        List<Atendimento> agendamentos = atendimentoService.agendamentosDateEFuncionario(funcionarioService.findById(funcionario_id), date);
-        System.out.println(agendamentos);
-        modelAndView.addObject("lista",agendamentos);
-        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
         usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
+        switch (u.getTipoUsuario()){
+            case ADM:
+            case DEV:
+            case SUPER:
+            case FUNCIONARIO:
+                modelAndView.addObject("lista",atendimentoService.agendamentosDateEFuncionario(funcionarioService.findById(funcionario_id),date));
+                break;
+            case BARBEIRO:
+                modelAndView.addObject("lista",atendimentoService.agendamentosDateEFuncionario(funcionarioService.findByLogin(u.getLogin()),date));
+                break;
+        }
         return modelAndView;
     }
 
@@ -145,11 +173,20 @@ public class ListasController {
     @RequestMapping(value = "/agendamentos/finalizados")
     public ModelAndView agendamentosFinalizados(HttpServletRequest request) throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
-        List<Atendimento> agendamentos = atendimentoService.finalizados();
-        System.out.println(agendamentos);
-        modelAndView.addObject("lista",agendamentos);
-        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
         usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
+        switch (u.getTipoUsuario()){
+            case ADM:
+            case DEV:
+            case SUPER:
+            case FUNCIONARIO:
+                modelAndView.addObject("lista",atendimentoService.agendamentos());
+                break;
+            case BARBEIRO:
+                modelAndView.addObject("lista",atendimentoService.agendamentosFuncionario(funcionarioService.findByLogin(u.getLogin()).getId()));
+                break;
+        }
         return modelAndView;
     }
 

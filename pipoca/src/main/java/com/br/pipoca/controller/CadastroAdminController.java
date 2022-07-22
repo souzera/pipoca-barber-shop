@@ -129,8 +129,21 @@ public class CadastroAdminController {
     @RequestMapping(value = "/agendar/step1")
     public ModelAndView buscarAgenda(HttpServletRequest request) throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/registroAgendamentoStep1.html");
-        modelAndView.addObject("funcionarios", funcionarioService.findByCargo(Cargo.BARBEIRO));
-        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
+        switch (u.getTipoUsuario()){
+            case ADM:
+            case DEV:
+            case SUPER:
+            case FUNCIONARIO:
+                modelAndView.addObject("funcionarios", funcionarioService.findByCargo(Cargo.BARBEIRO));
+                break;
+            case BARBEIRO:
+                modelAndView.addObject("funcionario", funcionarioService.findByLogin(u.getLogin()));
+                break;
+        }
         return modelAndView;
     }
 

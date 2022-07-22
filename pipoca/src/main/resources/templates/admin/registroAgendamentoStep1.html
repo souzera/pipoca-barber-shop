@@ -57,7 +57,19 @@
                                 <input type="date" name="date" id="date" required>
                             </div>
 
-                            <div class="col-md-6 form-select">
+                            <div th:if="${barberPass}" class="col-md-6 form-select" hidden>
+                                <input type="text" name="funcionario_id" th:value="${funcionario.id}">
+                            </div>
+
+                            <div th:if="${admPass}" class="col-md-6 form-select">
+                                <label class="form-label" for="funcionario">Barbeiro</label>
+                                <select class="form-select" required name="funcionario_id" id="funcionario">
+                                    <option selected th:each="funcionario:${funcionarios}" th:value="${funcionario.id}"
+                                        th:text="${funcionario.nome}"></option>
+                                </select>
+                            </div>
+
+                            <div th:if="${funPass}" class="col-md-6 form-select">
                                 <label class="form-label" for="funcionario">Barbeiro</label>
                                 <select class="form-select" required name="funcionario_id" id="funcionario">
                                     <option selected th:each="funcionario:${funcionarios}" th:value="${funcionario.id}"

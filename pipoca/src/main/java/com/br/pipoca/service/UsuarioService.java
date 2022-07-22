@@ -94,7 +94,7 @@ public class UsuarioService {
                 modelAndView.addObject("admPass", true);
                 break;
             case BARBEIRO:
-                modelAndView.addObject("funPass", true);
+                modelAndView.addObject("barberPass", true);
                 break;
             case FUNCIONARIO:
                 modelAndView.addObject("funPass", true);
