@@ -2,6 +2,7 @@ package com.br.pipoca.controller;
 
 import com.br.pipoca.entity.*;
 import com.br.pipoca.service.*;
+import com.br.pipoca.util.StatusHorario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -181,10 +182,31 @@ public class ListasController {
             case DEV:
             case SUPER:
             case FUNCIONARIO:
-                modelAndView.addObject("lista",atendimentoService.agendamentos());
+                modelAndView.addObject("lista",atendimentoService.finalizados());
                 break;
             case BARBEIRO:
-                modelAndView.addObject("lista",atendimentoService.agendamentosFuncionario(funcionarioService.findByLogin(u.getLogin()).getId()));
+                modelAndView.addObject("lista",atendimentoService.listarPorStatusEFuncionario(funcionarioService.findByLogin(u.getLogin()).getId(), StatusHorario.CONCLUIDO));
+                break;
+        }
+        return modelAndView;
+    }
+
+    @GetMapping
+    @RequestMapping(value = "/agendamentos/atrasados")
+    public ModelAndView agendamentosAtrasados(HttpServletRequest request) throws IOException {
+        ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
+        switch (u.getTipoUsuario()){
+            case ADM:
+            case DEV:
+            case SUPER:
+            case FUNCIONARIO:
+                modelAndView.addObject("lista",atendimentoService.listarPorStatus(StatusHorario.ATRASADO));
+                break;
+            case BARBEIRO:
+                modelAndView.addObject("lista",atendimentoService.listarPorStatusEFuncionario(funcionarioService.findByLogin(u.getLogin()).getId(), StatusHorario.ATRASADO));
                 break;
         }
         return modelAndView;

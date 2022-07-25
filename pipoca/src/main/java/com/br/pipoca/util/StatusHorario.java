@@ -4,7 +4,7 @@ public enum StatusHorario {
 
     CONCLUIDO(0),
     OCIOSO(1),
-    FECHADO(2),
+    ATRASADO(2),
     CANCELADO(3),
     DISPONIVEL(4);
 

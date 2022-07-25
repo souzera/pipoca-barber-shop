@@ -66,7 +66,7 @@ public class HorarioService {
 
     // Alterar Status
     public Horario fecharHorario(Horario horario){
-        horario.setStatusHorario(StatusHorario.FECHADO);
+        horario.setStatusHorario(StatusHorario.ATRASADO);
         return saveHorario(horario);
     }
 
@@ -94,7 +94,7 @@ public class HorarioService {
                 horario.setStatusHorario(StatusHorario.OCIOSO);
                 return saveHorario(horario);
             case 2:
-                horario.setStatusHorario(StatusHorario.FECHADO);
+                horario.setStatusHorario(StatusHorario.ATRASADO);
                 return saveHorario(horario);
             case 3:
                 horario.setStatusHorario(StatusHorario.CANCELADO);

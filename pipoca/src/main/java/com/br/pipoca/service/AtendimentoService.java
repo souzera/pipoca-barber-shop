@@ -87,8 +87,7 @@ public class AtendimentoService {
         List<Atendimento> lista = new ArrayList<>();
         for (Atendimento a: atendimentoIterable) {
             if (a.getHorario().getStatusHorario() == StatusHorario.CANCELADO
-            || a.getHorario().getStatusHorario() == StatusHorario.CONCLUIDO
-            || a.getHorario().getStatusHorario() == StatusHorario.FECHADO){
+            || a.getHorario().getStatusHorario() == StatusHorario.CONCLUIDO){
                 lista.add(a);
             }
         }
@@ -130,6 +129,28 @@ public class AtendimentoService {
         return lista;
     }
 
+    public List<Atendimento> listarPorStatus(StatusHorario statusHorario){
+        Iterable<Atendimento> atendimentoIterable = this.atendimentoRepository.findAll();
+        List<Atendimento> lista = new ArrayList<>();
+        for (Atendimento a: atendimentoIterable) {
+            if (a.getHorario().getStatusHorario() == statusHorario){
+                lista.add(a);
+            }
+        }
+        return lista;
+    }
+
+    public List<Atendimento> listarPorStatusEFuncionario(long funcionario_id, StatusHorario statusHorario) throws IOException {
+        Iterable<Atendimento> atendimentoIterable = agendamentosFuncionario(funcionario_id);
+        List<Atendimento> lista = new ArrayList<>();
+        for (Atendimento a: atendimentoIterable) {
+            if (a.getHorario().getStatusHorario() == statusHorario){
+                lista.add(a);
+            }
+        }
+        return lista;
+    }
+
     public List<Atendimento> listarPorClienteEStatus(long cliente_id, StatusHorario status){
         Iterable<Atendimento> atendimentoIterable = this.atendimentoRepository.findByCliente(cliente_id);
         List<Atendimento> lista = new ArrayList<>();
@@ -157,6 +178,7 @@ public class AtendimentoService {
                 ociososDate.add(a);
             }
         }
+        if (ociososDate.size() == 0){return 100;}
         float progresso = (ociososDate.size()*100)/atendimentos.size();
         return 100-progresso;
     }

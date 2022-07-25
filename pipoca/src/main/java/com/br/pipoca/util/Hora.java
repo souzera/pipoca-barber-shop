@@ -1,6 +1,8 @@
 package com.br.pipoca.util;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public enum Hora {
 
@@ -44,5 +46,10 @@ public enum Hora {
         horaOf.setHours(matrix[ordinal][0]);
         horaOf.setMinutes(matrix[ordinal][1]);
         return horaOf.after(agora);
+    }
+
+    public static List<int[]> getMatrix() {
+        List<int[]> lista = Arrays.asList(matrix);
+        return lista;
     }
 }
