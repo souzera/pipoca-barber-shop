@@ -114,7 +114,7 @@ public class ListasController {
     }
 
     @GetMapping
-    @RequestMapping(value = "/agendamento/funcionario_id={funcionario_id}")
+    @RequestMapping(value = "/agendamento/funcionario/{funcionario_id}")
     public ModelAndView buscaFuncionario(@PathVariable("funcionario_id") long funcionario_id, HttpServletRequest request) throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
         Funcionario f = funcionarioService.findById(funcionario_id);
@@ -128,7 +128,7 @@ public class ListasController {
     }
 
     @GetMapping
-    @RequestMapping(value = "/agendamento/date={data}")
+    @RequestMapping(value = "/agendamento/date/{data}")
     public ModelAndView buscaData(@PathVariable("data")Date date, HttpServletRequest request) throws IOException {
         ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
         Date d = date;

@@ -12,7 +12,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
     dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
     s = '',
-    toFixedFix = function(n, prec) {
+    toFixedFix = function (n, prec) {
       var k = Math.pow(10, prec);
       return '' + Math.round(n * k) / k;
     };
@@ -28,19 +28,23 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
-function getGanhos(){
+function getReceitasMensais() {
   const ano = new Date().getFullYear();
-  console.log(ano);
-  const json = $.get("/api/vendas/mensais/" + ano, function(dados){
-    return dados;
-  })
-  return json;
+  var result = null;
+  var scriptUrl = "/api/vendas/mensais/" + ano;
+  $.ajax({
+    url: scriptUrl,
+    type: 'get',
+    dataType: 'json',
+    async: false,
+    success: function (data) {
+      result = data;
+    }
+  });
+  return result;
 }
 
-var ganhos = getGanhos();
-
-
-console.log(ganhos);
+array = getReceitasMensais();
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
@@ -51,17 +55,17 @@ var myLineChart = new Chart(ctx, {
     datasets: [{
       label: "Receita",
       lineTension: 0.3,
-      backgroundColor: "rgba(223, 78, 78, 0.05)",
-      borderColor: "rgba(204, 67, 23, 1)",
+      backgroundColor: "rgba(0, 0, 0, 0.05)",
+      borderColor: "rgba(0, 0, 0, 1)",
       pointRadius: 3,
-      pointBackgroundColor: "rgba(204, 67, 23, 1)",
-      pointBorderColor: "rgba(203, 31, 31, 1)",
+      pointBackgroundColor: "rgba(0, 0, 0, 1)",
+      pointBorderColor: "rgba(0, 0 , 0, 1)",
       pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(223, 78, 78, 1)",
-      pointHoverBorderColor: "rgba(223, 78, 78, 1)",
+      pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+      pointHoverBorderColor: "rgba(0, 0, 0, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: ganhos.get,
+      data: array.slice()
     }],
   },
   options: {
@@ -92,7 +96,7 @@ var myLineChart = new Chart(ctx, {
           maxTicksLimit: 5,
           padding: 10,
           // Include a dollar sign in the ticks
-          callback: function(value, index, values) {
+          callback: function (value, index, values) {
             return '$' + number_format(value);
           }
         },
@@ -123,7 +127,7 @@ var myLineChart = new Chart(ctx, {
       mode: 'index',
       caretPadding: 10,
       callbacks: {
-        label: function(tooltipItem, chart) {
+        label: function (tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
           return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
         }

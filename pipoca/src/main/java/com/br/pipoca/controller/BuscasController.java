@@ -37,19 +37,22 @@ public class BuscasController {
         return modelAndView;
     }
 
-    /*@PostMapping
-    @RequestMapping(value = "/buscando/agendamento")
-    public String agendamentosRedirect(Date date, Long funcionario_id, Model model, HttpServletResponse response) throws IOException {
-        if (date != null && funcionario_id != null){
-            return "redirect:/agendamento/"+ date.toString() + "/"+ funcionario_id;
-        } else if (!(date!=null)) {
-            return "redirect:/agendamento/funcionario_id="+funcionario_id;
-        } else if (!(funcionario_id !=null)){
-            return "redirect:/agendamento/date="+ date;
-        } else if (!(date!=null) && !(funcionario_id !=null)){
-            model.addAttribute("erro", "Preencha ao menos 1 campo.");
-            response.sendRedirect("/busca/agendamento");
-        }
-        return "redirect:/agendamentos";
-    }*/
+    @PostMapping
+    @RequestMapping(value = "/buscando/agendamento-data")
+    public void buscaAgendaData(Date date, HttpServletResponse response) throws IOException {
+        response.sendRedirect("/agendamento/date/"+ date);
+    }
+
+    @PostMapping
+    @RequestMapping(value = "/buscando/agendamento-funcionario")
+    public void buscaAgendaData(long funcionario_id, HttpServletResponse response) throws IOException {
+        response.sendRedirect("/agendamento/funcionario/"+ funcionario_id);
+    }
+
+    @PostMapping
+    @RequestMapping(value = "/buscando/agendamento-data-funcionario")
+    public void buscaAgendaData(long funcionario_id ,Date date, HttpServletResponse response) throws IOException {
+        response.sendRedirect("/agendamento/"+ date + "/" + funcionario_id);
+    }
+
 }
