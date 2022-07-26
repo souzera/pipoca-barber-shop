@@ -2,14 +2,32 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
+
+function getPagamentosCount() {
+  var result = null;
+  var scriptUrl = "/api/vendas/tipo-pagamentos";
+  $.ajax({
+    url: scriptUrl,
+    type: 'get',
+    dataType: 'json',
+    async: false,
+    success: function (data) {
+      result = data;
+    }
+  });
+  return result;
+}
+
+array = getPagamentosCount();
+
 // Pie Chart Example
 var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Dinheiro", "Cartão", "Pix"],
+    labels: ["Dinheiro", "Pix", "Cartão"],
     datasets: [{
-      data: [55, 30, 15],
+      data: array,
       backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
       hoverBackgroundColor: ['#4e73df', '#13c88a', '#36b9cc'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",

@@ -2,6 +2,7 @@ package com.br.pipoca.service;
 
 import com.br.pipoca.entity.Venda;
 import com.br.pipoca.repository.VendaRepository;
+import com.br.pipoca.util.Pagamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +53,36 @@ public class VendaService {
         }
 
         return lista;
+    }
+
+    public List<Venda> vendasPorTipoPagamento(Pagamento pagamento){
+        Iterable<Venda> vendaIterable = this.vendaRepository.findAll();
+        List<Venda> lista = new ArrayList<>();
+        for (Venda v:vendaIterable) {
+            if (v.getPagamento()==pagamento){
+                lista.add(v);
+            }
+        }
+        return lista;
+    }
+
+    public List<Venda> vendasDinheiro(){
+        return vendasPorTipoPagamento(Pagamento.DINHEIRO);
+    }
+
+    public List<Venda> vendasPix(){
+        return vendasPorTipoPagamento(Pagamento.PIX);
+    }
+
+    public List<Venda> vendasCartao(){
+        return vendasPorTipoPagamento(Pagamento.CARTAO);
+    }
+
+    public int[] pagamentoTypeCount(){
+        System.out.println(vendasDinheiro().size());
+        System.out.println(vendasPix().size());
+        System.out.println(vendasCartao().size());
+        return null;
     }
 
     public float receitaMensal(int mes, int ano){

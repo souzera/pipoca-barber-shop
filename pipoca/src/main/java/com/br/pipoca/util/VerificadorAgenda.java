@@ -39,7 +39,7 @@ public class VerificadorAgenda {
                     dateAtendimento.setHours(19);
                     dateAtendimento.setMinutes(0);
                 }
-                if (dateAtendimento.after(date)
+                if (dateAtendimento.before(date)
                     && a.getHorario().getStatusHorario() == StatusHorario.OCIOSO){
                     horarioService.alterarStatus(a.getHorario(), StatusHorario.ATRASADO.getValor());
                 }

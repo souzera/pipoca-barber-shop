@@ -57,4 +57,14 @@ public class VendaController {
     public List<Float> ganhos(@PathVariable("ano") int ano){
         return vendaService.ganhosMensais(ano-1900);
     }
+
+    @GetMapping
+    @RequestMapping(value = "/vendas/tipo-pagamentos")
+    public int[] payTypes(){
+        int[] payTypeCount = {vendaService.vendasDinheiro().size(),
+                vendaService.vendasPix().size(),
+                vendaService.vendasCartao().size()};
+        vendaService.pagamentoTypeCount();
+        return payTypeCount;
+    }
 }
