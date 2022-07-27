@@ -64,13 +64,11 @@ public class AtendimentoService {
     }
 
     public List<Atendimento> agendamentosDateEFuncionario(Funcionario funcionario, Date date) throws IOException {
-        Iterable<Atendimento> atendimentoIterable = this.atendimentoRepository.findAll();
+        Iterable<Atendimento> atendimentoIterable = agendamentosDate(date);
         List<Atendimento> lista = new ArrayList<>();
         for (Atendimento a:
                 atendimentoIterable) {
-            if (a.getHorario().getDate() == date
-                    &&
-                a.getHorario().getFuncionario() == funcionario){
+            if (a.getHorario().getFuncionario() == funcionario){
                 lista.add(a);
             }
         }

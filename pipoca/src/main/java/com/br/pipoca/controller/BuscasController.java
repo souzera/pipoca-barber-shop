@@ -1,14 +1,11 @@
 package com.br.pipoca.controller;
 
-import com.br.pipoca.service.ClienteService;
 import com.br.pipoca.service.CookieService;
 import com.br.pipoca.service.FuncionarioService;
 import com.br.pipoca.service.UsuarioService;
 import com.br.pipoca.util.Cargo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,12 +44,6 @@ public class BuscasController {
     @RequestMapping(value = "/buscando/agendamento-funcionario")
     public void buscaAgendaData(long funcionario_id, HttpServletResponse response) throws IOException {
         response.sendRedirect("/agendamento/funcionario/"+ funcionario_id);
-    }
-
-    @PostMapping
-    @RequestMapping(value = "/buscando/agendamento-data-funcionario")
-    public void buscaAgendaData(long funcionario_id ,Date date, HttpServletResponse response) throws IOException {
-        response.sendRedirect("/agendamento/"+ date + "/" + funcionario_id);
     }
 
 }

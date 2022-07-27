@@ -38,7 +38,9 @@ public class DetalhesController {
     public ModelAndView agendaDetails(@RequestParam(value = "id") long agenda_id, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView("admin/agendamentoDetails.html");
         modelAndView.addObject("agendamento", atendimentoService.buscarPorId(agenda_id));
-        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieName(request, "login")));
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        usuarioService.addPass(u, modelAndView);
         return modelAndView;
     }
     @PostMapping
@@ -75,7 +77,9 @@ public class DetalhesController {
         ModelAndView modelAndView = new ModelAndView("admin/clienteDetails.html");
         modelAndView.addObject("cliente", clienteService.buscarPorID(id));
         modelAndView.addObject("agendamentos", atendimentoService.agendamentosCliente(id));
-        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieName(request, "login")));
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        usuarioService.addPass(u, modelAndView);
         return modelAndView;
     }
 
@@ -98,7 +102,9 @@ public class DetalhesController {
         ModelAndView modelAndView = new ModelAndView("admin/funcionarioDetails.html");
         modelAndView.addObject("funcionario", funcionarioService.findById(id));
         modelAndView.addObject("agendamentos", atendimentoService.agendamentosFuncionario(id));
-        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieName(request, "login")));
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        usuarioService.addPass(u, modelAndView);
         return modelAndView;
     }
 

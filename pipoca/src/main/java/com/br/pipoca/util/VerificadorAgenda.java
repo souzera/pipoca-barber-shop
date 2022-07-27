@@ -23,7 +23,7 @@ public class VerificadorAgenda {
     @Autowired
     HorarioService horarioService;
 
-    @Scheduled(fixedDelay = (MINUTO/2))
+    @Scheduled(fixedDelay = (HORA/6))
     private void verificarAgenda() throws IOException {
         System.out.println("opa");
         java.util.Date date = new java.util.Date();
