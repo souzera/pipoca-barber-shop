@@ -144,26 +144,6 @@ public class ListasController {
         return modelAndView;
     }
 
-//    @GetMapping
-//    @RequestMapping(value = "/agendamento/{data}{funcionario_id}")
-//    public ModelAndView buscaDataEFunc(@RequestParam("data")Date date, @RequestParam("funcionario_id") long funcionario_id, HttpServletRequest request) throws IOException {
-//        ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
-//        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
-//        modelAndView.addObject("usuario", u);
-//        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
-//        switch (u.getTipoUsuario()){
-//            case ADM:
-//            case DEV:
-//            case SUPER:
-//            case FUNCIONARIO:
-//                modelAndView.addObject("lista",atendimentoService.agendamentosDateEFuncionario(funcionarioService.findById(funcionario_id),date));
-//                break;
-//            case BARBEIRO:
-//                modelAndView.addObject("lista",atendimentoService.agendamentosDateEFuncionario(funcionarioService.findByLogin(u.getLogin()),date));
-//                break;
-//        }
-//        return modelAndView;
-//    }
 
     @GetMapping
     @RequestMapping(value = "/agendamento/data&funcionario")
@@ -224,6 +204,27 @@ public class ListasController {
                 break;
             case BARBEIRO:
                 modelAndView.addObject("lista",atendimentoService.listarPorStatusEFuncionario(funcionarioService.findByLogin(u.getLogin()).getId(), StatusHorario.ATRASADO));
+                break;
+        }
+        return modelAndView;
+    }
+
+    @GetMapping
+    @RequestMapping(value = "/fila")
+    public ModelAndView fila(HttpServletRequest request) throws IOException {
+        ModelAndView modelAndView = new ModelAndView("admin/listaAgendamento.html");
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
+        switch (u.getTipoUsuario()){
+            case ADM:
+            case DEV:
+            case SUPER:
+            case FUNCIONARIO:
+                modelAndView.addObject("lista",atendimentoService.listarPorStatus(StatusHorario.OCIOSO));
+                break;
+            case BARBEIRO:
+                modelAndView.addObject("lista",atendimentoService.listarPorStatusEFuncionario(funcionarioService.findByLogin(u.getLogin()).getId(), StatusHorario.OCIOSO));
                 break;
         }
         return modelAndView;

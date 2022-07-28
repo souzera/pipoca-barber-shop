@@ -58,15 +58,15 @@
 
                         <table th:fragment="agenda" id="agendamentos-table" class="table table-striped">
                             <thead>
-                              <tr>
-                                  <th scope="col">#</th>
-                                  <th scope="col">Cliente</th>
-                                  <th scope="col">Funcionario</th>
-                                  <th scope="col">Dia</th>
-                                  <th scope="col">Hora</th>
-                                  <th scope="col">Preço</th>
-                                  <th scope="col">Ações</th>
-                              </tr>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Cliente</th>
+                                    <th scope="col">Funcionario</th>
+                                    <th scope="col">Dia</th>
+                                    <th scope="col">Hora</th>
+                                    <th scope="col">Preço</th>
+                                    <th scope="col">Ações</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <!--
@@ -80,11 +80,12 @@
                                     <td th:text="${objeto.horario.hora.valor}"></td>
                                     <td th:text="${objeto.servico.valor}"></td>
                                     <td>
-                                        <a class="nav-link" th:href="@{/agenda/details(id=${objeto.id})}"><i class="fas fa-fw fa-wrench"></i></a>
+                                        <a class="nav-link" th:href="@{/agenda/details(id=${objeto.id})}"><i
+                                                class="fas fa-fw fa-wrench"></i></a>
                                     </td>
                                 </tr>
                             </tbody>
-                          </table>
+                        </table>
 
                     </div>
                     <!-- /.container-fluid -->
@@ -110,61 +111,64 @@
                         </div>
                     </div>
 
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Pipoca Barber Shop 2022</span>
-                    </div>
                 </div>
-            </footer>
-            <!-- End of Footer -->
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Pipoca Barber Shop 2022</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+        <!-- Logout Modal-->
+        <div th:replace="~{admin/fragmentos :: logout}"></div>
 
-    <!-- Logout Modal-->
-    <div th:replace="~{admin/fragmentos :: logout}"></div>
+        <!-- Bootstrap core JavaScript-->
+        <script src="/admin/vendor/jquery/jquery.min.js"></script>
+        <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="/admin/js/pipoca-admin-2.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="/admin/vendor/chart.js/Chart.min.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="/admin/js/demo/chart-area-demo.js"></script>
+        <script src="/admin/js/demo/chart-pie-demo.js"></script>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/admin/vendor/jquery/jquery.min.js"></script>
-    <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="/admin/js/pipoca-admin-2.min.js"></script>
-    <!-- Page level plugins -->
-    <script src="/admin/vendor/chart.js/Chart.min.js"></script>
-    <!-- Page level custom scripts -->
-    <script src="/admin/js/demo/chart-area-demo.js"></script>
-    <script src="/admin/js/demo/chart-pie-demo.js"></script>
+        <!-- Gerar PDF -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script>
+            const botao = document.querySelector('#relatorio-btn');
+            const table = document.querySelector('#agendamentos-table');
 
-    <!-- Gerar PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
-        const botao = document.querySelector('#relatorio-btn');
-        const table = document.querySelector('#agendamentos-table');
+            botao.addEventListener('click', (dados) => {
+                const pdf = jsPDF();
 
-        botao.addEventListener('click', (dados)=>{
-        const pdf = jsPDF();
+                doc.setFont('helvetica')
+                doc.setFontType('bold')
 
-        pdf.autoPrint();
-        pdf.output("dataurlnewwindow");
-        });
-    </script>
-    <script>
-        console.log("olá");
-    </script>
+                doc.html(document.body, {callback: function(doc){doc.save();},x:10, y:10});
+                pdf.autoPrint();
+                pdf.output("dataurlnewwindow");
+            });
+            console.log("olá");
+        </script>
 
 </body>
 

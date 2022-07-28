@@ -1,18 +1,23 @@
 package com.br.pipoca.util;
 
 import com.br.pipoca.entity.Atendimento;
+import com.br.pipoca.entity.Usuario;
 import com.br.pipoca.service.AtendimentoService;
+import com.br.pipoca.service.CookieService;
 import com.br.pipoca.service.HorarioService;
+import com.br.pipoca.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
 @Component @EnableScheduling
-public class VerificadorAgenda {
+public class Thread {
 
     private final long SEGUNDO = 1000;
     private final long MINUTO = SEGUNDO*60;
@@ -20,6 +25,8 @@ public class VerificadorAgenda {
 
     @Autowired
     private AtendimentoService atendimentoService;
+    @Autowired
+    UsuarioService usuarioService;
     @Autowired
     HorarioService horarioService;
 
