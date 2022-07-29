@@ -61,7 +61,7 @@
                                 <input type="text" name="funcionario_id" th:value="${funcionario.id}">
                             </div>
 
-                            <div th:if="${admPass}" class="col-md-6 form-select">
+                            <div th:if="${admPass}" class="col-md-6 form-select form-select-lg">
                                 <label class="form-label" for="funcionario">Barbeiro</label>
                                 <select class="form-select" required name="funcionario_id" id="funcionario">
                                     <option selected th:each="funcionario:${funcionarios}" th:value="${funcionario.id}"

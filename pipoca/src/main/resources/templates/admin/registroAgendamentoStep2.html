@@ -66,19 +66,42 @@
                         <hr class="mb-3">
 
                         <div id="step-2" class="form-group col-mb-8" style="margin: 2%;">
-
+                            
                             <div class="col-mb-8 mb-3 row">
                                 <label class="form-label" for="cliente">Cliente</label>
-                                <select class="form-select" name="cliente_id" id="cliente">
+
+                                <!--
+
+                                    ==== SELECT =====
+
+                                    <select class="form-select" name="cliente_id" id="cliente">
+                                        <option th:each="cliente:${clientes}" th:value="${cliente.id}"
+                                            th:text="${cliente.nome}"></option>
+                                    </select>
+                                -->
+
+                                <!-- 
+
+                                    ==== DATALIST ====
+
+                                -->
+                                <div class="form-outline ml-2">
+                                  <input type="search" list="lista-clientes" placeholder="Buscar" name=cliente_id id="pesquisa-cliente" class="form-control" />
+                                </div>
+
+                                <datalist id="lista-clientes">
                                     <option th:each="cliente:${clientes}" th:value="${cliente.id}"
-                                        th:text="${cliente.nome}"></option>
-                                </select>
+                                            th:text="${cliente.nome}"></option>
+                                </datalist>
                             </div>
+                            
+                            
+
 
                             <div class="row mb-3 col-mb-4">
                                 <div class="col-mb-4 mr-3">
                                     <label class="form-label" for="hora">Hora</label>
-                                    <select class="form-select" name="hora" id="hora">
+                                    <select class="form-select form-select-lg" name="hora" id="hora">
                                         <option th:each="hora:${vagas}" th:value="${hora}" th:text="${hora.valor}">
                                         </option>
                                     </select>
@@ -86,7 +109,7 @@
 
                                 <div class="col-mb-8">
                                     <label class="form-label" for="servico">Serviço</label>
-                                    <select class="form-select" name="servico_id" id="servico">
+                                    <select class="form-select form-select-lg" name="servico_id" id="servico">
                                         <option th:each="servico:${servicos}" th:text="${servico.descricao}"
                                             th:value="${servico.id}"></option>
                                     </select>
@@ -138,6 +161,7 @@
     <script src="/admin/js/demo/chart-pie-demo.js"></script>
 
     <script>
+
         $(document).ready(function () {
             $("#dia").blur(function () {
                 $.ajax({

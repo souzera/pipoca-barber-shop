@@ -57,7 +57,7 @@ public class ClienteService {
         List<Cliente> lista = new ArrayList<>();
         for (Cliente c:
              clienteIterable) {
-            if (c.getNome().contains(nome)){
+            if (c.getNome().toLowerCase().contains(nome.toLowerCase())){
                 lista.add(c);
             }
         }
