@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 
 @Controller
 public class CadastroAdminController {
@@ -137,7 +138,7 @@ public class CadastroAdminController {
             case ADM:
             case DEV:
             case SUPER:
-            case FUNCIONARIO:
+            case ATENDENTE:
                 modelAndView.addObject("funcionarios", funcionarioService.findByCargo(Cargo.BARBEIRO));
                 break;
             case BARBEIRO:
@@ -209,22 +210,11 @@ public class CadastroAdminController {
         return modelAndView;
     }
 
-    @PostMapping
-    @RequestMapping(value = "/registrar/venda-step1")
-    public Model createVendaStep1(long cliente_id, VendaDTO vendaDTO, HttpServletResponse response) throws IOException {
-        if (cliente_id!=0){
-            vendaDTO.getModel().addAttribute("cliente", clienteService.buscarPorID(cliente_id));
-            vendaDTO.getModel().addAttribute("agendamentos", atendimentoService.listarPorClienteEStatus(cliente_id, StatusHorario.OCIOSO));
-        }
-        vendaDTO.getModel().addAttribute("step2", true);
-        response.sendRedirect("/registrar/venda-step2");
-        return vendaDTO.getModel();
-    }
 
+    //TODO implentar controle para venda de produtos
     @PostMapping
-    @RequestMapping(value = "/registrar/venda-step2")
-    public VendaDTO createVendaStep2(long cliente_id, VendaDTO vendaDTO){
-        vendaDTO.getModel().addAttribute("step3", true);
-        return vendaDTO;
+    @RequestMapping(value = "/registrar/venda")
+    public String createVendaStep1(Long produto_id, HttpServletResponse response) throws IOException {
+        return "olá mundo";
     }
 }

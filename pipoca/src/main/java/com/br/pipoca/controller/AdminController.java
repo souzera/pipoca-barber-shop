@@ -3,7 +3,6 @@ package com.br.pipoca.controller;
 import com.br.pipoca.entity.Usuario;
 import com.br.pipoca.service.*;
 import com.br.pipoca.util.DateConverter;
-import com.br.pipoca.util.TipoUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,7 +58,7 @@ public class AdminController {
                 case ADM:
                 case DEV:
                 case SUPER:
-                case FUNCIONARIO:
+                case ATENDENTE:
                     modelAndView.addObject("lista", atendimentoService.agendamentosDate(DateConverter.dateConverter(hoje)));
                     modelAndView.addObject("progresso", atendimentoService.progressoDiario(DateConverter.dateConverter(hoje)));
                     break;

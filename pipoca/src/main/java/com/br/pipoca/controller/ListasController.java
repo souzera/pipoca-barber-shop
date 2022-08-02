@@ -98,7 +98,7 @@ public class ListasController {
             case ADM:
             case DEV:
             case SUPER:
-            case FUNCIONARIO:
+            case ATENDENTE:
                 modelAndView.addObject("lista",atendimentoService.ociosos());
                 break;
             case BARBEIRO:
@@ -134,7 +134,7 @@ public class ListasController {
             case ADM:
             case DEV:
             case SUPER:
-            case FUNCIONARIO:
+            case ATENDENTE:
                 modelAndView.addObject("lista",atendimentoService.ociosos());
                 break;
             case BARBEIRO:
@@ -156,7 +156,7 @@ public class ListasController {
             case ADM:
             case DEV:
             case SUPER:
-            case FUNCIONARIO:
+            case ATENDENTE:
                 List<Atendimento> agendamentos = atendimentoService.agendamentosDateEFuncionario(funcionarioService.findById(funcionario_id),date);
                 modelAndView.addObject("lista", agendamentos);
                 break;
@@ -178,7 +178,7 @@ public class ListasController {
             case ADM:
             case DEV:
             case SUPER:
-            case FUNCIONARIO:
+            case ATENDENTE:
                 modelAndView.addObject("lista",atendimentoService.finalizados());
                 break;
             case BARBEIRO:
@@ -199,7 +199,7 @@ public class ListasController {
             case ADM:
             case DEV:
             case SUPER:
-            case FUNCIONARIO:
+            case ATENDENTE:
                 modelAndView.addObject("lista",atendimentoService.listarPorStatus(StatusHorario.ATRASADO));
                 break;
             case BARBEIRO:
@@ -220,7 +220,7 @@ public class ListasController {
             case ADM:
             case DEV:
             case SUPER:
-            case FUNCIONARIO:
+            case ATENDENTE:
                 modelAndView.addObject("lista",atendimentoService.listarPorStatus(StatusHorario.OCIOSO));
                 break;
             case BARBEIRO:
