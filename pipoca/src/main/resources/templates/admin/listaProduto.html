@@ -61,7 +61,10 @@
                                 <th scope="row" th:text="${objeto.id}">id</th>
                                 <td th:text="${objeto.descricao}">nome</td>
                                 <td th:text="${objeto.categoria}">categoria</td>
-                                <td href="#" th:text="${objeto.descricao}">Detalhes</td>
+                                <td>
+                                    <a class="nav-link" th:href="@{/produto/details(id=${objeto.id})}"><i
+                                            class="fas fa-fw fa-wrench"></i></a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

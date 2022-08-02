@@ -23,4 +23,12 @@ public class ProdutoService {
         Iterable<Produto> produtoIterable = this.produtoRepository.findAll();
         return Streamable.of(produtoIterable).toList();
     }
+
+    public Produto findById(long id) {
+        return produtoRepository.findById(id);
+    }
+
+    public void deleteById(long id) {
+        produtoRepository.deleteById(id);
+    }
 }
