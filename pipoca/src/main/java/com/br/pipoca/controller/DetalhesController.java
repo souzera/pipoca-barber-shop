@@ -5,6 +5,7 @@ import com.br.pipoca.entity.*;
 import com.br.pipoca.service.*;
 import com.br.pipoca.util.DateConverter;
 import com.br.pipoca.util.Pagamento;
+import com.br.pipoca.util.StatusHorario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +30,13 @@ public class DetalhesController {
     FuncionarioService funcionarioService;
     @Autowired
     VendaService vendaService;
+    @Autowired
+    ProdutoService produtoService;
+    @Autowired
+    ServicoService servicoService;
     //=======================================================================================================
 
-    //AGENDAMENTOS
+    //AGENDAMENTOS *horario
 
     @GetMapping
     @RequestMapping(value = "/agenda/details{id}")
@@ -55,6 +60,7 @@ public class DetalhesController {
     @RequestMapping(value = "/agenda/check")
     public String concluirAgenda(long agenda_id, Pagamento pagamento){
         Horario h = atendimentoService.buscarPorId(agenda_id).getHorario();
+        if (h.getStatusHorario() == StatusHorario.CONCLUIDO){return "redirect:/agendamentos";}
         horarioService.alterarStatus(h, 0);
         Venda venda = new Venda();
         venda.setAtendimento(atendimentoService.buscarPorId(agenda_id));
@@ -110,20 +116,77 @@ public class DetalhesController {
 
     @PostMapping
     @RequestMapping(value = "/funcionario/deletar")
-    public String deletarFuncionario(long id) throws IOException {
-        Funcionario f = funcionarioService.findById(id);
-        for (Atendimento a: atendimentoService.agendamentosFuncionario(id)) {
-            horarioService.deletarHorario(a.getHorario());
+    public String deletarFuncionario(long funcionario_id) throws IOException {
+        Funcionario f = funcionarioService.findById(funcionario_id);
+        Usuario u = usuarioService.findByLogin(f.getUsuario().getLogin());
+        for (Atendimento a: atendimentoService.agendamentosFuncionario(funcionario_id)) {
             atendimentoService.deleteById(a.getId());
+            horarioService.deletarHorario(a.getHorario());
         }
-        funcionarioService.deleteById(id);
-        return "redirect:/agendamentos";
+        funcionarioService.deleteById(funcionario_id);
+        usuarioService.deleteById(u.getId());
+        return "redirect:/funcionarios";
     }
 
     //=======================================================================================================
     //=======================================================================================================
 
     //VENDA
+
+    //=======================================================================================================
+    //=======================================================================================================
+
+    //PRODUTO
+
+    @GetMapping
+    @RequestMapping("/produto/details{id}")
+    public ModelAndView produtoDetails(@RequestParam(value = "id") long produto_id, HttpServletRequest request) throws IOException {
+        ModelAndView modelAndView = new ModelAndView("admin/produtoDetails.html");
+        modelAndView.addObject("produto", produtoService.findById(produto_id));
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        usuarioService.addPass(u, modelAndView);
+        return modelAndView;
+    }
+
+    @PostMapping
+    @RequestMapping(value = "/produto/deletar")
+    public String deletarProduto(long produto_id) throws IOException {
+        Produto p = produtoService.findById(produto_id);
+        //todo: se hover vendas desse produto o manter apenas inativo
+        produtoService.deleteById(produto_id);
+        return "redirect:/produtos";
+    }
+
+    //=======================================================================================================
+    //=======================================================================================================
+
+    //SERVIÇO
+
+    @GetMapping
+    @RequestMapping("/servico/details{id}")
+    public ModelAndView servicoDetails(@RequestParam(value = "id") long servico_id, HttpServletRequest request) throws IOException {
+        ModelAndView modelAndView = new ModelAndView("admin/servicoDetails.html");
+        modelAndView.addObject("servico", servicoService.findById(servico_id));
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        usuarioService.addPass(u, modelAndView);
+        return modelAndView;
+    }
+
+    @PostMapping
+    @RequestMapping(value = "/servico/deletar")
+    public String deletarServico(long servico_id) throws IOException {
+        Servico s = servicoService.findById(servico_id);
+        //todo: se hover vendas desse servico o manter apenas inativo
+        servicoService.deleteById(servico_id);
+        return "redirect:/servicos";
+    }
+
+    //=======================================================================================================
+    //=======================================================================================================
+
+    //USUARIO
 
     //=======================================================================================================
     //=======================================================================================================
