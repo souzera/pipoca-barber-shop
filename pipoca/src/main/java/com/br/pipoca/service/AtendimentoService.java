@@ -184,8 +184,10 @@ public class AtendimentoService {
     public float progressoFuncionario(long funcionario_id) throws IOException {
         List<Atendimento> atendimentos = agendamentosFuncionario(funcionario_id);
         List<Atendimento> ociososFuncionario = ociososFuncionario(funcionario_id);
-        float progresso = (ociososFuncionario.size()*100)/atendimentos.size();
-        return 100-progresso;
+        if (ociososFuncionario.size()>0){
+            float progresso = (ociososFuncionario.size()*100)/atendimentos.size();
+            return 100-progresso;
+        }
+        return 0;
     }
-
 }
