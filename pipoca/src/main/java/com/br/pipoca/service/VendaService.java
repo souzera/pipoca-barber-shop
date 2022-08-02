@@ -79,9 +79,6 @@ public class VendaService {
     }
 
     public int[] pagamentoTypeCount(){
-        System.out.println(vendasDinheiro().size());
-        System.out.println(vendasPix().size());
-        System.out.println(vendasCartao().size());
         return null;
     }
 

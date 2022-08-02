@@ -117,7 +117,7 @@
         </div>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item" hidden>
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenda" aria-expanded="true"
             aria-controls="collapseVenda">
             <i class="fas fa-fw fa-cart-plus"></i>
@@ -234,24 +234,41 @@
 <!-- Barra Topo -->
 <nav th:fragment="topbar" class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-    <!-- Sidebar Toggle (Topbar) -->
-    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 ">
-        <i class="fa fa-bars"></i>
-    </button>
+    <!-- Sidebar Toggle (Topbar) 
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 ">
+            <i class="fa fa-bars"></i>
+        </button>
+    -->
 
     <!-- Topbar Search -->
+    <!--
     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action=""
-        method="get" hidden>
+        method="get">
         <div class="input-group">
-            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..." aria-label="buscar"
-                aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
+            <div class="form-outline ml-2">
+                <input type="search" list="lista-function" placeholder="Buscar..." name=cliente_id
+                    id="pesquisa-function" class="form-control" />
             </div>
-        </div>
-    </form>
+
+            <datalist id="lista-function">
+                <option value="Home"><a href="/login">Home</a></option>
+                <option value="Agendamentos"><a href="/agendamentos">Agendamentos</a></option>
+                <option value="Clientes"><a href="/clientes">Cliente</a></option>
+                <option value="Produtos"><a href="/produtos">Produtos</a></option>
+                <option value="Serviços"><a href="/servicos"></a></option>
+            </datalist>
+
+
+                <input type="search" class="form-control bg-light border-0 small" placeholder="Buscar..." aria-label="buscar"
+                    aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    -->
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
@@ -458,5 +475,43 @@
 
 </div>
 <!--End of Graphs-->
+
+
+
+
+
+
+
+
+
+
+
+<!--TODO fazer implementao da formulario para venda de produtos-->
+<!-- Button trigger modal -->
+<div th:fragment="select-produtos">
+
+    <form action="" method="post">
+        <div class="form-group">
+
+            <label for="produto" class="col-mb-2 control-label">Produtos</label>
+
+            <div class="container bg-light col-mb-5">
+
+                <label class="checkbox-inline row" th:each="produto:${produtos}">
+                    <input name="produto_id" type="checkbox" id="produto" th:value="${produto.id}" th:text="${produto.descricao}" th:field="*{produtos}"/>
+                </label>
+
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Avançar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</div>
 
 </html>
