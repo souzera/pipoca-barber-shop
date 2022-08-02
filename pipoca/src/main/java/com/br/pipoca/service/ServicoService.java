@@ -24,4 +24,12 @@ public class ServicoService {
         Iterable<Servico> servicoIterable = this.servicoRepository.findAll();
         return Streamable.of(servicoIterable).toList();
     }
+
+    public Servico findById(long servico_id) {
+        return servicoRepository.findById(servico_id);
+    }
+
+    public void deleteById(long servico_id) {
+        servicoRepository.deleteById(servico_id);
+    }
 }

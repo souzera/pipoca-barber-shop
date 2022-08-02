@@ -47,8 +47,8 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Descrição</th>
-                                <th scope="col">Agendar Serviço</th>
                                 <th scope="col">Valor</th>
+                                <th scope="col">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,8 +59,11 @@
                             <tr class="servico" th:each="objeto: ${lista}">
                                 <th scope="row" th:text="${objeto.id}">id</th>
                                 <td th:text="${objeto.descricao}">nome</td>
-                                <td><button class="btn btn-primary">Agendar</button></td>
                                 <td href="#" th:text="${objeto.valor}">Valor</td>
+                                <td>
+                                    <a class="nav-link" th:href="@{/servico/details(id=${objeto.id})}"><i
+                                            class="fas fa-fw fa-wrench"></i></a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
