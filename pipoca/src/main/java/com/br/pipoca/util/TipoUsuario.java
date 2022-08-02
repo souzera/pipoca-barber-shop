@@ -5,7 +5,7 @@ public enum TipoUsuario {
     ADM(0),
     SUPER(1),
     BARBEIRO(2),
-    FUNCIONARIO(3),
+    ATENDENTE(3),
     CLIENTE(4),
     DEV(5);
 

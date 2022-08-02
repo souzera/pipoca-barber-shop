@@ -28,8 +28,7 @@ public class LoginController {
             response.sendRedirect("/dashboard/" + CookieService.getCookieName(request, "login").hashCode());
             return null;
         }
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login/login.html");
+        ModelAndView modelAndView = new ModelAndView("login/login");
         return modelAndView;
     }
 
@@ -58,7 +57,7 @@ public class LoginController {
             }
         }
         model.addAttribute("erro", "Usuário ou senha Inválidos");
-        return "login/login";
+        return "redirect:/login";
     }
 
 }
