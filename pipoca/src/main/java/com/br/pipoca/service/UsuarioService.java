@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -96,12 +95,16 @@ public class UsuarioService {
             case BARBEIRO:
                 modelAndView.addObject("barberPass", true);
                 break;
-            case FUNCIONARIO:
+            case ATENDENTE:
                 modelAndView.addObject("funPass", true);
                 break;
             case SUPER:
                 modelAndView.addObject("admPass", true);
                 break;
         }
+    }
+
+    public void deleteById(long id) {
+        usuarioRepository.deleteById(id);
     }
 }
