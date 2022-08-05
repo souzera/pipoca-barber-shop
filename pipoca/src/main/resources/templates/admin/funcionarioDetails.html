@@ -99,7 +99,9 @@
                                         </div>
 
                                         <div class="ml-2 mr-2 mb-2">
-                                            <button type="submit" class="btn btn-primary">Alterar</button>
+                                            <a th:href="@{/funcionario/alterar(id=${funcionario.id})}">
+                                                <button type="submit" class="btn btn-primary">Alterar</button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
