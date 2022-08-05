@@ -65,7 +65,7 @@
                                     </h3>
                                 </div>
                             </div>
-                            
+
                             <div class="row mb-3">
                                 <div class="col">
                                     <label for="categoria">Categoria: </label>
@@ -85,49 +85,112 @@
                                 <div class="col"></div>
                                 <div class="col"></div>
                                 <div class="col">
-                                <div class="btn-group row" role="group" id="botoes" >
-                                    <div class="mb-2">
-                                        <form action="/produto/deletar" method="post">
-                                            <input type="text" name="produto_id" id="produto_id" th:value="${produto.id}" hidden>
-                                            <button type="submit" class="btn btn-danger">Excluir</button>
-                                        </form>
+                                    <div class="btn-group row" role="group" id="botoes">
+                                        <div class="mb-2">
+                                            <form action="/produto/deletar" method="post">
+                                                <input type="text" name="produto_id" id="produto_id"
+                                                    th:value="${produto.id}" hidden>
+                                                <button type="submit" class="btn btn-danger">Excluir</button>
+                                            </form>
+                                        </div>
+
+                                        <div class="ml-2 mr-2 mb-2">
+                                            <a th:href="@{/produto/alterar(id=${produto.id})}">
+                                                <button type="button" class="btn btn-primary">Alterar</button>
+                                            </a>
+                                        </div>
+
+                                        <div class="mr-2 ml-2 mb-2">
+                                            <button type="submit" class="btn btn-success" data-toggle="modal"
+                                                data-target="#pagamentoModalCenter">Vender</button>
+                                        </div>
                                     </div>
-                                        
-                                    <div class="ml-2 mr-2 mb-2">
-                                        <a th:href="@{/produto/alterar(id=${produto.id})}">
-                                            <button type="button" class="btn btn-primary">Alterar</button>
-                                        </a>
+                                </div>
+                            </div>
+
+                            <hr class="mb-3">
+                        </div>
+
+
+                        <!-- Pagamento Modal -->
+                        <div class="modal fade" id="pagamentoModalCenter" tabindex="-1" role="dialog"
+                            aria-labelledby="pagamentoModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="pagamentoModalLongTitle">Selecione a forma de
+                                            Pagamento</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <form action="/produto/venda" method="post">
+                                                    <input type="text" name="produto_id" th:value="${produto.id}"
+                                                        hidden>
+                                                    <h6>Dinheiro</h6>
+                                                    <button class="btn btn-lg btn-primary" type="submit">
+                                                        <input type="text" name="pagamento" value="DINHEIRO" hidden>
+                                                        <i class="fa fa-money" aria-hidden="true"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <div class="col">
+                                                <form action="/produto/venda" method="post">
+                                                    <input type="text" name="produto_id" th:value="${produto.id}"
+                                                        hidden>
+                                                    <h6>Cartão</h6>
+                                                    <button class="btn btn-lg btn-primary" type="submit">
+                                                        <input type="text" name="pagamento" value="CARTAO" hidden>
+                                                        <i class="fa fa-credit-card" aria-hidden="true"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <div class="col">
+                                                <form action="/produto/venda" method="post">
+                                                    <input type="text" name="produto_id" th:value="${produto.id}"
+                                                        hidden>
+                                                    <h6>Pix</h6>
+                                                    <button class="btn btn-lg btn-primary" type="submit">
+                                                        <input type="text" name="pagamento" value="PIX" hidden>
+                                                        <i class="fa-brands fa-pix"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <hr class="mb-3">                         
-                        </div>
-                        
                     </div>
-                <!-- /.container-fluid -->
+                    <!-- /.container-fluid -->
+
+
+                </div>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer th:replace="~{admin/fragmentos :: footer}"></footer>
+                <!-- End of Footer -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer th:replace="~{admin/fragmentos :: footer}"></footer>
-            <!-- End of Footer -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Logout Modal-->
+        <div th:replace="~{admin/fragmentos :: logout}"></div>
     </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div th:replace="~{admin/fragmentos :: logout}"></div></div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="/admin/vendor/jquery/jquery.min.js"></script>
@@ -141,6 +204,9 @@
     <!-- Page level custom scripts -->
     <script src="/admin/js/demo/chart-area-demo.js"></script>
     <script src="/admin/js/demo/chart-pie-demo.js"></script>
+
+    <!--FA ICONS-->
+    <script src="/js/be2a1fbfc9.js" crossorigin="anonymous"></script>
 
     <!-- Gerar PDF -->
 
