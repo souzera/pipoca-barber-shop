@@ -97,15 +97,27 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="row mb-6">
                                 <div class="col">
-                                    <div class="form-select">
+                                    <div class="form-select form-select-lg">
                                         <label class="col-md-4 control-label" for="sexo">Sexo</label>
                                         <select id="sexo" class="col-md-4 mb-3" aria-label="sexo" name="sexo"
                                             style="text-transform: lowercase;font-size: large;">
                                             <option th:value="${funcionario.sexo}" selected hidden></option>
                                             <option value="FEMININO">Feminino</option>
                                             <option value="MASCULINO">Masculino</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="form-select form-select-lg">
+                                        <label class="col-md-4 control-label" for="cargo">Cargo</label>
+                                        <select id="cargo" class="col-md-4 mb-3" aria-label="cargo" name="cargo"
+                                            style="text-transform: lowercase;font-size: large;">
+                                            <option th:value="${funcionario.cargo}" selected hidden></option>
+                                            <option value="BARBEIRO">Barbeiro</option>
+                                            <option value="ATENDENTE">Atendente</option>
                                         </select>
                                     </div>
                                 </div>
@@ -161,7 +173,7 @@
     <!-- Logout Modal-->
     <div th:replace="~{admin/fragmentos :: logout}"></div>
     </div>
-    
+
     <!-- Bootstrap core JavaScript-->
     <script src="/admin/vendor/jquery/jquery.min.js"></script>
     <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

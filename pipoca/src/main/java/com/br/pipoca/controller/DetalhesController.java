@@ -158,6 +158,19 @@ public class DetalhesController {
         return "redirect:/produtos";
     }
 
+    @PostMapping
+    @RequestMapping(value = "/produto/venda")
+    public String venderProduto(long produto_id, Pagamento pagamento) throws IOException {
+        Produto p = produtoService.findById(produto_id);
+        Venda venda = new Venda();
+        venda.setProduto(p);
+        venda.setValor(venda.getProduto().getValor());
+        venda.setPagamento(pagamento);
+        venda.setDate(DateConverter.dateConverter(new java.util.Date()));
+        vendaService.save(venda);
+        return "redirect:/produtos";
+    }
+
     //=======================================================================================================
     //=======================================================================================================
 

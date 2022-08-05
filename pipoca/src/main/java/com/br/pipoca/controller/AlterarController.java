@@ -6,6 +6,7 @@ import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.entity.Produto;
 import com.br.pipoca.entity.Usuario;
 import com.br.pipoca.service.*;
+import com.br.pipoca.util.Cargo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
