@@ -1,10 +1,7 @@
 package com.br.pipoca.controller;
 
 import com.br.pipoca.dto.ClienteDTO;
-import com.br.pipoca.entity.Cliente;
-import com.br.pipoca.entity.Funcionario;
-import com.br.pipoca.entity.Produto;
-import com.br.pipoca.entity.Usuario;
+import com.br.pipoca.entity.*;
 import com.br.pipoca.service.*;
 import com.br.pipoca.util.Cargo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +26,8 @@ public class AlterarController {
     UsuarioService usuarioService;
     @Autowired
     ProdutoService produtoService;
+    @Autowired
+    ServicoService servicoService;
 
 
     //========================================================================================
@@ -110,7 +109,7 @@ public class AlterarController {
 
     @PostMapping
     @RequestMapping("produto/alterando")
-    public String alterandoFucionario(Produto produto){
+    public String alterandoProduto(Produto produto){
         Produto p = produtoService.findById(produto.getId());
         p.setDescricao(produto.getDescricao());
         p.setCategoria(produto.getCategoria());
@@ -124,6 +123,27 @@ public class AlterarController {
     //========================================================================================
 
     //SERVIÇO
+
+    @GetMapping
+    @RequestMapping("/servico/alterar{id}")
+    public ModelAndView servicoAlterar(@RequestParam(value = "id") long id, HttpServletRequest request) throws IOException {
+        ModelAndView modelAndView = new ModelAndView("admin/alterarServico.html");
+        modelAndView.addObject("servico", servicoService.findById(id));
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        usuarioService.addPass(u, modelAndView);
+        return modelAndView;
+    }
+
+    @PostMapping
+    @RequestMapping("servico/alterando")
+    public String alterandoServico(Servico servico){
+        Servico s = servicoService.findById(servico.getId());
+        s.setDescricao(servico.getDescricao());
+        s.setValor(servico.getValor());
+        servicoService.saveServico(s);
+        return "redirect:/servico/details?id="+s.getId();
+    }
 
     //========================================================================================
 
