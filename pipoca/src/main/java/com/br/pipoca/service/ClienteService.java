@@ -3,6 +3,7 @@ package com.br.pipoca.service;
 import com.br.pipoca.entity.Atendimento;
 import com.br.pipoca.entity.Cliente;
 import com.br.pipoca.repository.ClienteRepository;
+import com.br.pipoca.util.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,8 @@ public class ClienteService {
     }
 
     //========================================================================================
+
+    //listas
 
     public List<Cliente> clientes() throws IOException {
         Iterable<Cliente> clienteIterable = this.clienteRepository.findAll();
@@ -64,5 +67,17 @@ public class ClienteService {
         return lista;
     }
 
-
+    public List<Cliente> aniversariantes(){
+        Iterable<Cliente> clienteIterable = this.clienteRepository.findAll();
+        Date hoje = DateConverter.dateConverter(new java.util.Date());
+        List<Cliente> lista = new ArrayList<>();
+        for (Cliente c:
+                clienteIterable) {
+            if (c.getDtNascimento().getDate() == hoje.getDate()
+            && c.getDtNascimento().getMonth() == hoje.getMonth()){
+                lista.add(c);
+            }
+        }
+        return lista;
+    }
 }

@@ -13,12 +13,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle
             (HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("opa");
-        if (CookieService.getCookieName(request, "login") != null){
-            return true;
-        }
-
-        response.sendRedirect("/login");
-        return false;
+        System.out.println("ola mundo");
+        return true;
     }
 }

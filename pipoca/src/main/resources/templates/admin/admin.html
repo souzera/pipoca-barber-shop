@@ -46,8 +46,6 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
                     <!-- Content Row -->
@@ -341,10 +339,48 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-3">
                         <div class="col col-ml-10">
+                            <h3>Agendamentos do Dia</h3>
+                            <br>
+
                             <table th:replace="~{admin/listaAgendamento :: agenda}"></table>
                         </div>
+
+                        <hr>
+                    </div>
+
+                    <div class="row mb-3" hidden>
+                        <div class="col col-mb-5">
+
+                            <h3>Aniversariantes do Dia</h3>
+                            <br>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Telefone</th>
+                                        <th scope="col" hidden>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--
+                                    Thymleaf Cliente e Funcionario
+                                -->
+                                    <tr class="cliente" th:each="cliente: ${aniversariantes}">
+                                        <td th:text="${cliente.nome}"></td>
+                                        <td th:text="${cliente.telefone}"></td>
+                                        <td hidden>
+                                            <a class="nav-link" th:href="@{/cliente/details(id=${cliente.id})}"><i
+                                                    class="fas fa-fw fa-wrench"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col col-mb-5"></div>
                     </div>
 
                 </div>

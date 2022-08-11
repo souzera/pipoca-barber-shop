@@ -41,6 +41,19 @@ public class ListasController {
         return modelAndView;
     }
 
+    @GetMapping
+    @RequestMapping(value = "/aniversariantes")
+    public ModelAndView listarAniversariantes(HttpServletRequest request) throws IOException {
+        ModelAndView modelAndView = new ModelAndView("admin/listaCliente.html");
+
+        List<Cliente> lista = clienteService.aniversariantes();
+        modelAndView.addObject("lista",lista);
+        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        usuarioService.addPass(usuarioService.findByLogin(CookieService.getCookieValue(request,"login")), modelAndView);
+        return modelAndView;
+    }
+
+
     //========================================================================================
     //FUNCIONARIOS
 

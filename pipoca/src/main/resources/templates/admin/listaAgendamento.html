@@ -152,22 +152,23 @@
         <script src="/admin/js/demo/chart-pie-demo.js"></script>
 
         <!-- Gerar PDF -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-        <script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
             const botao = document.querySelector('#relatorio-btn');
-            const table = document.querySelector('#agendamentos-table');
+            const table = document.getElementById('agendamentos-table')
+
+            console.log(table)
 
             botao.addEventListener('click', (dados) => {
+                console.log('gerou relatorio')
                 const pdf = jsPDF();
 
                 doc.setFont('helvetica')
                 doc.setFontType('bold')
 
-                doc.html(document.body, {callback: function(doc){doc.save();},x:10, y:10});
+                doc.html(table, {callback: function(doc){doc.save();},x:10, y:10});
                 pdf.autoPrint();
                 pdf.output("dataurlnewwindow");
             });
-            console.log("olá");
         </script>
 
 </body>

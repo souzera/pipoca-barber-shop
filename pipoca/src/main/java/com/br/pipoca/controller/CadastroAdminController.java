@@ -36,7 +36,9 @@ public class CadastroAdminController {
     @RequestMapping(value = "/cadastrar/funcionario")
     public ModelAndView cadastrarFuncionario(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView("admin/cadastroFuncionario.html");
-        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        usuarioService.addPass(u, modelAndView);
         return modelAndView;
     }
     @PostMapping(value = "/cadastrando/funcionario")
@@ -67,7 +69,9 @@ public class CadastroAdminController {
     @RequestMapping(value = "/cadastrar/cliente")
     public ModelAndView cadastrarCliente(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView("admin/cadastroCliente.html");
-        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        usuarioService.addPass(u, modelAndView);
         return modelAndView;
     }
     @PostMapping(value = "/cadastrando/cliente")
@@ -97,7 +101,9 @@ public class CadastroAdminController {
     @RequestMapping(value = "/registro/produto")
     public ModelAndView cadastrarProduto(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView("admin/cadastroProduto.html");
-        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        usuarioService.addPass(u, modelAndView);
         return modelAndView;
     }
     @PostMapping(value = "/registrando/produto")
@@ -112,8 +118,9 @@ public class CadastroAdminController {
     @GetMapping
     @RequestMapping(value = "/registro/servico")
     public ModelAndView cadastrarServico(HttpServletRequest request){
-        ModelAndView modelAndView = new ModelAndView("admin/cadastroServico.html");
-        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        ModelAndView modelAndView = new ModelAndView("admin/cadastroServico.html");Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        usuarioService.addPass(u, modelAndView);
         return modelAndView;
     }
     @PostMapping(value = "/registrando/servico")
@@ -162,7 +169,9 @@ public class CadastroAdminController {
         modelAndView.addObject("clientes", clienteService.clientes());
         modelAndView.addObject("servicos", servicoService.servicos());
         modelAndView.addObject("vagas", horarioService.vagas(funcionario_id, date));
-        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        usuarioService.addPass(u, modelAndView);
         return modelAndView;
     }
 
@@ -206,7 +215,9 @@ public class CadastroAdminController {
         ModelAndView modelAndView = new ModelAndView("admin/registroVenda");
         modelAndView.addObject("clientes", clienteService.clientes());
         modelAndView.addObject("produtos", produtoService.produtos());
-        modelAndView.addObject("usuario", usuarioService.findByLogin(CookieService.getCookieValue(request,"login")));
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        usuarioService.addPass(u, modelAndView);
         return modelAndView;
     }
 

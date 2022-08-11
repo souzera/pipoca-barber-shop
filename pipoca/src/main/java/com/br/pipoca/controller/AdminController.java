@@ -20,13 +20,14 @@ public class AdminController {
 
     @Autowired
     private UsuarioService usuarioService;
-
     @Autowired
     private VendaService vendaService;
     @Autowired
     AtendimentoService atendimentoService;
     @Autowired
     FuncionarioService funcionarioService;
+    @Autowired
+    private ClienteService clienteService;
 
     @GetMapping
     @RequestMapping(value = "/dashboard/{chave}")
