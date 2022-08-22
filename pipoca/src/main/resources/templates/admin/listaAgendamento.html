@@ -138,6 +138,7 @@
         <!-- Logout Modal-->
         <div th:replace="~{admin/fragmentos :: logout}"></div>
 
+
         <!-- Bootstrap core JavaScript-->
         <script src="/admin/vendor/jquery/jquery.min.js"></script>
         <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -152,25 +153,34 @@
         <script src="/admin/js/demo/chart-pie-demo.js"></script>
 
         <!-- Gerar PDF -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+        <script src="/js/jspdf.umd.min.js"></script>
+        <script>
             const botao = document.querySelector('#relatorio-btn');
             const table = document.getElementById('agendamentos-table')
 
-            console.log(table)
 
-            botao.addEventListener('click', (dados) => {
-                console.log('gerou relatorio')
-                const pdf = jsPDF();
-
-                doc.setFont('helvetica')
-                doc.setFontType('bold')
-
-                doc.html(table, {callback: function(doc){doc.save();},x:10, y:10});
-                pdf.autoPrint();
-                pdf.output("dataurlnewwindow");
+            botao.addEventListener('click', () => {
+                console.log('gerou relatorio');
+                gerar_pdf();
             });
-        </script>
 
+
+            function gerar_pdf(){
+                const doc = new jsPDF();
+
+                doc.html(table, {
+                    callback: function (doc) {
+                        doc.save();
+                    },
+                    x: 10,
+                    y: 10
+                });
+
+                var hoje = new Date();
+                doc.save(`relatorio${hoje.valueOf()}.pdf`);
+            }
+
+        </script>
 </body>
 
 </html>
