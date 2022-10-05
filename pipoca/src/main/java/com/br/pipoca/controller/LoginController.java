@@ -21,14 +21,13 @@ public class LoginController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping
-    @RequestMapping(value = "/login")
+    @GetMapping(value = "/login")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (CookieService.getCookieName(request, "login") != null){
             response.sendRedirect("/dashboard/" + CookieService.getCookieName(request, "login").hashCode());
             return null;
         }
-        ModelAndView modelAndView = new ModelAndView("login/login");
+        ModelAndView modelAndView = new ModelAndView("login/login.html");
         return modelAndView;
     }
 

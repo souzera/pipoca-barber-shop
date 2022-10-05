@@ -3,6 +3,7 @@ package com.br.pipoca.controller;
 import com.br.pipoca.entity.Usuario;
 import com.br.pipoca.service.*;
 import com.br.pipoca.util.DateConverter;
+import com.br.pipoca.util.Semana;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,10 +52,14 @@ public class AdminController {
             java.util.Date hoje = new java.util.Date();
             modelAndView.addObject("vendaMensal", vendaService.receitaMensal(hoje.getMonth(),hoje.getYear()));
             modelAndView.addObject("vendaAnual", vendaService.receitaAnual(hoje.getYear()));
+            modelAndView.addObject("vendaDiaria", vendaService.receitaDiaria(DateConverter.dateConverter(hoje)));
+            modelAndView.addObject("vendaSemanal", vendaService.receitaSemanal(DateConverter.dateConverter(hoje)));
+            Semana.getSemana(DateConverter.dateConverter(hoje));
             //trocar quando implementar a fila
             modelAndView.addObject("fila", atendimentoService.ociosos().size());
             //====================================================================================
             //===================================LISTA=========================================
+            modelAndView.addObject("aniversariantes", clienteService.aniversariantes());
             switch (u.getTipoUsuario()){
                 case ADM:
                 case DEV:

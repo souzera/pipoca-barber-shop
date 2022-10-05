@@ -6,6 +6,7 @@ import com.br.pipoca.util.Pagamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,19 @@ public class VendaService {
         return vendaRepository.findById(id);
     }
 
+    public List<Venda> vendasDiarias(Date date){
+        Iterable<Venda> vendaIterable = this.vendaRepository.findAll();
+        List<Venda> lista = new ArrayList<>();
+        for (Venda v:vendaIterable) {
+            if (v.getDate().getDate()==date.getDate() &&
+                v.getDate().getMonth()==date.getMonth() &&
+                v.getDate().getYear()==date.getYear()){
+                lista.add(v);
+            }
+        }
+        return lista;
+    }
+
     public List<Venda> vendasMensais(int mes, int ano){
         Iterable<Venda> vendaIterable = this.vendaRepository.findAll();
         List<Venda> lista = new ArrayList<>();
@@ -51,7 +65,6 @@ public class VendaService {
                 lista.add(v);
             }
         }
-
         return lista;
     }
 
@@ -80,6 +93,19 @@ public class VendaService {
 
     public int[] pagamentoTypeCount(){
         return null;
+    }
+
+    public float receitaDiaria(Date date){
+        List<Venda> vendas = vendasDiarias(date);
+        float receita = 0;
+        for (Venda v: vendas) {
+            receita+= v.getValor();
+        }
+        return receita;
+    }
+
+    public int receitaSemanal(Date date) {
+        return date.getTimezoneOffset();
     }
 
     public float receitaMensal(int mes, int ano){
@@ -133,4 +159,6 @@ public class VendaService {
 
         return valor;
     }
+
+
 }

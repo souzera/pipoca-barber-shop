@@ -10,4 +10,13 @@ public class DateConverter {
         int dia = date.getDate();
         return new Date(ano,mes,dia);
     }
+
+    public static java.util.Date toJavaDate(Date date){
+        java.util.Date javaDate = new java.util.Date();
+        javaDate.setDate(date.getDate());
+        javaDate.setMonth(date.getMonth());
+        javaDate.setYear(date.getYear());
+
+        return javaDate;
+    }
 }

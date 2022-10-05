@@ -88,6 +88,7 @@
                                 <div class="btn-group row" role="group" id="botoes" >
                                     <div class="mb-2">
                                         <form action="/cliente/deletar" method="post">
+                                            <input type="text" name="id" th:value=${cliente.id} hidden>
                                             <button type="submit" class="btn btn-danger">Excluir</button>
                                         </form>
                                     </div>

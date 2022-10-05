@@ -47,6 +47,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Venda</th>
+                            <th scope="col">Data</th>
                             <th scope="col">Detalhes</th>
                         </tr>
                         </thead>
@@ -57,7 +58,8 @@
                             -->
                             <tr class="venda" th:each="objeto: ${lista}">
                                 <th scope="row" th:text="${objeto.id}">id</th>
-                                <td th:text="${objeto. toString()}">Venda</td>
+                                <td th:text="${objeto.toString()}">Venda</td>
+                                <td th:text="${objeto.date}"></td>
                                 <td>
                                     <a class="nav-link" th:href="@{/venda/details(id=${objeto.id})}"><i class="fas fa-fw fa-wrench"></i></a>
                                 </td>
