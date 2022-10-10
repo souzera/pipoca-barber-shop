@@ -1,14 +1,14 @@
 package com.br.pipoca.controller;
 
 import com.br.pipoca.dto.AtendimentosFuncionarioDiariosDTO;
+import com.br.pipoca.dto.ListaMetodosPagamentoDTO;
 import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.entity.Usuario;
-import com.br.pipoca.service.AtendimentoService;
-import com.br.pipoca.service.CookieService;
-import com.br.pipoca.service.FuncionarioService;
-import com.br.pipoca.service.UsuarioService;
+import com.br.pipoca.entity.Venda;
+import com.br.pipoca.service.*;
 import com.br.pipoca.util.Cargo;
 import com.br.pipoca.util.DateConverter;
+import com.br.pipoca.util.Pagamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,9 +32,14 @@ public class GraficosController {
     @Autowired
     AtendimentoService atendimentoService;
 
+    @Autowired
+    VendaService vendaService;
+
     @GetMapping
     @RequestMapping("/graficos")
     public ModelAndView graficos(HttpServletRequest request) throws IOException {
+        java.util.Date hoje = new java.util.Date();
+
         ModelAndView modelAndView = new ModelAndView("admin/graficos");
         Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
         modelAndView.addObject("usuario", u);
@@ -45,11 +50,10 @@ public class GraficosController {
             case DEV:
             case SUPER:
             case ATENDENTE:
+
                 //Note: ESTA LISTAGEM É ESTATICA
-                //TODO: TENTAR FAZER DE FORMA DINAMICA
-
+                //TODO: TENTAR FAZER DE FORMA DINAMICA - ok
                 List<AtendimentosFuncionarioDiariosDTO> barbeirosAtendimentos = new ArrayList<>();
-
                 List<Funcionario> barbeiros = funcionarioService.findByCargo(Cargo.BARBEIRO);
 
                 for (Funcionario barber: barbeiros){
@@ -58,6 +62,22 @@ public class GraficosController {
 
                 }
                 modelAndView.addObject("barbeirosTable",  barbeirosAtendimentos);
+                // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
+
+                List<ListaMetodosPagamentoDTO> listaMetodosPag = new ArrayList<>();
+                //Venda em Dinheiro Diarias
+                listaMetodosPag.add(new ListaMetodosPagamentoDTO("Dinheiro",
+                                vendaService.vendasPorPagTypeDate(Pagamento.DINHEIRO,DateConverter.dateConverter(hoje))));
+                //Venda em Cartão Diarias
+                listaMetodosPag.add(new ListaMetodosPagamentoDTO("Cartão",
+                        vendaService.vendasPorPagTypeDate(Pagamento.CARTAO, DateConverter.dateConverter(hoje))));
+                //Venda em Pix Diarias
+                listaMetodosPag.add(new ListaMetodosPagamentoDTO("Pix",
+                        vendaService.vendasPorPagTypeDate(Pagamento.PIX, DateConverter.dateConverter(hoje))));
+
+                System.out.println(listaMetodosPag);
+
+                modelAndView.addObject("tableMetPag",listaMetodosPag);
                 break;
             case BARBEIRO:
                 break;

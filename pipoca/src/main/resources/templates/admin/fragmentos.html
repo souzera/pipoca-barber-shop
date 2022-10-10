@@ -605,6 +605,9 @@
     </div>
 
     <div class="container text-center">
+        <hr>
+        <h2> Agendamentos do Dia </h2>
+        <br>
         <div class="row">
           <div class="col" th:each="table:${barbeirosTable}">
 
@@ -632,6 +635,35 @@
                 </tbody>
             </table>
           </div>
+        </div>
+
+        <hr>
+        <h2> Métodos de Pagamento </h2>
+        <br>
+
+        
+        <div class="row">
+
+            <div class="col" th:each="table:${tableMetPag}">
+                <h3 th:text="${table.metodo}"></h3>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Venda</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="venda" th:each="objeto: ${table.lista}">
+                            <th scope="row" th:text="${objeto.id}">id</th>
+                            <td th:text="${objeto.toString()}">Venda</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h5 style="text-align: right;"> Total: <span th:text="${table.total}"></span></h5>
+            </div>
         </div>
       </div>
 

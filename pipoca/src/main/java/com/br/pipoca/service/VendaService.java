@@ -79,6 +79,19 @@ public class VendaService {
         return lista;
     }
 
+    public List<Venda> vendasPorPagTypeDate(Pagamento pagamento, Date date){
+        Iterable<Venda> vendaIterable = vendasDiarias(date);
+        List<Venda> lista = new ArrayList<>();
+        for (Venda v:vendaIterable) {
+            if (v.getPagamento()==pagamento){
+                lista.add(v);
+            }
+        }
+
+        System.out.println(lista);
+        return lista;
+    }
+
     public List<Venda> vendasDinheiro(){
         return vendasPorTipoPagamento(Pagamento.DINHEIRO);
     }
@@ -159,6 +172,4 @@ public class VendaService {
 
         return valor;
     }
-
-
 }
