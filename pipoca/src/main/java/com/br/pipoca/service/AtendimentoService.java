@@ -160,6 +160,18 @@ public class AtendimentoService {
         return lista;
     }
 
+    public List<Atendimento> listarPorDiaFuncionario(long funcionario_id, Date date){
+        Iterable<Atendimento> atendimentoIterable = this.atendimentoRepository.findAll();
+        List<Atendimento> lista = new ArrayList<>();
+        for (Atendimento a: atendimentoIterable) {
+            if (a.getHorario().getFuncionario().getId() == funcionario_id &&
+                    a.getHorario().getDate() == date){
+                lista.add(a);
+            }
+        }
+        return lista;
+    }
+
     public Atendimento atualizarAgenda(long agenda_id, Atendimento novoAtendimento){
         Atendimento a = buscarPorId(agenda_id);
         a.setHorario(novoAtendimento.getHorario());

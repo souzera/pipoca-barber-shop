@@ -100,6 +100,10 @@ public class Cliente {
         this.usuario = usuario;
     }
 
+    public String getFirstName(){
+        return nome.substring(0, nome.indexOf(" "));
+    }
+
     @Override
     public String toString() {
         return "Cliente{" +

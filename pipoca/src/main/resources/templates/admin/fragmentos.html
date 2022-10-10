@@ -41,6 +41,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="/agendamentos">Agendamentos</a>
                 <a th:if="${admPass}" class="collapse-item" href="/busca/agendamento">Buscar Agendamento</a>
+                <a th:if="${funPass}" class="collapse-item" href="/busca/agendamento">Buscar Agendamento</a>
                 <a class="collapse-item" href="/agendar/step1">Agendar Horário</a>
                 <a class="collapse-item" href="/agendamentos">Cancelar Agendamento</a>
                 <a class="collapse-item" href="/agendamentos" hidden>Alterar Agendamento</a>
@@ -159,6 +160,16 @@
     <div th:if="${admPass}" class="sidebar-heading">
         Utilidades
     </div>
+
+    <div th:if="${funPass}" class="sidebar-heading">
+        Utilidades
+    </div>
+
+    <li th:if="${funPass}" class="nav-item">
+        <a class="nav-link" href="/graficos">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Controle Díario</span></a>
+    </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item" hidden>
@@ -400,7 +411,7 @@
 
 
 
-<!--Graphs-->
+<!--Graphs ADM-->
 <div th:fragment="charts" th:if="${admPass}" class="row">
 
     <!-- Area Chart -->
@@ -513,5 +524,124 @@
     </form>
 
 </div>
+
+
+
+
+
+
+
+<!--Graphs ATE-->
+<div th:fragment="chartsFun" th:if="${funPass}" class="row">
+
+    <!-- Area Chart -->
+    <div class="col-xl-8 col-lg-7">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-black">Visão Geral</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header" hidden>Menu:</div>
+                        <a class="dropdown-item" href="/graficos">Expandir</a>
+                        <div class="dropdown-divider" hidden></div>
+                        <a class="dropdown-item" href="#" hidden>Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="myAreaChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-black">Métodos de Pagamentos</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header" hidden>Menu:</div>
+                        <a class="dropdown-item" href="/graficos">Expandir</a>
+                        <a class="dropdown-item" href="#" hidden>Another action</a>
+                        <div class="dropdown-divider" hidden></div>
+                        <a class="dropdown-item" href="#" hidden>Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2">
+                    <canvas id="myPieChart"></canvas>
+                </div>
+                <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-primary"></i> Dinheiro
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-success"></i> Pix
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-info"></i> Cartão
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-center">
+        <div class="row">
+          <div class="col" th:each="table:${barbeirosTable}">
+
+            <h3 th:text="${table.funcionario.nome}"></h3>
+
+            <table id="agendamentos-table" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Hora</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--
+                        Thymleaf Agenda
+                    -->
+                    <tr class="atendimento" th:each="objeto:${table.atendimentos}">
+                        <th scope="row" th:text="${objeto.id}">id</th>
+                        <td th:text="${objeto.cliente.getFirstName}"></td>
+                        <td th:text="${objeto.horario.hora.valor}"></td>
+                        <td th:text="${objeto.horario.statusHorario}"></td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+</div>
+<!--End of Graphs-->
+
+
+
+
+
+
 
 </html>
