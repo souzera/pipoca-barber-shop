@@ -391,7 +391,7 @@
 
 
 <!--Footer-->
-<footer th:fragment="footer" class="sticky-footer bg-white">
+<footer th:fragment="footer" class="sticky-footer bg-white mt-3">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
             <span>Copyright &copy; Pipoca Barber Shop 2022</span>
@@ -535,7 +535,7 @@
 <div th:fragment="chartsFun" th:if="${funPass}" class="row">
 
     <!-- Area Chart -->
-    <div class="col-xl-8 col-lg-7">
+    <div class="col-xl-8 col-lg-7" hidden>
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -564,7 +564,7 @@
     </div>
 
     <!-- Pie Chart -->
-    <div class="col-xl-4 col-lg-5">
+    <div class="col-xl-4 col-lg-5" hidden>
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -611,29 +611,32 @@
         <div class="row">
           <div class="col" th:each="table:${barbeirosTable}">
 
-            <h3 th:text="${table.funcionario.nome}"></h3>
+            <div class="card shadow m-1 pt-4 pb-3 p-1">   
+                <h3 th:text="${table.funcionario.nome}"></h3>
+    
+                <table id="agendamentos-table" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Hora</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--
+                            Thymleaf Agenda
+                        -->
+                        <tr class="atendimento" th:each="objeto:${table.atendimentos}">
+                            <th scope="row" th:text="${objeto.id}">id</th>
+                            <td th:text="${objeto.cliente.getFirstName}"></td>
+                            <td th:text="${objeto.horario.hora.valor}"></td>
+                            <td th:text="${objeto.horario.statusHorario}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-            <table id="agendamentos-table" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Cliente</th>
-                        <th scope="col">Hora</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!--
-                        Thymleaf Agenda
-                    -->
-                    <tr class="atendimento" th:each="objeto:${table.atendimentos}">
-                        <th scope="row" th:text="${objeto.id}">id</th>
-                        <td th:text="${objeto.cliente.getFirstName}"></td>
-                        <td th:text="${objeto.horario.hora.valor}"></td>
-                        <td th:text="${objeto.horario.statusHorario}"></td>
-                    </tr>
-                </tbody>
-            </table>
           </div>
         </div>
 
@@ -641,28 +644,65 @@
         <h2> Métodos de Pagamento </h2>
         <br>
 
-        
         <div class="row">
 
             <div class="col" th:each="table:${tableMetPag}">
-                <h3 th:text="${table.metodo}"></h3>
+                
+                <div class="card shadow m-1 pt-3 pb-3 p-1">
+                    <h3 class=" rounded" th:text="${table.metodo}"></h3>
 
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Venda</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="venda" th:each="objeto: ${table.lista}">
-                            <th scope="row" th:text="${objeto.id}">id</th>
-                            <td th:text="${objeto.toString()}">Venda</td>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Venda</th>
                         </tr>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <tr class="venda" th:each="objeto: ${table.lista}">
+                                <th scope="row" th:text="${objeto.id}">id</th>
+                                <td th:text="${objeto.toString()}">Venda</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+            
+                    <h5 class="" style="text-align: right;"> Total: <span th:text="${table.total}"></span></h5>
+                </div>
 
-                <h5 style="text-align: right;"> Total: <span th:text="${table.total}"></span></h5>
+
+
+            </div>
+        </div>
+
+        <hr>
+        <h2> Receita por Barbeiro </h2>
+        <br>
+
+        <div class="row">
+            <div class="col" th:each="table:${tableVendaFunc}">
+                
+                <div class="card shadow m-1 pt-3 pb-3 p-1">
+                    <h3 class=" rounded" th:text="${table.funcionario.nome}"></h3>
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Venda</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="venda" th:each="objeto: ${table.vendas}">
+                                <th scope="row" th:text="${objeto.id}">id</th>
+                                <td th:text="${objeto.toString()}">Venda</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+            
+                    <h5 class="" style="text-align: right;"> Total: <span th:text="${table.receita}"></span></h5>
+                </div>
             </div>
         </div>
       </div>

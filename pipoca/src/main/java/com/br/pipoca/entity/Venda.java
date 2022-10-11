@@ -87,7 +87,6 @@ public class Venda {
         this.valor = valor;
     }
 
-
     @Override
     public String toString() {
         if (!(this.produto != null)){

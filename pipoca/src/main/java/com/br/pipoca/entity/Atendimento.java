@@ -52,6 +52,10 @@ public class Atendimento {
         this.servico = servico;
     }
 
+    public Funcionario getFuncionario(){
+        return this.horario.getFuncionario();
+    }
+
     public Atendimento(long id, Cliente cliente, Horario horario, Servico servico) {
         this.id = id;
         this.cliente = cliente;

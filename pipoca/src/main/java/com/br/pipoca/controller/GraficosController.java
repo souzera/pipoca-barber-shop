@@ -2,6 +2,7 @@ package com.br.pipoca.controller;
 
 import com.br.pipoca.dto.AtendimentosFuncionarioDiariosDTO;
 import com.br.pipoca.dto.ListaMetodosPagamentoDTO;
+import com.br.pipoca.dto.ListaVendaFuncionarioDTO;
 import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.entity.Usuario;
 import com.br.pipoca.entity.Venda;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class GraficosController {
     @GetMapping
     @RequestMapping("/graficos")
     public ModelAndView graficos(HttpServletRequest request) throws IOException {
-        java.util.Date hoje = new java.util.Date();
+        Date hoje = DateConverter.dateConverter(new java.util.Date());
 
         ModelAndView modelAndView = new ModelAndView("admin/graficos");
         Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
@@ -58,7 +60,7 @@ public class GraficosController {
 
                 for (Funcionario barber: barbeiros){
                     barbeirosAtendimentos.add(new AtendimentosFuncionarioDiariosDTO(barber,
-                            atendimentoService.agendamentosDateEFuncionario(barber, DateConverter.dateConverter(new java.util.Date()))));
+                            atendimentoService.agendamentosDateEFuncionario(barber, hoje)));
 
                 }
                 modelAndView.addObject("barbeirosTable",  barbeirosAtendimentos);
@@ -67,17 +69,29 @@ public class GraficosController {
                 List<ListaMetodosPagamentoDTO> listaMetodosPag = new ArrayList<>();
                 //Venda em Dinheiro Diarias
                 listaMetodosPag.add(new ListaMetodosPagamentoDTO("Dinheiro",
-                                vendaService.vendasPorPagTypeDate(Pagamento.DINHEIRO,DateConverter.dateConverter(hoje))));
+                                vendaService.vendasPorPagTypeDate(Pagamento.DINHEIRO,hoje)));
                 //Venda em Cartão Diarias
                 listaMetodosPag.add(new ListaMetodosPagamentoDTO("Cartão",
-                        vendaService.vendasPorPagTypeDate(Pagamento.CARTAO, DateConverter.dateConverter(hoje))));
+                        vendaService.vendasPorPagTypeDate(Pagamento.CARTAO, hoje)));
                 //Venda em Pix Diarias
                 listaMetodosPag.add(new ListaMetodosPagamentoDTO("Pix",
-                        vendaService.vendasPorPagTypeDate(Pagamento.PIX, DateConverter.dateConverter(hoje))));
-
-                System.out.println(listaMetodosPag);
+                        vendaService.vendasPorPagTypeDate(Pagamento.PIX, hoje)));
 
                 modelAndView.addObject("tableMetPag",listaMetodosPag);
+
+                // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
+
+                List<ListaVendaFuncionarioDTO> listaVendaFunc = new ArrayList<>();
+
+                for (Funcionario barber: barbeiros){
+                    listaVendaFunc.add(new ListaVendaFuncionarioDTO(barber,
+                            vendaService.vendasAgendaByDateFuncionario(hoje, barber)));
+                }
+                modelAndView.addObject("tableVendaFunc", listaVendaFunc);
+
+                // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
+
+
                 break;
             case BARBEIRO:
                 break;

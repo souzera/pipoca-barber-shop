@@ -18,5 +18,11 @@ public interface VendaRepository extends JpaRepository<Venda, Long> {
     List<Venda> vendaAgenda();
     @Query(value = "select * from venda where produto_id is not null", nativeQuery = true)
     List<Venda> vendaProdutos();
+    @Query(value = "select * from venda where date=:date", nativeQuery = true)
+    List<Venda> vendaDate(@Param("date") Date date);
+    @Query(value ="select * from venda where date=:date and atendimento_id is not null",nativeQuery = true)
+    List<Venda> vendaAgendaDate(@Param("date") Date date);
+    @Query(value ="select * from venda where date=:date and produto_id is not null",nativeQuery = true)
+    List<Venda> vendaProdutoDate(@Param("date") Date date);
 
 }

@@ -1,5 +1,6 @@
 package com.br.pipoca.service;
 
+import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.entity.Venda;
 import com.br.pipoca.repository.VendaRepository;
 import com.br.pipoca.util.Pagamento;
@@ -32,13 +33,44 @@ public class VendaService {
         return vendaRepository.findById(id);
     }
 
+    //Todo: depurar
     public List<Venda> vendasDiarias(Date date){
+        return this.vendaRepository.vendaDate(date);
+        /*
         Iterable<Venda> vendaIterable = this.vendaRepository.findAll();
         List<Venda> lista = new ArrayList<>();
         for (Venda v:vendaIterable) {
             if (v.getDate().getDate()==date.getDate() &&
                 v.getDate().getMonth()==date.getMonth() &&
                 v.getDate().getYear()==date.getYear()){
+                lista.add(v);
+            }
+        }
+        return lista;
+        */
+    }
+
+    public List<Venda> vendasDiariasAgenda(Date date){
+        return this.vendaRepository.vendaAgendaDate(date);
+    }
+    public List<Venda> vendasDiariasProduto(Date date){
+        return this.vendaRepository.vendaProdutoDate(date);
+    }
+    public List<Venda> vendasAgendaByFuncionario(List<Venda> vendas, long funcionario_id){
+        List<Venda> lista = new ArrayList<>();
+        for (Venda v: vendas){
+            if(v.getAtendimento().getHorario().getFuncionario().getId()==funcionario_id){
+                lista.add(v);
+            }
+        }
+        return lista;
+    }
+
+    public List<Venda> vendasAgendaByDateFuncionario(Date date, Funcionario funcionario){
+        Iterable<Venda> vendas = vendasDiariasAgenda(date);
+        List<Venda> lista = new ArrayList<>();
+        for (Venda v: vendas){
+            if (v.getAtendimento().getFuncionario().getId() == funcionario.getId()){
                 lista.add(v);
             }
         }

@@ -18,10 +18,10 @@ public class Cliente {
     @Enumerated(EnumType.ORDINAL)
     private Sexo sexo;
     private Date dtNascimento;
+
     @OneToOne
     @JoinColumn
-    @NotNull
-    private Usuario usuario;
+    private Usuario usuario; // @NotNull
 
     public Cliente() {}
 
