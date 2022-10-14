@@ -1,6 +1,6 @@
 package com.br.pipoca.controller;
 
-import com.br.pipoca.dto.ClienteDTO;
+import com.br.pipoca.entity.*;
 import com.br.pipoca.entity.*;
 import com.br.pipoca.service.*;
 import com.br.pipoca.util.DateConverter;
@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.sql.Date;
 
 @Controller
 public class DetalhesController {

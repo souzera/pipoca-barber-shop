@@ -1,6 +1,5 @@
 package com.br.pipoca.controller;
 
-import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.entity.Horario;
 import com.br.pipoca.repository.HorarioRepository;
 import com.br.pipoca.service.HorarioService;

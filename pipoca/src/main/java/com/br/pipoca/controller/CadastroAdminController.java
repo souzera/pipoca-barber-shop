@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
-import java.util.List;
 
 @Controller
 public class CadastroAdminController {
@@ -76,19 +75,21 @@ public class CadastroAdminController {
     }
     @PostMapping(value = "/cadastrando/cliente")
     public String createCliente(UsuarioDTO usuarioDTO, ClienteDTO clienteDTO, Model model){
-        if (usuarioService.isPresent(usuarioDTO.getLogin())){
-            model.addAttribute("erro", "Este usuário já existe.");
-            return "admin/cadastroCliente";
-        }
-        if(!(usuarioDTO.getSenha().equals(usuarioDTO.getConfirmaSenha()))){
-            model.addAttribute("erro", "As senhas devem ser correspondentes");
-            return "admin/cadastroCliente";
-        }
-        Usuario usuario = usuarioDTO.toUsuarioCliente();
-        usuarioService.criptarSenha(usuario);
-        usuarioService.saveUsuario(usuario);
         Cliente cliente = clienteDTO.toCliente();
-        cliente.setUsuario(usuarioService.findByLogin(usuario.getLogin()));
+        if (usuarioDTO.getLogin() != "") {
+            if (usuarioService.isPresent(usuarioDTO.getLogin())) {
+                model.addAttribute("erro", "Este usuário já existe.");
+                return "admin/cadastroCliente";
+            }
+            if (!(usuarioDTO.getSenha().equals(usuarioDTO.getConfirmaSenha()))) {
+                model.addAttribute("erro", "As senhas devem ser correspondentes");
+                return "admin/cadastroCliente";
+            }
+            Usuario usuario = usuarioDTO.toUsuarioCliente();
+            usuarioService.criptarSenha(usuario);
+            usuarioService.saveUsuario(usuario);
+            cliente.setUsuario(usuarioService.findByLogin(usuario.getLogin()));
+        }
         clienteService.saveCliente(cliente);
         //lembrar de mudar esse redirect
         return "redirect:/login";

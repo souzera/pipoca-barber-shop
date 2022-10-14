@@ -5,11 +5,11 @@ import com.br.pipoca.dto.ListaMetodosPagamentoDTO;
 import com.br.pipoca.dto.ListaVendaFuncionarioDTO;
 import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.entity.Usuario;
-import com.br.pipoca.entity.Venda;
 import com.br.pipoca.service.*;
 import com.br.pipoca.util.Cargo;
 import com.br.pipoca.util.DateConverter;
 import com.br.pipoca.util.Pagamento;
+import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +45,7 @@ public class GraficosController {
         ModelAndView modelAndView = new ModelAndView("admin/graficos");
         Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
         modelAndView.addObject("usuario", u);
+        modelAndView.addObject("hoje", hoje.getDate() + "/" + hoje.getMonth() + "/" + hoje.getYear());
         usuarioService.addPass(u, modelAndView);
 
         switch (u.getTipoUsuario()){
@@ -91,6 +92,13 @@ public class GraficosController {
 
                 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
 
+
+                //TODO: Apagar
+                try {
+                    atendimentoService.gerarRelatorioDay(hoje);
+                } catch (DocumentException e) {
+                    throw new RuntimeException(e);
+                }
 
                 break;
             case BARBEIRO:

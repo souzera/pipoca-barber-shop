@@ -1,8 +1,6 @@
 package com.br.pipoca.dto;
 
 import com.br.pipoca.entity.Venda;
-import com.br.pipoca.service.VendaService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 

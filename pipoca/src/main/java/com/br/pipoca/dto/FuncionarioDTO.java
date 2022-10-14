@@ -3,7 +3,6 @@ package com.br.pipoca.dto;
 import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.util.Cargo;
 import com.br.pipoca.util.Sexo;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 

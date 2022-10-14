@@ -1,11 +1,6 @@
 package com.br.pipoca.dto;
 
 import com.br.pipoca.entity.Atendimento;
-import com.br.pipoca.entity.Cliente;
-import com.br.pipoca.entity.Servico;
-import com.br.pipoca.service.ClienteService;
-import com.br.pipoca.service.ServicoService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class AtendimentoDTO {
     private long cliente_id;

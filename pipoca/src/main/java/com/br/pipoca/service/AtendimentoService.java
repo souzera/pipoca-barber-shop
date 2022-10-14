@@ -1,16 +1,19 @@
 package com.br.pipoca.service;
 
 import com.br.pipoca.entity.Atendimento;
-import com.br.pipoca.entity.Cliente;
 import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.repository.AtendimentoRepository;
+import com.br.pipoca.util.GeradorPdf;
 import com.br.pipoca.util.StatusHorario;
+import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -201,5 +204,13 @@ public class AtendimentoService {
             return 100-progresso;
         }
         return 0;
+    }
+
+    public void gerarRelatorioDay(Date date) throws IOException, DocumentException {
+        try {
+            GeradorPdf.relatorioAtendimentos(agendamentosDate(date));
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

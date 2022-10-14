@@ -1,9 +1,8 @@
 package com.br.pipoca.controller;
 
-import com.br.pipoca.dto.ClienteDTO;
+import com.br.pipoca.entity.*;
 import com.br.pipoca.entity.*;
 import com.br.pipoca.service.*;
-import com.br.pipoca.util.Cargo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

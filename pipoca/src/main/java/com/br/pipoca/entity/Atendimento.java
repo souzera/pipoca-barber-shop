@@ -68,4 +68,12 @@ public class Atendimento {
         this.cliente = cliente;
         this.horario = horario;
     }
+
+    @Override
+    public String toString() {
+        return "Aº " + id +
+                ", Cliente:" + cliente.getFirstName() +
+                ", Funcionário: =" + horario.getFuncionario().getFirstName()+
+                ", Hora: " + horario.getHora().getValor();
+    }
 }

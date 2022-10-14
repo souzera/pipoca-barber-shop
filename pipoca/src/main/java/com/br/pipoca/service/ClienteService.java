@@ -1,6 +1,5 @@
 package com.br.pipoca.service;
 
-import com.br.pipoca.entity.Atendimento;
 import com.br.pipoca.entity.Cliente;
 import com.br.pipoca.repository.ClienteRepository;
 import com.br.pipoca.util.DateConverter;

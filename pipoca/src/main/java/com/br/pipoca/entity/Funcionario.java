@@ -14,6 +14,8 @@ public class Funcionario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
+
+    private String apelido;
     private String telefone;
 
     @Enumerated
@@ -112,4 +114,14 @@ public class Funcionario {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public String getApelido() {return apelido;}
+
+    public void setApelido(String apelido) {this.apelido = apelido;}
+
+    public String getFirstName(){
+        return nome.substring(0, nome.indexOf(" "));
+    }
+
+
 }

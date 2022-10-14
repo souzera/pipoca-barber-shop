@@ -534,6 +534,10 @@
 <!--Graphs ATE-->
 <div th:fragment="chartsFun" th:if="${funPass}" class="row">
 
+    <div class="col-xl-8 col-lg-7" >
+        <h1> Dia: <span th:text="${hoje}"></span></h1>
+    </div>
+
     <!-- Area Chart -->
     <div class="col-xl-8 col-lg-7" hidden>
         <div class="card shadow mb-4">

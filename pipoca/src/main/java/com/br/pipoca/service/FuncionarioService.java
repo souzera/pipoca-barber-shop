@@ -1,17 +1,14 @@
 package com.br.pipoca.service;
 
-import com.br.pipoca.entity.Cliente;
 import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.repository.FuncionarioRepository;
 import com.br.pipoca.util.Cargo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FuncionarioService {
