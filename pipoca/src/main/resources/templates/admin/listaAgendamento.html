@@ -75,7 +75,7 @@
                                 <tr class="atendimento" th:each="objeto:${lista}">
                                     <th scope="row" th:text="${objeto.id}">id</th>
                                     <td th:text="${objeto.cliente.nome}"></td>
-                                    <td th:text="${objeto.horario.funcionario.nome}"></td>
+                                    <td th:text="${objeto.horario.funcionario.getApelido}"></td>
                                     <td th:text="${objeto.horario.date}"></td>
                                     <td th:text="${objeto.horario.hora.valor}"></td>
                                     <td th:text="${objeto.servico.valor}"></td>

@@ -49,7 +49,8 @@ public class Funcionario {
         this.cargo = cargo;
     }
 
-    public Funcionario(long id, String nome, String telefone, Sexo sexo, Date dtNascimento, Cargo cargo, Usuario usuario) {
+    public Funcionario(long id, String nome, String telefone, Sexo sexo,
+                       Date dtNascimento, Cargo cargo, Usuario usuario) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
@@ -115,8 +116,10 @@ public class Funcionario {
         this.usuario = usuario;
     }
 
-    public String getApelido() {return apelido;}
-
+    public String getApelido() {
+        if (!(apelido != null)){return getFirstName();}
+        return apelido;
+    }
     public void setApelido(String apelido) {this.apelido = apelido;}
 
     public String getFirstName(){

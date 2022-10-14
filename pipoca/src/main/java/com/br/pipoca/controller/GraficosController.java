@@ -53,7 +53,6 @@ public class GraficosController {
             case DEV:
             case SUPER:
             case ATENDENTE:
-
                 //Note: ESTA LISTAGEM É ESTATICA
                 //TODO: TENTAR FAZER DE FORMA DINAMICA - ok
                 List<AtendimentosFuncionarioDiariosDTO> barbeirosAtendimentos = new ArrayList<>();
@@ -91,14 +90,6 @@ public class GraficosController {
                 modelAndView.addObject("tableVendaFunc", listaVendaFunc);
 
                 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
-
-
-                //TODO: Apagar
-                try {
-                    atendimentoService.gerarRelatorioDay(hoje);
-                } catch (DocumentException e) {
-                    throw new RuntimeException(e);
-                }
 
                 break;
             case BARBEIRO:

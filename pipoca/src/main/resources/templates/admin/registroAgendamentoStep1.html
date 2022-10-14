@@ -65,7 +65,7 @@
                                 <label class="form-label" for="funcionario">Barbeiro</label>
                                 <select class="form-select" required name="funcionario_id" id="funcionario">
                                     <option selected th:each="funcionario:${funcionarios}" th:value="${funcionario.id}"
-                                        th:text="${funcionario.nome}"></option>
+                                        th:text="${funcionario.getApelido}"></option>
                                 </select>
                             </div>
 
@@ -73,7 +73,7 @@
                                 <label class="form-label" for="funcionario">Barbeiro</label>
                                 <select class="form-select" required name="funcionario_id" id="funcionario">
                                     <option selected th:each="funcionario:${funcionarios}" th:value="${funcionario.id}"
-                                        th:text="${funcionario.nome}"></option>
+                                        th:text="${funcionario.getApelido}"></option>
                                 </select>
                             </div>
                         </div>
