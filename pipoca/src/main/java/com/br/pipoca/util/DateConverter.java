@@ -1,6 +1,7 @@
 package com.br.pipoca.util;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class DateConverter {
 
@@ -18,5 +19,10 @@ public class DateConverter {
         javaDate.setYear(date.getYear());
 
         return javaDate;
+    }
+
+    public static String textDateFormat(java.util.Date date){
+        SimpleDateFormat patternDate = new SimpleDateFormat("dd/MM/yyyy");
+        return patternDate.format(date);
     }
 }

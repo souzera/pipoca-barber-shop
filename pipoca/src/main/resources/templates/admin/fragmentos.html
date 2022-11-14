@@ -157,8 +157,8 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/graficos">Diário</a>
-                <a class="collapse-item" href="/graficos">Semanal</a>
+                <a class="collapse-item" href="/today-charts">Diário</a>
+                <a class="collapse-item" href="/week-charts">Semanal</a>
             </div>
         </div>
     </li>
@@ -501,7 +501,8 @@
             <div class="container bg-light col-mb-5">
 
                 <label class="checkbox-inline row" th:each="produto:${produtos}">
-                    <input name="produto_id" type="checkbox" id="produto" th:value="${produto.id}" th:text="${produto.descricao}" th:field="*{produtos}"/>
+                    <input name="produto_id" type="checkbox" id="produto" th:value="${produto.id}"
+                        th:text="${produto.descricao}" th:field="*{produtos}" />
                 </label>
 
                 <div class="row">
@@ -524,114 +525,184 @@
 
 
 <!--Graphs ATE-->
-<div th:fragment="chartsFun" th:if="${funPass}" class="row">
+<div th:fragment="chartsFun" th:if="${funPass}">
 
-    <div class="col-xl-8 col-lg-7" >
+    <div class="row flex-row align-items-center">
         <h1> Dia: <span th:text="${hoje}"></span></h1>
     </div>
 
-    <div class="container text-center">
-        <hr>
-        <h2> Agenda p/ Barbeiro </h2>
-        <br>
-        <div class="row">
-          <div class="col" th:each="table:${barbeirosTable}">
-
-            <div class="card shadow m-1 pt-4 pb-3 p-1">   
-                <h3 th:text="${table.funcionario.getApelido}"></h3>
+    <br>
+    <hr>
+    <br>
     
-                <table id="agendamentos-table" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Cliente</th>
-                            <th scope="col">Hora</th>
-                            <th scope="col">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!--
-                            Thymleaf Agenda
-                        -->
-                        <tr class="atendimento" th:each="objeto:${table.atendimentos}">
-                            <th scope="row" th:text="${objeto.id}">id</th>
-                            <td th:text="${objeto.cliente.getFirstName}"></td>
-                            <td th:text="${objeto.horario.hora.valor}"></td>
-                            <td th:text="${objeto.horario.statusHorario}"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-          </div>
-        </div>
-
-        <hr>
-        <h2> Métodos de Pagamento </h2>
-        <br>
-
-        <div class="row">
-
-            <div class="col" th:each="table:${tableMetPag}">
-                
-                <div class="card shadow m-1 pt-3 pb-3 p-1">
-                    <h3 class=" rounded" th:text="${table.metodo}"></h3>
-
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Venda</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="venda" th:each="objeto: ${table.lista}">
-                                <th scope="row" th:text="${objeto.id}">id</th>
-                                <td th:text="${objeto.toString()}">Venda</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-            
-                    <h5 class="" style="text-align: right;"> Total: <span th:text="${table.total}"></span></h5>
-                </div>
-
-
-
-            </div>
-        </div>
-
-        <hr>
-        <h2> Receita por Barbeiro </h2>
-        <br>
-
-        <div class="row">
-            <div class="col" th:each="table:${tableVendaFunc}">
-                
-                <div class="card shadow m-1 pt-3 pb-3 p-1">
-                    <h3 class=" rounded" th:text="${table.funcionario.nome}"></h3>
-
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Venda</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="venda" th:each="objeto: ${table.vendas}">
-                                <th scope="row" th:text="${objeto.id}">id</th>
-                                <td th:text="${objeto.toString()}">Venda</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-            
-                    <h5 class="" style="text-align: right;"> Total: <span th:text="${table.receita}"></span></h5>
+    <div class="row">
+        <!-- Total Arrecadado -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Total: <span th:text="${hoje}"></span></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <span th:text="${total}"></span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-cash-register fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-      </div>
+
+
+        <!---->
+        <div class="col-xl-3 col-md-6 mb-4" th:each=" table: ${tableVendaFunc}">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total: <span th:text="${table.funcionario.getApelido}"></span></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <span th:text="${table.receita}"></span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+    
+    </div>
+
+    <div class="row">
+
+        <div class="container text-center">
+
+            <div th:if="${isSemana}">
+                <h2>Agendamentos da Semana</h2>
+                <br>
+                <div class="row">
+                    <table th:replace="~{admin/listaAgendamento :: agenda}"></table>
+                </div>
+            </div>
+
+            
+            
+            <h2> Agenda p/ Barbeiro </h2>
+            <br>
+            <div class="row">
+                <div class="col" th:each="table:${barbeirosTable}">
+
+                    <div class="card shadow m-1 pt-4 pb-3 p-1">
+                        <h3 th:text="${table.funcionario.getApelido}"></h3>
+
+                        <table id="agendamentos-table" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Cliente</th>
+                                    <th scope="col">Hora</th>
+                                    <th scope="col" th:if="${isSemana}">Dia</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--
+                                Thymleaf Agenda
+                            -->
+                                <tr class="atendimento" th:each="objeto:${table.atendimentos}">
+                                    <th scope="row" th:text="${objeto.id}">id</th>
+                                    <td th:text="${objeto.cliente.getFirstName}"></td>
+                                    <td th:text="${objeto.horario.hora.valor}"></td>
+                                    <th scope="col" th:if="${isSemana}" th:text="${objeto.horario.getDateTextFormat}"></th>
+                                    <td th:text="${objeto.horario.statusHorario}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <hr>
+            <h2> Métodos de Pagamento </h2>
+            <br>
+
+            <div class="row">
+
+                <div class="col" th:each="table:${tableMetPag}">
+
+                    <div class="card shadow m-1 pt-3 pb-3 p-1">
+                        <h3 class=" rounded" th:text="${table.metodo}"></h3>
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Venda</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="venda" th:each="objeto: ${table.lista}">
+                                    <th scope="row" th:text="${objeto.id}">id</th>
+                                    <td th:text="${objeto.toString()}">Venda</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <h5 class="" style="text-align: right;"> Total: <span th:text="${table.total}"></span></h5>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+            <hr>
+            <h2> Receita por Barbeiro </h2>
+            <br>
+
+            <div class="row">
+                <div class="col" th:each="table:${tableVendaFunc}">
+
+                    <div class="card shadow m-1 pt-3 pb-3 p-1">
+                        <h3 class=" rounded" th:text="${table.funcionario.getApelido}"></h3>
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Venda</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="venda" th:each="objeto: ${table.vendas}">
+                                    <th scope="row" th:text="${objeto.id}">id</th>
+                                    <td th:text="${objeto.toString()}">Venda</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <h5 class="" style="text-align: right;"> Total: <span th:text="${table.receita}"></span></h5>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
 
 </div>
 <!--End of Graphs-->

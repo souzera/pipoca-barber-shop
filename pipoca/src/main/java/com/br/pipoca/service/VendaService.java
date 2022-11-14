@@ -4,6 +4,8 @@ import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.entity.Venda;
 import com.br.pipoca.repository.VendaRepository;
 import com.br.pipoca.util.Pagamento;
+import com.br.pipoca.util.Semana;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,22 +35,43 @@ public class VendaService {
         return vendaRepository.findById(id);
     }
 
+    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
+    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
     //Todo: depurar
     public List<Venda> vendasDiarias(Date date){
         return this.vendaRepository.vendaDate(date);
-        /*
+    }
+    public List<Venda> vendasSemanais(Date date){
+        List<Venda> lista = new ArrayList<>();
+        List<Date> semana = Semana.getSemana(date);
+        for (Date d: semana){
+            lista.addAll(vendasDiarias(d));
+        }
+        return lista;
+    }
+    public List<Venda> vendasMensais(int mes, int ano){
         Iterable<Venda> vendaIterable = this.vendaRepository.findAll();
         List<Venda> lista = new ArrayList<>();
         for (Venda v:vendaIterable) {
-            if (v.getDate().getDate()==date.getDate() &&
-                v.getDate().getMonth()==date.getMonth() &&
-                v.getDate().getYear()==date.getYear()){
+            if (v.getDate().getMonth() == mes &&
+                    v.getDate().getYear() == ano){
                 lista.add(v);
             }
         }
         return lista;
-        */
     }
+    public List<Venda> vendasAnuais(int ano){
+        Iterable<Venda> vendaIterable = this.vendaRepository.findAll();
+        List<Venda> lista = new ArrayList<>();
+        for (Venda v:vendaIterable) {
+            if (v.getDate().getYear() == ano){
+                lista.add(v);
+            }
+        }
+        return lista;
+    }
+    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
+    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
 
     public List<Venda> vendasDiariasAgenda(Date date){
         return this.vendaRepository.vendaAgendaDate(date);
@@ -77,28 +100,26 @@ public class VendaService {
         return lista;
     }
 
-    public List<Venda> vendasMensais(int mes, int ano){
-        Iterable<Venda> vendaIterable = this.vendaRepository.findAll();
+    public List<Venda> vendasAgendaBySemanaFuncionario(Date date, Funcionario funcionario){
+        Iterable<Venda> vendas = vendasSemanais(date);
+        List<Venda> vendasServicos = new ArrayList<>();
+
+        for (Venda vS: vendas){
+            if (!(vS.getProduto() != null) && vS.getAtendimento() != null){
+                vendasServicos.add(vS);
+            }
+        }
         List<Venda> lista = new ArrayList<>();
-        for (Venda v:vendaIterable) {
-            if (v.getDate().getMonth() == mes &&
-                    v.getDate().getYear() == ano){
+        for (Venda v: vendasServicos){
+            if (v.getAtendimento().getFuncionario().getId() == funcionario.getId()){
                 lista.add(v);
             }
         }
         return lista;
     }
 
-    public List<Venda> vendasAnuais(int ano){
-        Iterable<Venda> vendaIterable = this.vendaRepository.findAll();
-        List<Venda> lista = new ArrayList<>();
-        for (Venda v:vendaIterable) {
-            if (v.getDate().getYear() == ano){
-                lista.add(v);
-            }
-        }
-        return lista;
-    }
+
+    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
 
     public List<Venda> vendasPorTipoPagamento(Pagamento pagamento){
         Iterable<Venda> vendaIterable = this.vendaRepository.findAll();
@@ -119,8 +140,17 @@ public class VendaService {
                 lista.add(v);
             }
         }
+        return lista;
+    }
 
-        System.out.println(lista);
+    public List<Venda> vendasPorPagTypeSemanal(Pagamento pagamento, Date date){
+        Iterable<Venda> vendaIterable = vendasSemanais(date);
+        List<Venda> lista = new ArrayList<>();
+        for (Venda v:vendaIterable) {
+            if (v.getPagamento()==pagamento){
+                lista.add(v);
+            }
+        }
         return lista;
     }
 
@@ -140,6 +170,9 @@ public class VendaService {
         return null;
     }
 
+
+    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
+
     public float receitaDiaria(Date date){
         List<Venda> vendas = vendasDiarias(date);
         float receita = 0;
@@ -149,8 +182,13 @@ public class VendaService {
         return receita;
     }
 
-    public int receitaSemanal(Date date) {
-        return date.getTimezoneOffset();
+    public float receitaSemanal(Date date) {
+        List<Venda> vendas = vendasSemanais(date);
+        float receita = 0;
+        for (Venda v: vendas){
+            receita += v.getValor();
+        }
+        return receita;
     }
 
     public float receitaMensal(int mes, int ano){
@@ -171,6 +209,9 @@ public class VendaService {
         return receita;
     }
 
+    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
+
+    //Note: Metodo usado para completar o grafico
     public List<Float> ganhosMensais(int ano){
         List<Float> ganhos = new ArrayList<>();
         for (int i = 0; i < 12; i++) {

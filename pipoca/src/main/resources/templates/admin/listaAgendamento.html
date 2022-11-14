@@ -76,7 +76,7 @@
                                     <th scope="row" th:text="${objeto.id}">id</th>
                                     <td th:text="${objeto.cliente.nome}"></td>
                                     <td th:text="${objeto.horario.funcionario.getApelido}"></td>
-                                    <td th:text="${objeto.horario.date}"></td>
+                                    <td th:text="${objeto.horario.getDateTextFormat}"></td>
                                     <td th:text="${objeto.horario.hora.valor}"></td>
                                     <td th:text="${objeto.servico.valor}"></td>
                                     <td>
@@ -94,7 +94,13 @@
                     <div class="row mb-4">
                         <div class="col"></div>
                         <div class="col"></div>
-                        <div class="col"></div>
+                        <div class="col">
+                            <a href="/agendar/step1">
+                                <button class="btn btn-link">
+                                    Agendar Horário
+                                </button>
+                            </a>
+                        </div>
                         <div class="col">
                             <a href="/agendamentos/atrasados">
                                 <button class="btn btn-link">

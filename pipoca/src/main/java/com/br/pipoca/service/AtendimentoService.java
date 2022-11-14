@@ -4,6 +4,7 @@ import com.br.pipoca.entity.Atendimento;
 import com.br.pipoca.entity.Funcionario;
 import com.br.pipoca.repository.AtendimentoRepository;
 import com.br.pipoca.util.GeradorPdf;
+import com.br.pipoca.util.Semana;
 import com.br.pipoca.util.StatusHorario;
 import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -213,4 +214,39 @@ public class AtendimentoService {
             throw new RuntimeException(e);
         }
     }
+
+
+
+    //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= METHODS SEMANAIS =-=-=
+
+    public List<Atendimento> agendamentosSemana(Date date){
+        List<Date> semana = Semana.getSemana(date);
+
+        Iterable<Atendimento> atendimentoIterable = this.atendimentoRepository.findAll();
+        List<Atendimento> lista = new ArrayList<>();
+        for (Atendimento a:
+                atendimentoIterable) {
+            if (semana.contains(a.getHorario().getDate())){
+                lista.add(a);
+            }
+        }
+        System.out.println(lista);
+        return lista;
+    }
+
+    public List<Atendimento> agendamentosSemanaFuncionario(Date date, long funcionario_id){
+        List<Date> semana = Semana.getSemana(date);
+        Iterable<Atendimento> atendimentoIterable = this.atendimentoRepository.findAll();
+        List<Atendimento> lista = new ArrayList<>();
+        for (Atendimento a:
+                atendimentoIterable) {
+            if (semana.contains(a.getHorario().getDate())
+                && a.getFuncionario().getId() == funcionario_id){
+                lista.add(a);
+            }
+        }
+        return lista;
+    }
+
+
 }

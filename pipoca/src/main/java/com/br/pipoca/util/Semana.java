@@ -10,12 +10,12 @@ import java.util.List;
 public class Semana {
 
     private static long DIA = 86400000;
-    public static void getSemana(Date date) {
+    public static List<Date> getSemana(Date date) {
         List<Date> semana = new ArrayList<Date>();
         anteriores(semana, date);
         semana.add(date);
         posteriores(semana, date);
-        System.out.println(semana);
+        return semana;
     }
 
     private static void posteriores(List<Date> array, Date date){
@@ -29,7 +29,6 @@ public class Semana {
             array.add(DateConverter.dateConverter(prox));
         }
     }
-
     private static void anteriores(List<Date> array, Date date){
         java.util.Date ant = DateConverter.toJavaDate(date);
         int limiteInit = ant.getDay();
@@ -40,5 +39,17 @@ public class Semana {
             array.add(0,DateConverter.dateConverter(ant));
         }
 
+    }
+
+    public static Date getOntem(Date date){
+        java.util.Date ontem = DateConverter.toJavaDate(date);
+        ontem.setTime(ontem.getTime()-DIA);
+        return DateConverter.dateConverter(ontem);
+    }
+
+    public static Date getAmanha(Date date){
+        java.util.Date amanha = DateConverter.toJavaDate(date);
+        amanha.setTime(amanha.getTime()+DIA);
+        return DateConverter.dateConverter(amanha);
     }
 }

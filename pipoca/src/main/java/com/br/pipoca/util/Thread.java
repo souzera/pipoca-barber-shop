@@ -28,7 +28,6 @@ public class Thread {
 
     @Scheduled(fixedDelay = (HORA/6))
     private void verificarAgenda() throws IOException {
-        System.out.println("opa");
         java.util.Date date = new java.util.Date();
         List<Atendimento> atendimentos = atendimentoService.agendamentosDate(DateConverter.dateConverter(date));
         if (!(atendimentos.isEmpty())){
