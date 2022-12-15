@@ -21,6 +21,9 @@
     <!-- Custom styles for this template-->
     <link href="/admin/css/pipoca-admin-2.css" rel="stylesheet">
 
+    <!-- html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 
 <body id="page-top">
@@ -48,7 +51,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Agendamentos</h1>
-                        <button class="btn btn-primary" id="relatorio-btn">
+                        <button class="btn btn-primary" id="relatorio-btn" hidden onclick="gerarPDF">
                             <i class="fas fa-download fa-sm text-white-50"></i> Gerar Relatório
                         </button>
                     </div>
@@ -159,34 +162,20 @@
         <script src="/admin/js/demo/chart-pie-demo.js"></script>
 
         <!-- Gerar PDF -->
-        <script src="/js/jspdf.umd.min.js"></script>
-        <script src="/admin/js/demo/js-pdf.js"></script>
+        <script src="/admin/js/jspdf.umd.min.js"></script>
+        <script src="/admin/js/jspdf-admin.js"></script>
+
         <script>
-            const botao = document.querySelector('#relatorio-btn');
-            const table = document.getElementById('agendamentos-table')
-
-
-            botao.addEventListener('click', () => {
-                console.log('gerou relatorio');
-                gerar_pdf();
-            });
-
-
-            function gerar_pdf(){
-                const doc = new jsPDF();
-
-                doc.html(table, {
-                    callback: function (doc) {
-                        doc.save();
-                    },
-                    x: 10,
-                    y: 10
-                });
-
-                var hoje = new Date();
-                doc.save(`relatorio${hoje.valueOf()}.pdf`);
+            function gerarPDF() {
+                var element = document.getElementById('agendamentos-table');
+                var opt = {
+                    margin: 1,
+                    filename: 'relatorio.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
             }
-
         </script>
 </body>
 

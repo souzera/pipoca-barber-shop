@@ -43,8 +43,51 @@ public class GraficosController {
     @GetMapping
     @RequestMapping("/graficos")
     public ModelAndView graficos(HttpServletRequest request) throws IOException {
-        //TODO: retornar todos os graficos construidos
-        return null;
+        Date hoje = DateConverter.dateConverter(new java.util.Date());
+
+        ModelAndView modelAndView = new ModelAndView("admin/graficos");
+        Usuario u = usuarioService.findByLogin(CookieService.getCookieValue(request,"login"));
+        modelAndView.addObject("usuario", u);
+        modelAndView.addObject("hoje", DateConverter.textDateFormat(new java.util.Date()));
+        usuarioService.addPass(u, modelAndView);
+        modelAndView.addObject("isSemana", true);
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
+        List<Atendimento> atendimentosSemanais = atendimentoService.agendamentosSemana(hoje);
+        modelAndView.addObject("lista", atendimentosSemanais);
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
+        List<Funcionario> barbeiros = funcionarioService.findByCargo(Cargo.BARBEIRO);
+        List<AtendimentosFuncionarioDiariosDTO> barbeirosAtendimentos = new ArrayList<>();
+
+        for (Funcionario barber: barbeiros){
+            barbeirosAtendimentos.add(new AtendimentosFuncionarioDiariosDTO(barber,
+                    atendimentoService.agendamentosSemanaFuncionario(hoje, barber.getId())));
+        }
+        modelAndView.addObject("barbeirosTable", barbeirosAtendimentos);
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
+        List<ListaMetodosPagamentoDTO> listaMetodosPag = new ArrayList<>();
+        //Venda em Dinheiro Diarias
+        listaMetodosPag.add(new ListaMetodosPagamentoDTO("Dinheiro",
+                vendaService.vendasPorPagTypeSemanal(Pagamento.DINHEIRO,hoje)));
+        //Venda em Cartão Diarias
+        listaMetodosPag.add(new ListaMetodosPagamentoDTO("Cartão",
+                vendaService.vendasPorPagTypeSemanal(Pagamento.CARTAO, hoje)));
+        //Venda em Pix Diarias
+        listaMetodosPag.add(new ListaMetodosPagamentoDTO("Pix",
+                vendaService.vendasPorPagTypeSemanal(Pagamento.PIX, hoje)));
+
+        modelAndView.addObject("tableMetPag",listaMetodosPag);
+
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
+        List<ListaVendaFuncionarioDTO> listaVendaFunc = new ArrayList<>();
+
+        for (Funcionario barber: barbeiros){
+            listaVendaFunc.add(new ListaVendaFuncionarioDTO(barber,
+                    vendaService.vendasAgendaBySemanaFuncionario(hoje, barber)));
+        }
+        modelAndView.addObject("tableVendaFunc", listaVendaFunc);
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
+        modelAndView.addObject("total", vendaService.receitaSemanal(hoje));
+        return modelAndView;
     }
 
     @GetMapping

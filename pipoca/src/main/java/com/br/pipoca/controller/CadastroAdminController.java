@@ -3,6 +3,7 @@ package com.br.pipoca.controller;
 import com.br.pipoca.dto.*;
 import com.br.pipoca.entity.*;
 import com.br.pipoca.util.Cargo;
+import com.br.pipoca.util.DateConverter;
 import com.br.pipoca.util.Hora;
 import com.br.pipoca.service.*;
 import com.br.pipoca.util.StatusHorario;
@@ -27,7 +28,6 @@ public class CadastroAdminController {
     @Autowired ServicoService servicoService;
     @Autowired HorarioService horarioService;
     @Autowired AtendimentoService atendimentoService;
-
 
     //funcionario
 
@@ -75,6 +75,7 @@ public class CadastroAdminController {
     }
     @PostMapping(value = "/cadastrando/cliente")
     public String createCliente(UsuarioDTO usuarioDTO, ClienteDTO clienteDTO, Model model){
+
         Cliente cliente = clienteDTO.toCliente();
         if (usuarioDTO.getLogin() != "") {
             if (usuarioService.isPresent(usuarioDTO.getLogin())) {

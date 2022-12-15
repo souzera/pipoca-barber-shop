@@ -1,12 +1,12 @@
 package com.br.pipoca.dto;
 
 import com.br.pipoca.entity.Cliente;
+import com.br.pipoca.util.DateConverter;
 import com.br.pipoca.util.Sexo;
 
 import java.sql.Date;
 public class ClienteDTO {
     private String nome;
-
     private Date dtNascimento;
     private Sexo sexo;
     private String telefone;
@@ -25,7 +25,10 @@ public class ClienteDTO {
         Cliente cliente = new Cliente();
         cliente.setNome(this.nome);
         cliente.setTelefone(this.telefone);
-        cliente.setDtNascimento(this.dtNascimento);
+        if (this.dtNascimento != null){
+            cliente.setDtNascimento(this.dtNascimento);
+            System.out.println(this.dtNascimento);
+        }
         cliente.setSexo(this.sexo);
         return cliente;
     }
@@ -53,7 +56,9 @@ public class ClienteDTO {
     }
 
     public void setDtNascimento(Date dtNascimento) {
-        this.dtNascimento = dtNascimento;
+        if (dtNascimento != null){
+            this.dtNascimento = dtNascimento;
+        }
     }
 
     public Sexo getSexo() {

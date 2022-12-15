@@ -8,9 +8,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-public class MyErrorController implements ErrorController {
+public class MyErrorController { //implements ErrorController {
 
-    @RequestMapping(value = "/error")
+    //@RequestMapping(value = "/error")
     public ModelAndView error(HttpServletResponse response){
         ModelAndView modelAndView = new ModelAndView("error/error");
         modelAndView.addObject("type", response.getStatus());

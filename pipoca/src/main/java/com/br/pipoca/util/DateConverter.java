@@ -25,4 +25,16 @@ public class DateConverter {
         SimpleDateFormat patternDate = new SimpleDateFormat("dd/MM/yyyy");
         return patternDate.format(date);
     }
+
+    public static java.util.Date textToUtilDate(String data){
+        // pattern => "yyyy-MM-dd";
+        return new java.util.Date(data);
+    }
+
+    public static Date defaultDate(){
+        int ano = 1582;
+        int mes = 02;
+        int dia = 30;
+        return new Date(ano,mes,dia);
+    }
 }
