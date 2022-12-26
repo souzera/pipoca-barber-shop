@@ -67,7 +67,7 @@ public class ClienteService {
     }
 
     public List<Cliente> aniversariantes(){
-        Iterable<Cliente> clienteIterable = this.clienteRepository.findAll();
+        Iterable<Cliente> clienteIterable = this.clienteRepository.findFullUser();
         Date hoje = DateConverter.dateConverter(new java.util.Date());
         List<Cliente> lista = new ArrayList<>();
         for (Cliente c:
