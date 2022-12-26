@@ -31,6 +31,15 @@ public class DateConverter {
         return new java.util.Date(data);
     }
 
+    public static Date textToSQLDate(String data){
+        // pattern => "yyyy-MM-dd";
+
+        int ano = Integer.parseInt(data.substring(0,4))-1900;
+        int mes = Integer.parseInt(data.substring(5, 7));
+        int dia = Integer.parseInt(data.substring(8));
+        Date date = new Date(ano, mes, dia);
+        return date;
+    }
     public static Date defaultDate(){
         int ano = 1582;
         int mes = 02;

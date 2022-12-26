@@ -7,28 +7,22 @@ import com.br.pipoca.util.Sexo;
 import java.sql.Date;
 public class ClienteDTO {
     private String nome;
-    private Date dtNascimento;
     private Sexo sexo;
     private String telefone;
 
 
     public ClienteDTO() {}
 
-    public ClienteDTO(String nome, String telefone, Sexo sexo, Date dtNascimento) {
+    public ClienteDTO(String nome, String telefone, Sexo sexo) {
         this.nome = nome;
         this.telefone = telefone;
         this.sexo = sexo;
-        this.dtNascimento = dtNascimento;
     }
 
     public Cliente toCliente(){
         Cliente cliente = new Cliente();
         cliente.setNome(this.nome);
         cliente.setTelefone(this.telefone);
-        if (this.dtNascimento != null){
-            cliente.setDtNascimento(this.dtNascimento);
-            System.out.println(this.dtNascimento);
-        }
         cliente.setSexo(this.sexo);
         return cliente;
     }
@@ -39,7 +33,6 @@ public class ClienteDTO {
                 "nome='" + nome + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", sexo=" + sexo +
-                ", dtNascimento=" + dtNascimento +
                 '}';
     }
 
@@ -49,16 +42,6 @@ public class ClienteDTO {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Date getDtNascimento() {
-        return dtNascimento;
-    }
-
-    public void setDtNascimento(Date dtNascimento) {
-        if (dtNascimento != null){
-            this.dtNascimento = dtNascimento;
-        }
     }
 
     public Sexo getSexo() {

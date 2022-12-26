@@ -74,9 +74,13 @@ public class CadastroAdminController {
         return modelAndView;
     }
     @PostMapping(value = "/cadastrando/cliente")
-    public String createCliente(UsuarioDTO usuarioDTO, ClienteDTO clienteDTO, Model model){
-
+    public String createCliente(UsuarioDTO usuarioDTO, ClienteDTO clienteDTO, String dtNascimento, Model model){
         Cliente cliente = clienteDTO.toCliente();
+        if(dtNascimento!=""){
+            Date data = DateConverter.textToSQLDate(dtNascimento);
+            cliente.setDtNascimento(data);
+            System.out.println(cliente.getDtNascimento());
+        }
         if (usuarioDTO.getLogin() != "") {
             if (usuarioService.isPresent(usuarioDTO.getLogin())) {
                 model.addAttribute("erro", "Este usuário já existe.");
@@ -91,7 +95,9 @@ public class CadastroAdminController {
             usuarioService.saveUsuario(usuario);
             cliente.setUsuario(usuarioService.findByLogin(usuario.getLogin()));
         }
-        clienteService.saveCliente(cliente);
+        if (cliente.getNome()!=null && cliente.getTelefone() != null) {
+            clienteService.saveCliente(cliente);
+        }
         //lembrar de mudar esse redirect
         return "redirect:/login";
     }
