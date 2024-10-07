@@ -48,8 +48,7 @@ public class AlterarController {
     @RequestMapping("cliente/alterando")
     public String alterandoCliente(Cliente cliente){
         Cliente c = clienteService.buscarPorID(cliente.getId());
-        c.setNome(cliente.getNome());
-        c.setSexo(cliente.getSexo());
+        c.setNome(cliente.getNome()); 
         c.setDtNascimento(cliente.getDtNascimento());
         c.setTelefone(cliente.getTelefone());
         clienteService.saveCliente(c);
@@ -77,7 +76,6 @@ public class AlterarController {
     public String alterandoFucionario(Funcionario funcionario){
         Funcionario f = funcionarioService.findById(funcionario.getId());
         f.setNome(funcionario.getNome());
-        f.setSexo(funcionario.getSexo());
         f.setDtNascimento(funcionario.getDtNascimento());
         f.setTelefone(funcionario.getTelefone());
         f.setCargo(funcionario.getCargo());

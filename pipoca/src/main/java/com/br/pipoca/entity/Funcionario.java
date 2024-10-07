@@ -18,8 +18,6 @@ public class Funcionario {
     private String apelido;
     private String telefone;
 
-    @Enumerated
-    private Sexo sexo;
     private Date dtNascimento;
     @Enumerated
     private Cargo cargo;
@@ -33,12 +31,11 @@ public class Funcionario {
         this.id = id;
     }
 
-    public Funcionario(long id, String nome, String telefone, Sexo sexo,
+    public Funcionario(long id, String nome, String telefone,
                        Date dtNascimento, Cargo cargo) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
-        this.sexo = sexo;
         this.dtNascimento = dtNascimento;
         this.cargo = cargo;
     }
@@ -54,7 +51,6 @@ public class Funcionario {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
-        this.sexo = sexo;
         this.dtNascimento = dtNascimento;
         this.cargo = cargo;
         this.usuario = usuario;
@@ -84,13 +80,6 @@ public class Funcionario {
         this.telefone = telefone;
     }
 
-    public Sexo getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
-    }
 
     public Date getDtNascimento() {
         return dtNascimento;

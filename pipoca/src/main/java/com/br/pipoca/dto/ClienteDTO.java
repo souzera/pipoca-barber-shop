@@ -1,10 +1,9 @@
 package com.br.pipoca.dto;
 
 import com.br.pipoca.entity.Cliente;
-import com.br.pipoca.util.DateConverter;
+
 import com.br.pipoca.util.Sexo;
 
-import java.sql.Date;
 public class ClienteDTO {
     private String nome;
     private Sexo sexo;

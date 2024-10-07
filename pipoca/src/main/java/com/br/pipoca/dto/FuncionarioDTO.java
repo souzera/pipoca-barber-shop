@@ -31,7 +31,6 @@ public class FuncionarioDTO {
         funcionario.setDtNascimento(this.dtNascimento);
         funcionario.setCargo(this.cargo);
         funcionario.setNome(this.nome);
-        funcionario.setSexo(this.sexo);
         funcionario.setTelefone(this.telefone);
         return funcionario;
     }
